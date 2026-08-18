@@ -63,7 +63,6 @@ def get_args():
             "lodl",
             "nce",
             "qptl",
-            "lodl",
             "perturb",
             "cpLayer",
             "pg",

@@ -2,7 +2,7 @@
 collect_loss_matrix.py
 ----------------------
 Assemble the (problem, method) x (train, val, test) x (pred, decision) loss
-matrix requested by the committee reviewer.
+matrix.
 
 For each (problem, method) at its best config (Phase 2 best if the method has
 a Phase-2 HP sweep, else Phase 1 best):
@@ -15,13 +15,14 @@ a Phase-2 HP sweep, else Phase 1 best):
     if present (produced by eval_test_pred.py); NaN otherwise.
 
 Outputs:
-  - loss_matrix.json                         — full 13 x 15 x 6 tensor as JSON
+  - loss_matrix.json                         — full 14 x 17 x 6 tensor as JSON
   - results/tables/loss_matrix/<problem>.md     — one markdown table per problem
   - results/tables/loss_matrix/summary.md       — overview across all problems
 
-Caveat (as of 2026-04-16): Phase-1 best (lr, batch) is currently picked by
-*test* regret (collect_bench_p1.py leakage). Phase-2 HP selection inherits
-that issue. Footnoted in every output.
+Caveat: with the legacy ``--best_json`` fallback (no ``--p2_best_json``),
+Phase-1 best (lr, batch) is picked by *test* regret and Phase-2 HP selection
+inherits that leakage; footnoted in every output. The documented invocation
+(``--p2_best_json bench_p2_best_val.json``) is val-selected and unaffected.
 
 Usage:
     python experiments/collect_loss_matrix.py
@@ -36,7 +37,7 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 
-# ---- Configuration (mirrors collect_bench_p2.py) ----
+# ---- Configuration (mirrors collect_bench_p2_val.py) ----
 
 PROBLEMS = ["knapsack", "knapsack-real", "energy", "budgetalloc",
             "cubic", "bipartitematching", "portfolio", "asurv", "cook_county",
@@ -355,7 +356,7 @@ def extract_run_metrics(dirpath, prob):
     train_regret / val_regret are ABSOLUTE (mean of the per-epoch ``eval``
     column in *_logs.csv). test_regret is RELATIVE for every problem except
     portfolio (where the codebase reports absolute) -- that mirrors the
-    headline metric used in fig_bench_bump_rerun and the rerun chapter.
+    headline metric used in the bump figures and the paper.
     test_regret_abs and test_regret_rel are also exposed so downstream
     table scripts can mix-and-match.
     """

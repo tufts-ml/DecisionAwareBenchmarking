@@ -3,17 +3,15 @@ table_error_per_problem.py
 --------------------------
 Readable per-problem version of the train / val / test error tables.
 
-Where ``table_error_grid.py`` packs 15 methods x 13 problems into one wide
-landscape grid (3 numbers per cell), this script emits one compact table
-per problem (13 in total) with 15 method rows and 6 columns:
+Emits one compact table per problem with one row per method and 6 columns:
 
     Method | Pred Train | Pred Val | Pred Test | Reg Train | Reg Val | Reg Test
 
-All 13 sub-tables go into a single ``results/tables/error_per_problem.tex`` file
-(``\\input`` once from the thesis chapter). Each sub-table has its own
+All sub-tables go into a single ``results/tables/error_per_problem.tex`` file
+(``\\input`` once from the paper source). Each sub-table has its own
 caption and ``\\label{tab:err-<prob>}``. The lowest test value in each of
-the two metric blocks is bolded so the chapter's "best method per task" is
-visible at a glance.
+the two metric blocks is bolded so the "best method per task" is visible at
+a glance.
 
 Source: ``loss_matrix.json`` (rebuilt from val-selected configs by
 ``experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json``).
@@ -232,7 +230,7 @@ def main():
     ap.add_argument("--loss_matrix", default=LOSS_MATRIX_PATH)
     ap.add_argument("--out", default=DEFAULT_OUT)
     ap.add_argument("--problem", default=None,
-                    help="Restrict to one problem (otherwise all 13).")
+                    help="Restrict to one problem (otherwise all).")
     ap.add_argument("--problems", nargs="*", default=None, metavar="PROB",
                     help="Restrict to a subset of problems; emitted in "
                          "loss_matrix order regardless of the order given "

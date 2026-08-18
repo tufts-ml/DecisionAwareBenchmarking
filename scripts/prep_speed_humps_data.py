@@ -18,7 +18,7 @@ Schema mirrors AerialSurv / CookCounty:
   *_y.csv : geoid, timestep, injury_count
 
 Run from the repo root:
-  conda run -n pco_bench_rhel7 python scripts/prep_speed_humps_data.py
+  python scripts/prep_speed_humps_data.py
 """
 
 import os

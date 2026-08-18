@@ -58,8 +58,8 @@ from openpto.method.utils_method import to_array, to_device  # noqa: E402
 from openpto.metrics.evals import get_eval_results  # noqa: E402
 from openpto.problems.wrapper_prob import problem_wrapper  # noqa: E402
 
-# Solver used per problem in the Phase-1/2 sweep (mirrors CLAUDE.md's
-# "Solvers for comparability" table and slurm/submit_bench_p1.sh).
+# Solver used per problem in the Phase-1/2 sweep (mirrors REPRODUCING.md's
+# benchmark fidelity table and slurm/submit_bench_p1.sh).
 PROB_SOLVER = {
     "knapsack": "heuristic",
     "knapsack-real": "gurobi",

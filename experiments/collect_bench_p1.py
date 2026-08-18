@@ -484,11 +484,12 @@ def main():
     parser.add_argument("--method", type=str, default=None,
                         help="Filter to one method")
     parser.add_argument("--relative", action="store_true",
-                        help="Show relative regret (regret/opt) as %")
-    parser.add_argument("--metric", type=str, choices=["test", "val"], default="test",
-                        help="Selection metric. 'test' = legacy (LEAKY: picks by "
-                             "test regret from results.npy). 'val' = correct "
-                             "(picks by min val regret from val_logs.csv).")
+                        help="Show relative regret (regret/opt) as %%")
+    parser.add_argument("--metric", type=str, choices=["test", "val"], default="val",
+                        help="Selection metric. 'val' (default) = correct "
+                             "(picks by min val regret from val_logs.csv). "
+                             "'test' = legacy (LEAKY: picks by test regret "
+                             "from results.npy); kept only for diffing.")
     parser.add_argument("--no-json", action="store_true",
                         help="Skip writing the best-config JSON file")
     args = parser.parse_args()

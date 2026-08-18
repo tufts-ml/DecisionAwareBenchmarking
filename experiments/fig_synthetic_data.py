@@ -23,6 +23,13 @@ Usage::
 
     python experiments/fig_synthetic_data.py
 """
+import sys
+
+if len(sys.argv) > 1:
+    print(__doc__ or "Regenerates paper figures into results/figures/; "
+          "takes no arguments. Run from the repo root.")
+    sys.exit(0 if {"-h", "--help"} & set(sys.argv[1:]) else 2)
+
 
 import os
 

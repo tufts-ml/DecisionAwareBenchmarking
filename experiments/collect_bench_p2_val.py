@@ -41,7 +41,7 @@ _VAL_MSE_LINE = re.compile(
     r"Iter\s+(\d+),\s*val MSE \(no solver\):\s*([0-9eE+\-\.]+)"
 )
 
-# ---- Configuration (mirrors collect_bench_p2.py / collect_loss_matrix.py) ----
+# ---- Configuration (mirrors collect_loss_matrix.py) ----
 
 PROBLEMS = ["knapsack", "knapsack-real", "energy", "budgetalloc",
             "cubic", "bipartitematching", "portfolio", "asurv", "cook_county",

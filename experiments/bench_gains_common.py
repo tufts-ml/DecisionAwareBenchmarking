@@ -1,17 +1,12 @@
 """
 bench_gains_common.py
 ---------------------
-Shared grid-builder + selection logic for the "MSE is stronger than believed"
-tuning-gain tables:
+Shared grid-builder + selection logic for the tuning-gain analyses
+(consumed by ``table_rank_counterfactual.py``): per method x task it builds
+the full sweep grid over both batch arms x 5 LRs plus the Phase-2 method-HP
+cells, in three seed-aggregation modes.
 
-  * ``table_minibatch_gain.py`` -- per-method minibatch gain (full-batch ->
-    minibatch) plus the additional Phase-2 method-HP gain, in three
-    seed-aggregation modes and two layouts.
-  * ``table_vs_geng.py`` -- improvement over the original Geng et al. benchmark
-    decomposed as: LR tuning alone (default/full batch) -> + batch-size tuning
-    -> + Phase-2 HP tuning.
-
-Both read the full sweep directly from ``saved_records/`` by reusing the path
+It reads the full sweep directly from ``saved_records/`` by reusing the path
 and IO helpers in ``collect_bench_p1.py`` / ``collect_bench_p2_val.py`` -- the
 published ``bench_p1_best_val.json`` / ``bench_p2_best_val.json`` only carry the
 winning cell, but these tables need *both* batch arms and the default-HP cell.

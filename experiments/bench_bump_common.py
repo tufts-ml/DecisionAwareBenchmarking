@@ -2,11 +2,9 @@
 bench_bump_common.py
 --------------------
 Shared config + helpers used by the family of bench-bump plots and the
-critical-difference diagram. The original ``fig_bench_bump_rerun.py`` is
-left untouched (it scans saved_records/ directly and has its own inline
-helpers); these helpers load the seed-aggregated JSON written by
-``collect_bench_p2_val.py`` so that the same per-seed data backs every new
-plot.
+critical-difference diagram. These helpers load the seed-aggregated JSON
+written by ``collect_bench_p2_val.py`` so that the same per-seed data backs
+every plot.
 
 Public surface:
   - PROBLEMS, METHODS, METHOD_DISPLAY, PROB_DISPLAY, USE_ABSOLUTE,
@@ -83,7 +81,7 @@ METHOD_PROBLEMS = {
     "pg":      set(PROBLEMS) - {"shortestpath"},
 }
 
-# ---- Marker / color scheme (mirrors fig_bench_bump_rerun.py) ----
+# ---- Marker / color scheme (shared across all bump figures) ----
 MSE_C       = "#1f77b4"
 MSE_TRAIN_C = "#c39bd3"
 MSE_VAL_C   = "#6c3483"

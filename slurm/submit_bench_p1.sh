@@ -2,18 +2,20 @@
 # ====================================================================
 # Benchmark re-run — Phase 1: LR × Batch sweep
 # ====================================================================
-# Runs all 15 methods × 13 tasks × 5 LRs × 2 batch configs.
+# Runs all 17 methods × 14 tasks × 5 LRs × 2 batch configs.
 # LRs match the original NeurIPS 2024 benchmark sweep: 1e-3, 5e-3, 1e-2, 5e-2, 1e-1.
 # Each job uses --requeue so preempted jobs are automatically restarted;
 # the ExpManager checkpoint/resume support picks up where it left off.
 #
 # Methods covered:
-#   PtO:  mse, dfl, identity
-#   PnO:  spo, nce, blackbox, pointLTR, pairLTR, listLTR, lodl, perturb
-#         qptl, cpLayer  (knapsack/bipartitematching/portfolio only)
+#   mse, mse_train, mse_val, dfl, identity, spo, nce, blackbox,
+#   pointLTR, pairLTR, listLTR, lodl, perturb, pg, dad, qptl, cpLayer
+#   (qptl/cpLayer: knapsack/bipartitematching/portfolio only;
+#    pg: all tasks except shortestpath)
 #
 # Tasks: knapsack, knapsack-real, energy, budgetalloc, cubic,
-#        bipartitematching, portfolio
+#        bipartitematching, portfolio, asurv, cook_county, speed_humps,
+#        sp_synth, sp_planted, pg_misspec, shortestpath
 #
 # Usage:
 #   bash slurm/submit_bench_p1.sh --dry-run

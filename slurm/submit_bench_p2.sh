@@ -5,8 +5,8 @@
 # For each method that has a tunable HP, sweeps that HP using the best
 # (lr, batch) config found in Phase 1.
 #
-# Reads bench_p1_best.json (produced by collect_bench_p1.py) to pick
-# the optimal (lr, batch) per method × task.
+# Reads bench_p1_best_val.json (produced by collect_bench_p1.py --metric val)
+# to pick the optimal (lr, batch) per method × task.
 #
 # Methods with HPs:
 #   dfl      : dflalpha  ∈ {0.001, 0.01, 0.1*, 1.0, 10.0}
@@ -16,6 +16,8 @@
 #   lodl     : num_samples ∈ {100, 250, 500*, 1000, 2000}
 #   perturb  : sigma     ∈ {0.1, 0.5, 1.0*, 2.0, 5.0}
 #   perturb  : n_samples ∈ {5, 10*, 25, 50, 100}
+#   pg       : sigma     ∈ {0.01, 0.05, 0.1*, 0.5, 1.0}
+#   dad      : stein_weight ∈ {0.1, 0.5, 1.0*, 2.0, 5.0}
 #
 # (* = Phase 1 default, included for completeness)
 #
