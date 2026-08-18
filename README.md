@@ -30,6 +30,8 @@ decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
 ## Installation
 
 ```bash
+git clone https://github.com/kheuton/DecisionAwareBenchmarking.git
+cd DecisionAwareBenchmarking
 conda env create -f environment.yml && conda activate openpto
 ```
 

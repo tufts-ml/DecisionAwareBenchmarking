@@ -47,6 +47,10 @@ dependencies = [
     "ruamel.yaml>=0.17,<0.18",
 ]
 
+[project.urls]
+Repository = "https://github.com/kheuton/DecisionAwareBenchmarking"
+Upstream = "https://github.com/Thinklab-SJTU/PredictiveCO-Benchmark"
+
 [project.optional-dependencies]
 test = ["pytest>=8.0"]
 # re-downloading the raw portfolio dataset (needs QUANDL_API_KEY); the

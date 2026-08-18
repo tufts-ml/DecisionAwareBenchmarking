@@ -7,6 +7,7 @@ authors:
   - family-names: Hughes
     given-names: Michael C.
 license: MIT
+repository-code: "https://github.com/kheuton/DecisionAwareBenchmarking"
 preferred-citation:
   type: unpublished
   title: "Towards Better Benchmarking for Decision-Aware Learning"
