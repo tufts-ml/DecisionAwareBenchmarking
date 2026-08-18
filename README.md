@@ -11,8 +11,9 @@ This repository benchmarks **Predict-then-Optimize** (PtO, "two-stage") against
 combinatorial optimization: a neural network predicts the unknown coefficients of
 an optimization problem, and methods differ in whether the network is trained to
 minimize prediction error or downstream decision regret. It is a re-run of and
-extension to the open-source benchmark of Geng et al. (NeurIPS 2024, Datasets and
-Benchmarks Track), covering **14 tasks x 17 methods** with a two-phase
+extension to the open-source benchmark of
+[Geng et al.](https://github.com/Thinklab-SJTU/PredictiveCO-Benchmark)
+(NeurIPS 2024, Datasets and Benchmarks Track), covering **14 tasks x 17 methods** with a two-phase
 hyperparameter sweep (learning rate x batch regime, then method-specific
 hyperparameters), 10 model-init seeds per configuration, and validation-regret
 model selection throughout. The paper reports a 12-method x 12-task subset; the
@@ -224,6 +225,23 @@ Two tests compare the DPO implementation against the reference
 [perturbations-differential-pytorch](https://github.com/tuero/perturbations-differential-pytorch)
 implementation; they skip cleanly unless that repo is cloned into the repo root
 (see `REPRODUCING.md`).
+
+## Relationship to the upstream benchmark
+
+This repository is a derivative of
+[Thinklab-SJTU/PredictiveCO-Benchmark](https://github.com/Thinklab-SJTU/PredictiveCO-Benchmark)
+(Geng et al., NeurIPS 2024), released under the same MIT license. From
+upstream: the modular `openpto` framework (problems / solvers / losses /
+prediction models), seven benchmark tasks (knapsack synth + energy prices,
+energy scheduling, budget allocation, cubic top-K, bipartite matching,
+portfolio, Warcraft shortest path), the original method implementations
+(two-stage, DFL, SPO+, Blackbox, NCE, the LTR family, LODL, QPTL, cpLayer,
+DPO), and the vendored `qpth` solver. New in this work: six tasks (the
+spatiotemporal top-K trio, the two synthetic shortest-path grids, and the PG
+misspecification task), the PG and DAD methods, the soft-decision DPO
+implementation, the MSE selection-signal variants, the two-phase multi-seed
+hyperparameter sweep with checkpoint/requeue support, and all analysis, figure,
+and table code in `experiments/`.
 
 ## License and citation
 

@@ -17,3 +17,43 @@ preferred-citation:
       given-names: Michael C.
   year: 2026
   notes: "Under review at Transactions on Machine Learning Research."
+references:
+  - type: software
+    title: "PredictiveCO-Benchmark (openpto)"
+    authors:
+      - family-names: Geng
+        given-names: Haoyu
+      - family-names: Ruan
+        given-names: Hang
+      - family-names: Wang
+        given-names: Runzhong
+      - family-names: Li
+        given-names: Yang
+      - family-names: Wang
+        given-names: Yang
+      - family-names: Chen
+        given-names: Lei
+      - family-names: Yan
+        given-names: Junchi
+    repository-code: "https://github.com/Thinklab-SJTU/PredictiveCO-Benchmark"
+    license: MIT
+    notes: "This repository is a derivative of this benchmark codebase."
+  - type: conference-paper
+    title: "Benchmarking PtO and PnO Methods in the Predictive Combinatorial Optimization Regime"
+    authors:
+      - family-names: Geng
+        given-names: Haoyu
+      - family-names: Ruan
+        given-names: Hang
+      - family-names: Wang
+        given-names: Runzhong
+      - family-names: Li
+        given-names: Yang
+      - family-names: Wang
+        given-names: Yang
+      - family-names: Chen
+        given-names: Lei
+      - family-names: Yan
+        given-names: Junchi
+    collection-title: "Advances in Neural Information Processing Systems (Datasets and Benchmarks Track)"
+    year: 2024
