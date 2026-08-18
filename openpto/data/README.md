@@ -62,6 +62,28 @@ Note on `portfolio`: if the `.pt` file is absent the loader falls back to
 downloading raw prices via the legacy Quandl API, which is unlikely to still
 work — use the file from the zip.
 
+### Terms of use
+
+The MIT license of this repository covers the **code only**. The datasets in
+the upstream zip are derived from third-party sources and carry their original
+terms, catalogued in Appendix C of
+[Geng et al. (2024)](https://arxiv.org/abs/2311.07633):
+
+- `knapsack/` and `energy/` — SEMO (Irish single electricity market operator)
+  price data, publicly available regulated market data.
+- `bipartitematching/` — the public Cora citation dataset.
+- `budgetalloc/` — a processed derivative of Yahoo Webscope search-advertising
+  data; **non-commercial academic use only**, subject to Yahoo's data-sharing
+  terms.
+- `portfolio/` — features/prices derived from the (discontinued) Quandl WIKI
+  end-of-day dataset. The derived `.pt`/feature files are what the benchmark
+  uses; treat the raw historical price CSVs as regeneration intermediates
+  rather than data to redistribute.
+
+The three datasets shipped in this repository (`asurv/`, `cook_county/`,
+`speed_humps/`) are our own derivatives of public government data (see the
+sections above).
+
 ## Warcraft shortest path (`shortestpath/`)
 
 **Not** in the zip above. This is the Warcraft II 12x12 shortest-path dataset
