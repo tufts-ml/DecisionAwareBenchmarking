@@ -23,7 +23,7 @@ Every figure script reads only `bench_p2_best_val.json`.
 | `fig_bench_bump_recommended_main_bootstrap_cropped.pdf` | `python experiments/fig_bench_bump_recommended.py` | Emits `recommended_{main,spatial}_{plain,bootstrap}`; `_cropped` = same crop-box post-processing, committed copy at `results/figures/`. |
 | `fig_bench_bump_recommended_spatial_bootstrap.pdf` | `python experiments/fig_bench_bump_recommended.py` | Same script as above. |
 | `fig_bench_bump_bootstrap_portfolio.pdf` | `python experiments/fig_bench_bump_bootstrap.py` | The portfolio panel of the per-group outputs (appendix). |
-| `synthetic_data.pdf` | `python experiments/fig_synthetic_data.py` | pg_misspec data-generating-process illustration. |
+| `synthetic_data.pdf` | `python experiments/fig_synthetic_data.py` | pg_misspec data-generating-process illustration. Uses the benchmark's noise sign (Y = f* + zeta - 0.5, per `openpto/problems/PGMisspec.py`), correcting the sign in the originally submitted manuscript figure. |
 
 ### Tables
 

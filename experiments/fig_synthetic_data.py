@@ -7,13 +7,14 @@ paper appendix "PG Misspecified Synthetic Task":
 
     x  ~ Uniform(0, 2)
     f*(x) = -4x + 2   for x in [0, 0.55],   -0.2  for x in (0.55, 2]
-    Y  = f*(x) + 0.5 - zeta,   zeta ~ Exponential(mean 0.5)
+    Y  = f*(x) + zeta - 0.5,   zeta ~ Exponential(mean 0.5)
 
-The DGP mirrors openpto/problems/PGMisspec.py (same f*, same mean-zero
-exponential noise magnitude), except for the noise sign: the paper equation
-above uses eps = 0.5 - zeta (Y bounded above by f*(x)+0.5, unbounded lower
-tail), while PGMisspec draws eps = zeta - 0.5 (the reflection). This script
-follows the paper equation so the figure matches the published one.
+This is exactly the DGP in openpto/problems/PGMisspec.py — the benchmark
+that produced every pg_misspec number in the paper — and the corrected
+manuscript equation: eps = zeta - 0.5 gives a hard floor at f*(x) - 0.5
+with sparse upward spikes (unbounded upper tail). The RNG recipe (seed,
+draw order) is unchanged from the originally submitted figure, so these
+samples are the exact mirror of the previously published points about f*.
 
 Generates:
     results/figures/synthetic_data.pdf
@@ -59,7 +60,7 @@ def f_star(x):
 
 
 def gen_data(n, seed):
-    """Sample (x, Y) from the pg_misspec DGP with the paper's noise sign.
+    """Sample (x, Y) from the pg_misspec DGP (benchmark noise sign).
 
     The Gaussian draw has weight 0 at ALPHA=1 but must stay in this order
     (uniform, normal, exponential) to reproduce the published figure's
@@ -68,7 +69,7 @@ def gen_data(n, seed):
     np.random.seed(seed)
     x = np.random.uniform(0.0, 2.0, n)
     norm_noise = np.random.normal(0.0, SD, n)
-    exp_noise = -(np.random.exponential(SD, n) - SD)  # 0.5 - zeta, mean zero
+    exp_noise = np.random.exponential(SD, n) - SD  # zeta - 0.5, mean zero
     noise = exp_noise * ALPHA**0.5 + norm_noise * (1.0 - ALPHA) ** 0.5
     return x, f_star(x) + noise
 
