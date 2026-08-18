@@ -7,7 +7,6 @@ from typing import Dict
 
 import pandas as pd
 
-from openpto.problems.Advertising import Advertising
 from openpto.problems.AerialSurv import AerialSurv
 from openpto.problems.BipartiteMatching import BipartiteMatching
 from openpto.problems.BudgetAllocation import BudgetAllocation
@@ -20,7 +19,6 @@ from openpto.problems.PortfolioOpt import PortfolioOpt
 from openpto.problems.Shortestpath import Shortestpath
 from openpto.problems.ShortestpathSynth import ShortestpathSynth
 from openpto.problems.SpeedHumps import SpeedHumps
-from openpto.problems.TSP import TSP
 
 
 ################################# Wrappers ################################################
@@ -45,12 +43,10 @@ def str2prob(prob_str):
         "portfolio": PortfolioOpt,
         "knapsack": Knapsack,
         "energy": Energy,
-        "advertising": Advertising,
         "shortestpath": Shortestpath,
         "sp_synth": ShortestpathSynth,
         "sp_planted": ShortestpathSynth,
         "pg_misspec": PGMisspec,
-        "TSP": TSP,
     }
     return prob_dict[prob_str]
 

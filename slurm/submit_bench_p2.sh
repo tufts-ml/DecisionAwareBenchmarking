@@ -20,10 +20,10 @@
 # (* = Phase 1 default, included for completeness)
 #
 # Usage:
-#   bash shells/slurm/submit_bench_p2.sh --dry-run
-#   bash shells/slurm/submit_bench_p2.sh
-#   bash shells/slurm/submit_bench_p2.sh --problem knapsack
-#   bash shells/slurm/submit_bench_p2.sh --method dfl
+#   bash slurm/submit_bench_p2.sh --dry-run
+#   bash slurm/submit_bench_p2.sh
+#   bash slurm/submit_bench_p2.sh --problem knapsack
+#   bash slurm/submit_bench_p2.sh --method dfl
 # ====================================================================
 
 set -e
@@ -32,9 +32,10 @@ DRY_RUN=false
 PROB_FILTER=""
 METHOD_FILTER=""
 SEED_FILTER=""
-PARTITION="preempt"
+# Site-specific: override via environment, e.g. PARTITION=gpu CONDA_ENV=myenv bash slurm/submit_bench_p2.sh
+PARTITION="${PARTITION:-preempt}"
 MEM="8G"
-CONDA_ENV="pco_bench_rhel7"
+CONDA_ENV="${CONDA_ENV:-pco_bench_rhel7}"
 SKIP_COMPLETED=true
 
 # GPU cards with >=24 GB VRAM. shortestpath (ResNet18 + 10K warcraft images)
@@ -64,7 +65,7 @@ done
 # (perturb, budgetalloc) to match the Phase 1 sweep.
 SEEDS=(0 1 2 3 4 5 6 7 8 9)
 
-SCRIPT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$SCRIPT_DIR/logs/slurm"
 
 # ---- Load Phase 1 best configs ----
@@ -455,7 +456,7 @@ submit_p2_job() {
         return
     fi
 
-    local cmd="python rethink_exp/main_results.py \
+    local cmd="python experiments/main_results.py \
         --problem ${prob_arg} \
         --opt_model ${method} \
         --solver ${solver} \

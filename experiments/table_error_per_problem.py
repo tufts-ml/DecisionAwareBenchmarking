@@ -9,14 +9,14 @@ per problem (13 in total) with 15 method rows and 6 columns:
 
     Method | Pred Train | Pred Val | Pred Test | Reg Train | Reg Val | Reg Test
 
-All 13 sub-tables go into a single ``docs/tables/error_per_problem.tex`` file
+All 13 sub-tables go into a single ``results/tables/error_per_problem.tex`` file
 (``\\input`` once from the thesis chapter). Each sub-table has its own
 caption and ``\\label{tab:err-<prob>}``. The lowest test value in each of
 the two metric blocks is bolded so the chapter's "best method per task" is
 visible at a glance.
 
 Source: ``loss_matrix.json`` (rebuilt from val-selected configs by
-``rethink_exp/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json``).
+``experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json``).
 """
 
 import argparse
@@ -27,7 +27,7 @@ import sys
 import numpy as np
 
 LOSS_MATRIX_PATH = "loss_matrix.json"
-DEFAULT_OUT = "docs/tables/error_per_problem.tex"
+DEFAULT_OUT = "results/tables/error_per_problem.tex"
 
 PROBLEMS = ["knapsack", "knapsack-real", "energy", "budgetalloc",
             "cubic", "bipartitematching", "portfolio", "asurv", "cook_county",
@@ -124,10 +124,10 @@ def _fmt_value(v, digits):
     return f"{v:.{digits}f}"
 
 
-def _gather_column(loss_matrix, prob, key):
+def _gather_column(loss_matrix, prob, key, methods):
     """Return list of (method, raw_value) for one column of one problem."""
     out = []
-    for m in ALL_METHODS:
+    for m in methods:
         entry = loss_matrix.get(prob, {}).get(m)
         if entry is None:
             out.append((m, None))
@@ -153,20 +153,26 @@ def _scale_header(label, exp):
     return rf"{label} ($\times 10^{{-{exp}}}$)"
 
 
-def render_one_problem(loss_matrix, prob):
-    # Per-column display scale, computed from raw values across methods.
-    pred_cols = [_gather_column(loss_matrix, prob, k) for k in PRED_KEYS]
-    reg_cols  = [_gather_column(loss_matrix, prob, k) for k in REG_KEYS]
+def render_one_problem(loss_matrix, prob, methods=None):
+    if methods is None:
+        methods = ALL_METHODS
+    # Per-column display scale, computed from raw values across the FULL
+    # method list -- --exclude drops rows and bolding candidates but must not
+    # change how the remaining rows are formatted.
+    pred_cols = [_gather_column(loss_matrix, prob, k, ALL_METHODS) for k in PRED_KEYS]
+    reg_cols  = [_gather_column(loss_matrix, prob, k, ALL_METHODS) for k in REG_KEYS]
 
     pred_scales = [_scale_for_column([v for _, v in col]) for col in pred_cols]
     reg_scales  = [_scale_for_column([v for _, v in col]) for col in reg_cols]
 
-    # Identify the best (min) test value in each metric for bolding.
-    pred_best = _argmin_method(pred_cols[2])  # test column
-    reg_best  = _argmin_method(reg_cols[2])
+    # Identify the best (min) test value in each metric for bolding, among
+    # the displayed methods only.
+    shown = set(methods)
+    pred_best = _argmin_method([mv for mv in pred_cols[2] if mv[0] in shown])
+    reg_best  = _argmin_method([mv for mv in reg_cols[2] if mv[0] in shown])
 
     rows = []
-    for m in ALL_METHODS:
+    for m in methods:
         cells = [METHOD_LABELS[m]]
         for col, (digits, exp) in zip(pred_cols, pred_scales):
             v = dict(col)[m]
@@ -227,25 +233,47 @@ def main():
     ap.add_argument("--out", default=DEFAULT_OUT)
     ap.add_argument("--problem", default=None,
                     help="Restrict to one problem (otherwise all 13).")
+    ap.add_argument("--problems", nargs="*", default=None, metavar="PROB",
+                    help="Restrict to a subset of problems; emitted in "
+                         "loss_matrix order regardless of the order given "
+                         "(default: all).")
+    ap.add_argument("--exclude", nargs="*", default=[], metavar="METHOD",
+                    help="Method keys to drop from every sub-table. Applied "
+                         "before best-value bolding (excluded methods cannot "
+                         "be bolded as best); column display scales are still "
+                         "computed over the full method list, so the "
+                         "remaining rows keep their formatting. Keys not in "
+                         "the method list are ignored.")
     args = ap.parse_args()
 
     if not os.path.exists(args.loss_matrix):
         print(f"error: {args.loss_matrix} not found. Run "
-              f"`python rethink_exp/collect_loss_matrix.py "
+              f"`python experiments/collect_loss_matrix.py "
               f"--p2_best_json bench_p2_best_val.json` first.")
         sys.exit(1)
     with open(args.loss_matrix) as f:
         loss_matrix = json.load(f)
 
-    problems = [args.problem] if args.problem else PROBLEMS
-    chunks = [render_one_problem(loss_matrix, p) for p in problems]
+    if args.problem:
+        problems = [args.problem]
+    elif args.problems is not None:
+        unknown = [p for p in args.problems if p not in PROBLEMS]
+        if unknown:
+            print(f"error: unknown problem(s): {' '.join(unknown)}")
+            sys.exit(1)
+        problems = [p for p in PROBLEMS if p in args.problems]
+    else:
+        problems = PROBLEMS
+
+    methods = [m for m in ALL_METHODS if m not in set(args.exclude)]
+    chunks = [render_one_problem(loss_matrix, p, methods) for p in problems]
     tex = "\n".join(chunks)
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, "w") as f:
         f.write(tex)
     print(f"wrote {args.out}  ({len(chunks)} sub-tables, "
-          f"{len(ALL_METHODS)} methods x 6 cols each)")
+          f"{len(methods)} methods x 6 cols each)")
 
 
 if __name__ == "__main__":

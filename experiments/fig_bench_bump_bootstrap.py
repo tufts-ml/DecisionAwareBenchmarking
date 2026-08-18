@@ -12,7 +12,7 @@ Reads ``bench_p2_best_val.json`` (which carries ``test_seed_values``).
 
 Usage::
 
-    python rethink_exp/fig_bench_bump_bootstrap.py
+    python experiments/fig_bench_bump_bootstrap.py
 
 Tweak ``N_RESAMPLES`` and ``CI_LEVEL`` at the top of the file.
 """
@@ -37,7 +37,7 @@ N_RESAMPLES = 10000
 CI_LEVEL    = 0.95
 RNG_SEED    = 20260524     # deterministic CIs
 
-OUT_DIR = "results"
+OUT_DIR = "results/figures"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 data = load_per_seed_data("bench_p2_best_val.json")

@@ -16,16 +16,16 @@ a Phase-2 HP sweep, else Phase 1 best):
 
 Outputs:
   - loss_matrix.json                         — full 13 x 15 x 6 tensor as JSON
-  - docs/tables/loss_matrix/<problem>.md     — one markdown table per problem
-  - docs/tables/loss_matrix/summary.md       — overview across all problems
+  - results/tables/loss_matrix/<problem>.md     — one markdown table per problem
+  - results/tables/loss_matrix/summary.md       — overview across all problems
 
 Caveat (as of 2026-04-16): Phase-1 best (lr, batch) is currently picked by
 *test* regret (collect_bench_p1.py leakage). Phase-2 HP selection inherits
 that issue. Footnoted in every output.
 
 Usage:
-    python rethink_exp/collect_loss_matrix.py
-    python rethink_exp/collect_loss_matrix.py --problem budgetalloc
+    python experiments/collect_loss_matrix.py
+    python experiments/collect_loss_matrix.py --problem budgetalloc
 """
 
 import argparse
@@ -115,7 +115,7 @@ RESULTS_ROOT = "saved_records"
 BEST_JSON_PATH = "bench_p1_best.json"
 P2_BEST_VAL_PATH = "bench_p2_best_val.json"
 OUTPUT_JSON = "loss_matrix.json"
-TABLES_DIR = "docs/tables/loss_matrix"
+TABLES_DIR = "results/tables/loss_matrix"
 
 
 # ---- Path helpers ----
@@ -590,7 +590,7 @@ def main():
                 diverged += 1
     print(f"\n{missing}/{total} (prob, method) cells missing test_pred_loss; "
           f"{diverged}/{total} diverged (inf). "
-          f"Run `python rethink_exp/eval_test_pred.py` to fill missing.")
+          f"Run `python experiments/eval_test_pred.py` to fill missing.")
 
 
 if __name__ == "__main__":

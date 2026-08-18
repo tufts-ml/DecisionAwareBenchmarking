@@ -15,7 +15,7 @@ Generates four figures (two groups x two uncertainty modes):
 
 Usage::
 
-    python rethink_exp/fig_bench_bump_recommended.py
+    python experiments/fig_bench_bump_recommended.py
 """
 
 import os
@@ -46,7 +46,7 @@ N_RESAMPLES = 10_000
 CI_LEVEL = 0.95
 RNG_SEED = 20260527
 
-OUT_DIR = "results"
+OUT_DIR = "results/figures"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 data = load_per_seed_data("bench_p2_best_val.json")

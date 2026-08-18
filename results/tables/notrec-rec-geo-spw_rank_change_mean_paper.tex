@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Change in rank from the expanded sweep: $\Delta$Rank $=$ Rank$_A-$Rank$_B$ (positive $=$ moved up), where $A$ is the original tuning regime (default batch arm, LR val-selected, default method HP) and $B$ is our full sweep (both batch arms $\times$ 5 LRs, plus the Phase-2 method HP); per-task cells give the method's rank$_A\rightarrow$rank$_B$ (1 $=$ best) among the methods shown, and values are the 10-seed mean. Tasks: KS $=$ Knapsack (synth), KS-E $=$ Knapsack (energy), En $=$ Energy scheduling, Cu $=$ Cubic Top-$K$, BM $=$ Bipartite matching, SP-W $=$ Warcraft shortest path, BA $=$ Budget allocation, pg\textsubscript{ms} $=$ PG misspec, sp\textsubscript{s} $=$ Shortest path (synth), CC $=$ cook\_county, SH $=$ speed\_humps, AS $=$ asurv.}
+\label{tab:notrec-rec-geo-spw-rank-change-mean-paper}
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lccccccccccccrrr@{}}
+\toprule
+ & \multicolumn{6}{c}{Not recommended} & \multicolumn{3}{c}{Recommended} & \multicolumn{3}{c}{Geospatial} &  &  &  \\
+\cmidrule(lr){2-7}\cmidrule(lr){8-10}\cmidrule(lr){11-13}
+ & KS & KS-E & En & Cu & BM & SP-W & BA & pg\textsubscript{ms} & sp\textsubscript{s} & CC & SH & AS & Rank$_A$ & Rank$_B$ & $\Delta$Rank \\
+\midrule
+lsLTR & 1$\rightarrow$2 & 2$\rightarrow$4 & 5$\rightarrow$6 & 3$\rightarrow$3 & 2$\rightarrow$8 & -- & 1$\rightarrow$1 & 2$\rightarrow$2 & 2$\rightarrow$3 & 7$\rightarrow$9 & 4$\rightarrow$4 & 12$\rightarrow$3 & 3.73 & 4.09 & $-0.36$ \\
+SPO\textsuperscript{+} & 3$\rightarrow$5 & 1$\rightarrow$1 & 6$\rightarrow$5 & 11$\rightarrow$11 & 9$\rightarrow$11 & 1$\rightarrow$2 & 3$\rightarrow$4 & 1$\rightarrow$3 & 1$\rightarrow$1 & 6$\rightarrow$2 & 2$\rightarrow$2 & 10$\rightarrow$4 & 4.50 & 4.25 & $+0.25$ \\
+MSE & 2$\rightarrow$1 & 4$\rightarrow$3 & 8$\rightarrow$8 & 2$\rightarrow$1 & 7$\rightarrow$5 & 4.5$\rightarrow$1 & 11$\rightarrow$11 & 6$\rightarrow$7 & 6$\rightarrow$6 & 3$\rightarrow$6 & 1$\rightarrow$1 & 4$\rightarrow$6 & 4.88 & 4.67 & $+0.21$ \\
+PG & 8$\rightarrow$9 & 10$\rightarrow$10 & 3$\rightarrow$2 & 10$\rightarrow$10 & 1$\rightarrow$2 & -- & 5$\rightarrow$3 & 10.5$\rightarrow$9 & 7$\rightarrow$5 & 2$\rightarrow$3 & 3$\rightarrow$3 & 2$\rightarrow$2 & 5.59 & 5.27 & $+0.32$ \\
+prLTR & 5$\rightarrow$6 & 6$\rightarrow$6 & 4$\rightarrow$7 & 4$\rightarrow$4 & 12$\rightarrow$7 & 4.5$\rightarrow$3 & 7$\rightarrow$8 & 3$\rightarrow$4 & 3$\rightarrow$4 & 8$\rightarrow$8 & 6$\rightarrow$5 & 11$\rightarrow$5 & 6.12 & 5.58 & \cellcolor{green!18}$+0.54$ \\
+DPO & 6$\rightarrow$7 & 8$\rightarrow$8 & 2$\rightarrow$3 & 5$\rightarrow$7 & 11$\rightarrow$10 & -- & 4$\rightarrow$5 & 5$\rightarrow$1 & 8$\rightarrow$2 & 12$\rightarrow$4 & 9$\rightarrow$9 & 3$\rightarrow$7 & 6.64 & 5.73 & \cellcolor{green!18}$+0.91$ \\
+ptLTR & 4$\rightarrow$3 & 3$\rightarrow$5 & 7$\rightarrow$4 & 1$\rightarrow$2 & 10$\rightarrow$12 & -- & 2$\rightarrow$2 & 4$\rightarrow$5 & 4$\rightarrow$7 & 4$\rightarrow$5 & 10$\rightarrow$10 & 6.5$\rightarrow$9 & 5.05 & 5.82 & \cellcolor{red!18}$-0.77$ \\
+NCE & 7$\rightarrow$8 & 9$\rightarrow$9 & 1$\rightarrow$1 & 12$\rightarrow$12 & 4$\rightarrow$1 & 4.5$\rightarrow$5.5 & 9$\rightarrow$6 & 7$\rightarrow$11 & 5$\rightarrow$8 & 5$\rightarrow$7 & 7$\rightarrow$7 & 1$\rightarrow$1 & 5.96 & 6.38 & $-0.42$ \\
+DFL & 10$\rightarrow$4 & 7$\rightarrow$2 & 12$\rightarrow$12 & 7$\rightarrow$5 & 6$\rightarrow$9 & 4.5$\rightarrow$5.5 & 8$\rightarrow$9 & 8$\rightarrow$6 & 10$\rightarrow$9 & 11$\rightarrow$10 & 8$\rightarrow$8 & 6.5$\rightarrow$8 & 8.17 & 7.29 & \cellcolor{green!18}$+0.87$ \\
+LODL & 9$\rightarrow$10 & 5$\rightarrow$7 & 9$\rightarrow$9 & 6$\rightarrow$6 & 8$\rightarrow$6 & 4.5$\rightarrow$5.5 & 12$\rightarrow$12 & 9$\rightarrow$8 & 9$\rightarrow$10 & 1$\rightarrow$1 & 5$\rightarrow$6 & 5$\rightarrow$12 & 6.88 & 7.71 & \cellcolor{red!18}$-0.83$ \\
+Identity & 12$\rightarrow$12 & 12$\rightarrow$12 & 11$\rightarrow$11 & 8.5$\rightarrow$8.5 & 3$\rightarrow$4 & 4.5$\rightarrow$5.5 & 6$\rightarrow$7 & 10.5$\rightarrow$10 & 11$\rightarrow$11 & 9.5$\rightarrow$11.5 & 11.5$\rightarrow$11.5 & 8.5$\rightarrow$10.5 & 9.00 & 9.54 & \cellcolor{red!18}$-0.54$ \\
+Blackbox & 11$\rightarrow$11 & 11$\rightarrow$11 & 10$\rightarrow$10 & 8.5$\rightarrow$8.5 & 5$\rightarrow$3 & 8$\rightarrow$8 & 10$\rightarrow$10 & 12$\rightarrow$12 & 12$\rightarrow$12 & 9.5$\rightarrow$11.5 & 11.5$\rightarrow$11.5 & 8.5$\rightarrow$10.5 & 9.75 & 9.92 & $-0.17$ \\
+\bottomrule
+\end{tabular}
+\end{table}

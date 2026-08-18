@@ -33,15 +33,15 @@ tables: ``seed0`` / ``bestseed`` / ``mean``.
 
 Outputs (per mode)::
 
-    docs/tables/notrec_regret_change_{seed0,bestseed,mean}.tex
-    docs/tables/notrec_rank_change_{seed0,bestseed,mean}.tex
+    results/tables/notrec_regret_change_{seed0,bestseed,mean}.tex
+    results/tables/notrec_rank_change_{seed0,bestseed,mean}.tex
 
 Usage::
 
-    python rethink_exp/table_rank_counterfactual.py                  # all 3 modes
-    python rethink_exp/table_rank_counterfactual.py --modes mean
-    python rethink_exp/table_rank_counterfactual.py --subset all     # all 14 tasks
-    python rethink_exp/table_rank_counterfactual.py --use_cache      # reuse last scan
+    python experiments/table_rank_counterfactual.py                  # all 3 modes
+    python experiments/table_rank_counterfactual.py --modes mean
+    python experiments/table_rank_counterfactual.py --subset all     # all 14 tasks
+    python experiments/table_rank_counterfactual.py --use_cache      # reuse last scan
 """
 
 import argparse
@@ -519,7 +519,7 @@ def main():
     ap.add_argument("--subset", default="not_recommended", choices=list(SUBSETS))
     ap.add_argument("--modes", nargs="+", default=["mean", "best", "seed0"],
                     choices=["mean", "best", "seed0"])
-    ap.add_argument("--outdir", default="docs/tables")
+    ap.add_argument("--outdir", default="results/tables")
     ap.add_argument("--include_excluded_methods", action="store_true",
                     help=f"keep {sorted(DEFAULT_EXCLUDE)} (dropped by default, "
                          "matching fig_bench_bump_not_recommended.py)")

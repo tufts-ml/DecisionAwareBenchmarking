@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Towards Better Benchmarking for Decision-Aware Learning"
+authors:
+  - family-names: Heuton
+    given-names: Kyle
+  - family-names: Hughes
+    given-names: Michael C.
+license: MIT
+preferred-citation:
+  type: unpublished
+  title: "Towards Better Benchmarking for Decision-Aware Learning"
+  authors:
+    - family-names: Heuton
+      given-names: Kyle
+    - family-names: Hughes
+      given-names: Michael C.
+  year: 2026
+  notes: "Under review at Transactions on Machine Learning Research."

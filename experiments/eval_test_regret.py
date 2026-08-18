@@ -27,10 +27,10 @@ not protocol-identical to cells that trained to convergence/patience. Say so
 wherever they are reported.
 
 Usage:
-    python rethink_exp/eval_test_regret.py --run_dir saved_records/.../prefix \
+    python experiments/eval_test_regret.py --run_dir saved_records/.../prefix \
                                            --problem shortestpath
-    python rethink_exp/eval_test_regret.py --missing        # every gap in loss_matrix.json
-    python rethink_exp/eval_test_regret.py --missing --force
+    python experiments/eval_test_regret.py --missing        # every gap in loss_matrix.json
+    python experiments/eval_test_regret.py --missing --force
 """
 
 import argparse
@@ -59,7 +59,7 @@ from openpto.metrics.evals import get_eval_results  # noqa: E402
 from openpto.problems.wrapper_prob import problem_wrapper  # noqa: E402
 
 # Solver used per problem in the Phase-1/2 sweep (mirrors CLAUDE.md's
-# "Solvers for comparability" table and shells/slurm/submit_bench_p1.sh).
+# "Solvers for comparability" table and slurm/submit_bench_p1.sh).
 PROB_SOLVER = {
     "knapsack": "heuristic",
     "knapsack-real": "gurobi",

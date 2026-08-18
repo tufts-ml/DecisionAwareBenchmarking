@@ -1,0 +1,19 @@
+# Experiment outputs (bulk; small final figures/tables live in results/, which IS committed)
+saved_records/
+saved_problems/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Datasets: bulk data is downloaded (upstream Google Drive zip) into
+# openpto/data/ and stays untracked; only the data README and the three
+# small real-world datasets ship with the repo.
+openpto/data/*
+!openpto/data/README.md
+!openpto/data/asurv/
+!openpto/data/cook_county/
+!openpto/data/speed_humps/

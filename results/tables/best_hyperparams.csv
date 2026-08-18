@@ -1,0 +1,216 @@
+method,task,lr,batch,hp_name,hp_value
+mse,knapsack,5e-2,bs=32,,
+mse,knapsack-real,5e-2,bs=32,,
+mse,energy,1e-1,bs=32,,
+mse,budgetalloc,1e-3,bs=32,,
+mse,cubic,5e-3,bs=32,,
+mse,bipartitematching,5e-3,bs=4,,
+mse,portfolio,5e-3,bs=32,,
+mse,asurv,1e-1,full batch,,
+mse,cook_county,1e-1,full batch,,
+mse,speed_humps,1e-1,full batch,,
+mse,sp_synth,1e-1,bs=32,,
+mse,sp_planted,1e-1,bs=32,,
+mse,pg_misspec,1e-1,full batch,,
+mse,shortestpath,5e-3,bs=32,,
+mse_train,knapsack,5e-2,bs=32,,
+mse_train,knapsack-real,1e-1,bs=32,,
+mse_train,energy,1e-1,bs=32,,
+mse_train,budgetalloc,1e-3,bs=32,,
+mse_train,cubic,1e-2,bs=32,,
+mse_train,bipartitematching,1e-3,bs=4,,
+mse_train,portfolio,1e-2,bs=32,,
+mse_train,asurv,5e-2,full batch,,
+mse_train,cook_county,1e-1,full batch,,
+mse_train,speed_humps,1e-1,full batch,,
+mse_train,sp_synth,5e-3,bs=32,,
+mse_train,sp_planted,5e-3,bs=32,,
+mse_train,pg_misspec,5e-2,full batch,,
+mse_train,shortestpath,5e-3,bs=32,,
+mse_val,knapsack,5e-2,full batch,,
+mse_val,knapsack-real,1e-1,bs=32,,
+mse_val,energy,1e-1,bs=32,,
+mse_val,budgetalloc,1e-3,bs=32,,
+mse_val,cubic,1e-2,bs=32,,
+mse_val,bipartitematching,1e-3,bs=4,,
+mse_val,portfolio,5e-2,bs=32,,
+mse_val,asurv,5e-2,full batch,,
+mse_val,cook_county,1e-2,full batch,,
+mse_val,speed_humps,1e-1,bs=32,,
+mse_val,sp_synth,1e-1,bs=32,,
+mse_val,sp_planted,5e-2,bs=32,,
+mse_val,pg_misspec,5e-2,bs=32,,
+mse_val,shortestpath,1e-2,bs=32,,
+dfl,knapsack,1e-1,full batch,dflalpha,10.0
+dfl,knapsack-real,5e-2,bs=32,dflalpha,1.0
+dfl,energy,1e-3,full batch,dflalpha,0.001
+dfl,budgetalloc,1e-3,full batch,dflalpha,1.0
+dfl,cubic,1e-2,full batch,dflalpha,10.0
+dfl,bipartitematching,1e-1,bs=4,dflalpha,10.0
+dfl,portfolio,1e-2,full batch,dflalpha,0.1
+dfl,asurv,1e-3,full batch,dflalpha,1.0
+dfl,cook_county,1e-1,full batch,dflalpha,0.01
+dfl,speed_humps,1e-1,full batch,dflalpha,10.0
+dfl,sp_synth,5e-2,full batch,dflalpha,10.0
+dfl,sp_planted,1e-1,bs=32,dflalpha,10.0
+dfl,pg_misspec,5e-3,bs=32,dflalpha,10.0
+dfl,shortestpath,1e-1,full batch,dflalpha,0.001
+identity,knapsack,1e-2,bs=32,,
+identity,knapsack-real,5e-3,full batch,,
+identity,energy,1e-3,full batch,,
+identity,budgetalloc,1e-2,full batch,,
+identity,cubic,5e-2,full batch,,
+identity,bipartitematching,1e-3,full batch,,
+identity,portfolio,1e-3,bs=32,,
+identity,asurv,1e-2,full batch,,
+identity,cook_county,1e-1,full batch,,
+identity,speed_humps,1e-1,full batch,,
+identity,sp_synth,1e-2,bs=32,,
+identity,sp_planted,5e-3,bs=32,,
+identity,pg_misspec,5e-2,bs=32,,
+identity,shortestpath,5e-2,full batch,,
+spo,knapsack,5e-2,bs=32,,
+spo,knapsack-real,1e-1,bs=32,,
+spo,energy,1e-1,bs=1,,
+spo,budgetalloc,1e-3,bs=1,,
+spo,cubic,5e-2,bs=1,,
+spo,bipartitematching,1e-2,bs=1,,
+spo,portfolio,5e-3,bs=32,,
+spo,asurv,5e-2,bs=32,,
+spo,cook_county,1e-2,bs=32,,
+spo,speed_humps,5e-2,bs=32,,
+spo,sp_synth,5e-3,bs=1,,
+spo,sp_planted,5e-2,bs=32,,
+spo,pg_misspec,1e-1,bs=1,,
+spo,shortestpath,1e-3,bs=32,,
+nce,knapsack,5e-2,bs=32,,
+nce,knapsack-real,1e-3,bs=32,,
+nce,energy,5e-3,bs=32,,
+nce,budgetalloc,1e-3,bs=32,,
+nce,cubic,1e-3,bs=32,,
+nce,bipartitematching,1e-2,bs=4,,
+nce,portfolio,1e-2,bs=1,,
+nce,asurv,1e-1,bs=32,,
+nce,cook_county,5e-2,bs=1,,
+nce,speed_humps,1e-3,bs=1,,
+nce,sp_synth,1e-2,bs=1,,
+nce,sp_planted,5e-2,bs=32,,
+nce,pg_misspec,1e-2,bs=32,,
+nce,shortestpath,1e-2,bs=1,,
+blackbox,knapsack,1e-2,full batch,lambd,0.01
+blackbox,knapsack-real,1e-1,full batch,lambd,0.01
+blackbox,energy,1e-1,full batch,lambd,0.05
+blackbox,budgetalloc,1e-3,full batch,lambd,0.05
+blackbox,cubic,5e-2,full batch,lambd,0.01
+blackbox,bipartitematching,1e-3,full batch,lambd,0.01
+blackbox,portfolio,5e-3,bs=32,lambd,0.1
+blackbox,asurv,1e-2,full batch,lambd,0.01
+blackbox,cook_county,1e-1,full batch,lambd,0.01
+blackbox,speed_humps,1e-1,full batch,lambd,0.01
+blackbox,sp_synth,5e-3,bs=32,lambd,0.01
+blackbox,sp_planted,1e-3,bs=32,lambd,0.01
+blackbox,pg_misspec,1e-2,full batch,lambd,0.01
+blackbox,shortestpath,1e-2,bs=32,lambd,0.01
+pointLTR,knapsack,1e-2,bs=1,,
+pointLTR,knapsack-real,1e-1,bs=32,,
+pointLTR,energy,1e-2,bs=32,,
+pointLTR,budgetalloc,1e-3,bs=1,,
+pointLTR,cubic,5e-2,bs=1,,
+pointLTR,bipartitematching,5e-2,bs=1,,
+pointLTR,portfolio,5e-3,bs=32,,
+pointLTR,asurv,5e-3,bs=32,,
+pointLTR,cook_county,1e-1,bs=32,,
+pointLTR,speed_humps,1e-3,bs=1,,
+pointLTR,sp_synth,5e-2,bs=1,,
+pointLTR,sp_planted,1e-2,bs=1,,
+pointLTR,pg_misspec,1e-1,bs=1,,
+pointLTR,shortestpath,5e-3,bs=32,,
+pairLTR,knapsack,1e-2,bs=32,,
+pairLTR,knapsack-real,5e-2,bs=32,,
+pairLTR,energy,1e-2,bs=32,,
+pairLTR,budgetalloc,5e-3,bs=32,,
+pairLTR,cubic,1e-2,bs=1,,
+pairLTR,bipartitematching,1e-2,bs=4,,
+pairLTR,portfolio,1e-3,bs=1,,
+pairLTR,asurv,5e-2,bs=32,,
+pairLTR,cook_county,1e-1,bs=32,,
+pairLTR,speed_humps,1e-2,bs=1,,
+pairLTR,sp_synth,5e-2,bs=1,,
+pairLTR,sp_planted,5e-2,bs=1,,
+pairLTR,pg_misspec,1e-2,bs=1,,
+pairLTR,shortestpath,1e-3,bs=32,,
+listLTR,knapsack,1e-2,bs=32,tau,0.1
+listLTR,knapsack-real,5e-2,bs=1,tau,5
+listLTR,energy,1e-2,bs=32,tau,0.5
+listLTR,budgetalloc,5e-3,bs=1,tau,0.1
+listLTR,cubic,5e-2,bs=1,tau,5
+listLTR,bipartitematching,5e-2,bs=4,tau,0.5
+listLTR,portfolio,1e-3,bs=1,tau,0.5
+listLTR,asurv,5e-2,bs=32,tau,0.1
+listLTR,cook_county,1e-1,bs=32,tau,0.1
+listLTR,speed_humps,1e-1,bs=32,tau,0.1
+listLTR,sp_synth,5e-2,bs=32,tau,0.5
+listLTR,sp_planted,5e-2,bs=32,tau,0.5
+listLTR,pg_misspec,1e-1,bs=1,tau,0.1
+listLTR,shortestpath,1e-3,bs=32,,
+lodl,knapsack,5e-2,full batch,num_samples,500
+lodl,knapsack-real,1e-1,full batch,num_samples,500
+lodl,energy,1e-1,bs=32,num_samples,1000
+lodl,budgetalloc,1e-3,full batch,num_samples,2000
+lodl,cubic,5e-2,full batch,num_samples,100
+lodl,bipartitematching,5e-3,bs=4,num_samples,1000
+lodl,portfolio,1e-3,bs=32,num_samples,1000
+lodl,asurv,5e-2,full batch,num_samples,250
+lodl,cook_county,5e-2,full batch,num_samples,2000
+lodl,speed_humps,1e-1,full batch,num_samples,250
+lodl,sp_synth,1e-1,bs=32,num_samples,2000
+lodl,sp_planted,5e-2,bs=32,num_samples,1000
+lodl,pg_misspec,1e-1,bs=32,num_samples,500
+lodl,shortestpath,1e-1,bs=32,num_samples,250
+perturb,knapsack,5e-3,full batch,n_samples,100
+perturb,knapsack-real,5e-3,full batch,n_samples,100
+perturb,energy,5e-3,bs=32,sigma,1.0
+perturb,budgetalloc,1e-2,full batch,sigma,0.5
+perturb,cubic,5e-2,bs=32,sigma,1.0
+perturb,bipartitematching,1e-2,bs=4,sigma,1.0
+perturb,portfolio,5e-2,bs=32,n_samples,50
+perturb,asurv,1e-2,full batch,n_samples,25
+perturb,cook_county,1e-2,full batch,n_samples,100
+perturb,speed_humps,1e-2,full batch,sigma,5.0
+perturb,sp_synth,1e-2,bs=32,n_samples,100
+perturb,sp_planted,5e-3,bs=32,n_samples,100
+perturb,pg_misspec,1e-1,bs=32,sigma,1.0
+perturb,shortestpath,1e-2,bs=32,n_samples,5
+pg,knapsack,1e-2,full batch,sigma,0.01
+pg,knapsack-real,1e-1,bs=32,sigma,0.1
+pg,energy,5e-2,bs=32,sigma,0.1
+pg,budgetalloc,1e-3,bs=32,sigma,1.0
+pg,cubic,1e-2,full batch,sigma,0.5
+pg,bipartitematching,5e-2,full batch,sigma,0.05
+pg,portfolio,1e-1,bs=32,sigma,0.5
+pg,asurv,1e-1,bs=32,sigma,0.1
+pg,cook_county,5e-2,full batch,sigma,0.1
+pg,speed_humps,1e-1,full batch,sigma,0.05
+pg,sp_synth,1e-1,full batch,sigma,1.0
+pg,sp_planted,1e-2,bs=32,sigma,0.1
+pg,pg_misspec,1e-1,bs=32,sigma,0.05
+qptl,knapsack,5e-2,bs=32,tau,0.1
+qptl,bipartitematching,1e-3,full batch,tau,0.1
+qptl,portfolio,5e-3,full batch,tau,0.1
+cpLayer,knapsack,1e-2,full batch,,
+cpLayer,bipartitematching,1e-3,full batch,,
+cpLayer,portfolio,1e-3,bs=32,,
+dad,knapsack,1e-3,full batch,stein_weight,1.0
+dad,knapsack-real,1e-3,full batch,stein_weight,0.1
+dad,energy,1e-1,full batch,stein_weight,5.0
+dad,budgetalloc,1e-3,full batch,stein_weight,2.0
+dad,cubic,1e-1,bs=32,stein_weight,0.5
+dad,bipartitematching,1e-1,bs=4,stein_weight,1.0
+dad,portfolio,1e-1,bs=32,stein_weight,0.1
+dad,asurv,5e-3,full batch,stein_weight,0.1
+dad,cook_county,5e-3,full batch,stein_weight,0.5
+dad,speed_humps,1e-3,full batch,stein_weight,0.5
+dad,sp_synth,5e-2,bs=32,stein_weight,5.0
+dad,sp_planted,1e-3,full batch,stein_weight,5.0
+dad,pg_misspec,1e-2,full batch,stein_weight,0.1
+dad,shortestpath,1e-2,full batch,stein_weight,2.0

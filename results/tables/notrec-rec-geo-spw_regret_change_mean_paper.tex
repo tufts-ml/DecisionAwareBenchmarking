@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Change in test relative regret from the expanded sweep: $\Delta$RR\% $=(A-B)/|A|\times100$ (positive $=$ the sweep helped), where $A$ is the original tuning regime (default batch arm, LR val-selected, default method HP) and $B$ is our full sweep (both batch arms $\times$ 5 LRs, plus the Phase-2 method HP); values are the 10-seed mean. Tasks: KS $=$ Knapsack (synth), KS-E $=$ Knapsack (energy), En $=$ Energy scheduling, Cu $=$ Cubic Top-$K$, BM $=$ Bipartite matching, SP-W $=$ Warcraft shortest path, BA $=$ Budget allocation, pg\textsubscript{ms} $=$ PG misspec, sp\textsubscript{s} $=$ Shortest path (synth), CC $=$ cook\_county, SH $=$ speed\_humps, AS $=$ asurv.}
+\label{tab:notrec-rec-geo-spw-regret-change-mean-paper}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+\toprule
+ & \multicolumn{6}{c}{Not recommended} & \multicolumn{3}{c}{Recommended} & \multicolumn{3}{c}{Geospatial} &  &  &  \\
+\cmidrule(lr){2-7}\cmidrule(lr){8-10}\cmidrule(lr){11-13}
+ & KS & KS-E & En & Cu & BM & SP-W & BA & pg\textsubscript{ms} & sp\textsubscript{s} & CC & SH & AS & Mean & Median & helped \\
+\midrule
+MSE & $+3.0$ & \cellcolor{green!18}$+8.4$ & $-3.4$ & \cellcolor{green!28}$+65.4$ & $+0.6$ & \cellcolor{green!28}$+100.0$ & $+4.0$ & $+0.0$ & \cellcolor{green!18}$+5.4$ & $+0.0$ & $+0.0$ & $+0.0$ & \cellcolor{green!18}$+15.3$ & $+1.8$ & 7/12 \\
+DFL & \cellcolor{green!28}$+72.4$ & \cellcolor{green!18}$+21.9$ & $+0.0$ & \cellcolor{green!28}$+39.9$ & $-0.1$ & $+0.0$ & $+1.8$ & \cellcolor{green!28}$+61.3$ & \cellcolor{green!28}$+64.6$ & $+0.9$ & \cellcolor{green!18}$+6.4$ & $+0.3$ & \cellcolor{green!18}$+22.4$ & $+4.1$ & 9/12 \\
+Identity & $+2.5$ & $+0.0$ & $+0.0$ & $+0.0$ & $+0.0$ & $+0.0$ & $+0.0$ & $+4.2$ & $-1.0$ & $+0.0$ & $+0.0$ & $+0.0$ & $+0.5$ & $+0.0$ & 2/12 \\
+SPO\textsuperscript{+} & \cellcolor{red!18}$-8.6$ & $-2.4$ & $+0.0$ & $+0.0$ & $+0.0$ & \cellcolor{green!28}$+26.4$ & $+0.0$ & $+0.0$ & $+0.0$ & \cellcolor{green!18}$+7.6$ & \cellcolor{red!18}$-6.5$ & $+2.1$ & $+1.5$ & $+0.0$ & 3/12 \\
+NCE & \cellcolor{green!18}$+6.2$ & $+2.0$ & $+0.6$ & \cellcolor{green!18}$+16.9$ & $+1.3$ & $+0.0$ & \cellcolor{green!28}$+55.9$ & $-0.2$ & $+0.0$ & $+0.0$ & $+0.0$ & $+0.7$ & \cellcolor{green!18}$+6.9$ & $+0.6$ & 7/12 \\
+Blackbox & $+0.0$ & $+0.0$ & \cellcolor{green!28}$+55.2$ & $+0.0$ & $+0.5$ & \cellcolor{green!28}$+65.4$ & \cellcolor{green!18}$+5.5$ & $+0.0$ & $-0.3$ & $+0.0$ & $+0.0$ & $+0.0$ & \cellcolor{green!18}$+10.5$ & $+0.0$ & 4/12 \\
+ptLTR & $+0.0$ & $-0.1$ & $+3.1$ & $+0.0$ & $+0.0$ & -- & $+0.0$ & $+0.0$ & $+0.0$ & $+2.4$ & $+0.0$ & $+0.0$ & $+0.5$ & $+0.0$ & 3/11 \\
+prLTR & \cellcolor{green!18}$+5.3$ & \cellcolor{green!18}$+11.3$ & $-4.8$ & $+0.0$ & $+0.6$ & \cellcolor{green!28}$+53.8$ & \cellcolor{green!18}$+5.5$ & $+0.0$ & $+0.0$ & \cellcolor{green!18}$+10.2$ & $+0.0$ & $+2.1$ & \cellcolor{green!18}$+7.0$ & $+1.4$ & 7/12 \\
+lsLTR & $-1.8$ & $+1.1$ & $-0.5$ & \cellcolor{green!28}$+52.6$ & $-1.0$ & -- & \cellcolor{green!18}$+14.9$ & $+0.5$ & $+0.3$ & $-4.2$ & $-2.8$ & \cellcolor{green!18}$+6.9$ & \cellcolor{green!18}$+6.0$ & $+0.3$ & 6/11 \\
+LODL & $+0.0$ & $+0.0$ & \cellcolor{green!18}$+23.1$ & \cellcolor{green!18}$+17.2$ & $+0.5$ & $+0.0$ & $+2.1$ & \cellcolor{green!28}$+35.8$ & \cellcolor{green!18}$+14.9$ & $-1.4$ & $-1.4$ & $-0.8$ & \cellcolor{green!18}$+7.5$ & $+0.2$ & 6/12 \\
+DPO & \cellcolor{green!18}$+23.7$ & $+2.7$ & $-3.0$ & $+0.1$ & $+0.3$ & -- & $+0.0$ & \cellcolor{green!18}$+7.5$ & \cellcolor{green!28}$+44.8$ & \cellcolor{green!28}$+47.7$ & \cellcolor{green!18}$+12.0$ & $-1.3$ & \cellcolor{green!18}$+12.2$ & $+2.7$ & 8/11 \\
+PG & $+4.7$ & \cellcolor{green!18}$+5.8$ & $-0.1$ & \cellcolor{green!18}$+15.8$ & $+0.0$ & -- & \cellcolor{green!28}$+58.1$ & \cellcolor{green!18}$+7.6$ & \cellcolor{green!28}$+36.1$ & $+0.0$ & $-2.5$ & $-0.4$ & \cellcolor{green!18}$+11.4$ & $+4.7$ & 6/11 \\
+\bottomrule
+\end{tabular}
+\end{table}

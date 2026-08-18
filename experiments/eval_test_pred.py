@@ -13,9 +13,9 @@ sweep: the **test** prediction loss. `collect_loss_matrix.py` then picks it
 up. No re-training.
 
 Usage:
-    python rethink_exp/eval_test_pred.py                       # all problems
-    python rethink_exp/eval_test_pred.py --problem budgetalloc
-    python rethink_exp/eval_test_pred.py --force               # recompute
+    python experiments/eval_test_pred.py                       # all problems
+    python experiments/eval_test_pred.py --problem budgetalloc
+    python experiments/eval_test_pred.py --force               # recompute
 """
 
 import argparse
@@ -39,7 +39,7 @@ from openpto.method.Predicts.wrapper_predicts import pred_model_wrapper
 from openpto.problems.wrapper_prob import problem_wrapper
 
 
-# ---- Per-problem configuration (mirrors shells/slurm/submit_bench_p1.sh) ----
+# ---- Per-problem configuration (mirrors slurm/submit_bench_p1.sh) ----
 
 PROB_ARG = {
     "knapsack": "knapsack", "knapsack-real": "knapsack",
@@ -176,7 +176,7 @@ def main():
 
     if not os.path.exists(args.loss_matrix_json):
         print(f"error: {args.loss_matrix_json} not found. "
-              f"Run `python rethink_exp/collect_loss_matrix.py` first.")
+              f"Run `python experiments/collect_loss_matrix.py` first.")
         sys.exit(1)
 
     with open(args.loss_matrix_json) as f:

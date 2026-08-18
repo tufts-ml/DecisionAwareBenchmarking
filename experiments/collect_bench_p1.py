@@ -10,10 +10,10 @@ Reads all bench_p1_* prefixes and produces:
      with the optimal configs per task.
 
 Usage:
-    python rethink_exp/collect_bench_p1.py
-    python rethink_exp/collect_bench_p1.py --problem knapsack
-    python rethink_exp/collect_bench_p1.py --method mse
-    python rethink_exp/collect_bench_p1.py --relative   # show relative regret %
+    python experiments/collect_bench_p1.py
+    python experiments/collect_bench_p1.py --problem knapsack
+    python experiments/collect_bench_p1.py --method mse
+    python experiments/collect_bench_p1.py --relative   # show relative regret %
 """
 
 import argparse
@@ -511,7 +511,7 @@ def main():
             print("To drive Phase 2 from val-selected configs, point "
                   "submit_bench_p2.sh at this file (BEST_JSON).")
         else:
-            print("Pass this to Phase 2: bash shells/slurm/submit_bench_p2.sh")
+            print("Pass this to Phase 2: bash slurm/submit_bench_p2.sh")
 
     # Print completion summary (counts every (prob, method, batch, lr, seed)
     # cell, where seed list is determined by seeds_for()).

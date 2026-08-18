@@ -16,12 +16,12 @@
 #        bipartitematching, portfolio
 #
 # Usage:
-#   bash shells/slurm/submit_bench_p1.sh --dry-run
-#   bash shells/slurm/submit_bench_p1.sh
-#   bash shells/slurm/submit_bench_p1.sh --problem knapsack
-#   bash shells/slurm/submit_bench_p1.sh --method mse
-#   bash shells/slurm/submit_bench_p1.sh --method mse --problem knapsack
-#   bash shells/slurm/submit_bench_p1.sh --seed 1            # submit only init_seed 2024
+#   bash slurm/submit_bench_p1.sh --dry-run
+#   bash slurm/submit_bench_p1.sh
+#   bash slurm/submit_bench_p1.sh --problem knapsack
+#   bash slurm/submit_bench_p1.sh --method mse
+#   bash slurm/submit_bench_p1.sh --method mse --problem knapsack
+#   bash slurm/submit_bench_p1.sh --seed 1            # submit only init_seed 2024
 #
 # Multi-seed model-init expansion (added 2026-05-21):
 #   SEEDS=(0..9); seed 0 = existing runs (prefix unchanged, no --init_seed);
@@ -43,9 +43,10 @@ DRY_RUN=false
 PROB_FILTER=""
 METHOD_FILTER=""
 SEED_FILTER=""
-PARTITION="preempt"
+# Site-specific: override via environment, e.g. PARTITION=gpu CONDA_ENV=myenv bash slurm/submit_bench_p1.sh
+PARTITION="${PARTITION:-preempt}"
 MEM="8G"
-CONDA_ENV="pco_bench_rhel7"
+CONDA_ENV="${CONDA_ENV:-pco_bench_rhel7}"
 SKIP_COMPLETED=true
 
 # GPU cards with >=24 GB VRAM. shortestpath (ResNet18 + 10K warcraft images)
@@ -65,7 +66,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-SCRIPT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$SCRIPT_DIR/logs/slurm"
 
 # ====================================================================
@@ -517,7 +518,7 @@ submit_job() {
 
     local method_path="${METHOD_PATH[$method]}"
 
-    local cmd="python rethink_exp/main_results.py \
+    local cmd="python experiments/main_results.py \
         --problem ${prob_arg} \
         --opt_model ${method} \
         --solver ${solver} \

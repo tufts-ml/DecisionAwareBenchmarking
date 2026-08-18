@@ -4,10 +4,6 @@ def get_ml_loss_fn(args, ptoSolver, conf):
         from openpto.method.Models.MSE import MSE
 
         ModelCalss = MSE
-    elif name == "msesum":
-        from openpto.method.Models.MSE import MSE_Sum
-
-        ModelCalss = MSE_Sum
     elif name == "ce":
         from openpto.method.Models.MSE import CE
 
@@ -25,7 +21,7 @@ def get_ml_loss_fn(args, ptoSolver, conf):
 
 def get_loss_fn(args, ptoSolver, conf):
     name = args.opt_model
-    if name in ["mse", "mse_train", "mse_val", "msesum", "ce", "bce", "mae"]:
+    if name in ["mse", "mse_train", "mse_val", "ce", "bce", "mae"]:
         ModelCalss = get_ml_loss_fn(args, ptoSolver, conf)
     elif name == "dfl":
         from openpto.method.Models.MSE import DFL
@@ -51,9 +47,6 @@ def get_loss_fn(args, ptoSolver, conf):
         from openpto.method.Models.QPTL import QPTL
 
         ModelCalss = QPTL
-    elif name == "intopt":
-        # from openpto.method.Models.Intopt import Intopt
-        ModelCalss = None
     elif name == "nce":
         from openpto.method.Models.NCE import NCE
 
@@ -82,10 +75,6 @@ def get_loss_fn(args, ptoSolver, conf):
         from openpto.method.Models.perturbed import perturbed
 
         ModelCalss = perturbed
-    elif name == "perturb_reinforce":
-        from openpto.method.Models.perturbed import perturbed_reinforce
-
-        ModelCalss = perturbed_reinforce
     elif name == "cpLayer":
         from openpto.method.Models.cpLayer import cpLayer
 

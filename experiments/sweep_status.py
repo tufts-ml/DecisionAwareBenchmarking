@@ -12,10 +12,10 @@ Status codes:
   -- = nothing (not started or failed before first checkpoint)
 
 Usage:
-    python rethink_exp/sweep_status.py --phase 1
-    python rethink_exp/sweep_status.py --phase 1 --vals
-    python rethink_exp/sweep_status.py --manifest sweep_manifest_p1.json
-    python rethink_exp/sweep_status.py --manifest sweep_manifest_p2.json --vals
+    python experiments/sweep_status.py --phase 1
+    python experiments/sweep_status.py --phase 1 --vals
+    python experiments/sweep_status.py --manifest sweep_manifest_p1.json
+    python experiments/sweep_status.py --manifest sweep_manifest_p2.json --vals
 """
 
 import argparse

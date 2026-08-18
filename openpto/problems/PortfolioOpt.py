@@ -3,15 +3,12 @@ import os
 import random
 
 import pandas as pd
-import quandl
 import torch
 
 from gurobipy import GRB  # pylint: disable=no-name-in-module
 
 from openpto.method.utils_method import to_tensor
 from openpto.problems.PTOProblem import PTOProblem
-
-quandl.ApiConfig.api_key = "3Uxzq4TZV5V9RghuRYsY"
 
 
 class PortfolioOpt(PTOProblem):
@@ -251,6 +248,17 @@ class PortfolioOpt(PTOProblem):
         return raw_symbol_df
 
     def _download_prices(self, symbol_df):
+        # Only needed when regenerating the raw dataset; the benchmark ships
+        # preprocessed price_data_*.pt in the data download instead.
+        import quandl
+
+        api_key = os.environ.get("QUANDL_API_KEY")
+        if not api_key:
+            raise RuntimeError(
+                "Set QUANDL_API_KEY to re-download raw portfolio data "
+                "(not needed when using the provided dataset files)."
+            )
+        quandl.ApiConfig.api_key = api_key
         print("Downloading data from quandl...")
 
         raw_tickers = symbol_df.Symbol

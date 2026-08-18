@@ -2,6 +2,7 @@ import os
 import sys
 import warnings
 
+import numpy  # noqa: F401  (import before torch: avoids libstdc++ conflicts in mixed conda/pip envs)
 import torch
 
 from openpto.config import get_args, get_logger, load_conf, setup_seed

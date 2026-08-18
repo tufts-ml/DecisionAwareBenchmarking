@@ -148,7 +148,7 @@ def load_per_seed_data(path="bench_p2_best_val.json"):
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"{path} not found. Run "
-            "`python rethink_exp/collect_bench_p2_val.py` first.")
+            "`python experiments/collect_bench_p2_val.py` first.")
     with open(path) as f:
         raw = json.load(f)
 

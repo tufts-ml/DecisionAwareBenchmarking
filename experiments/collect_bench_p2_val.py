@@ -22,9 +22,9 @@ For each winner we also record:
 
 Usage::
 
-    python rethink_exp/collect_bench_p2_val.py
-    python rethink_exp/collect_bench_p2_val.py --problem knapsack
-    python rethink_exp/collect_bench_p2_val.py --method perturb
+    python experiments/collect_bench_p2_val.py
+    python experiments/collect_bench_p2_val.py --problem knapsack
+    python experiments/collect_bench_p2_val.py --method perturb
 """
 
 import argparse
@@ -397,7 +397,7 @@ def main():
 
     if not os.path.exists(args.p1_best_json):
         print(f"error: {args.p1_best_json} not found. "
-              f"Run `python rethink_exp/collect_bench_p1.py --metric val` first.")
+              f"Run `python experiments/collect_bench_p1.py --metric val` first.")
         sys.exit(1)
 
     with open(args.p1_best_json) as f:

@@ -14,7 +14,7 @@ Generates two figures:
 
 Usage::
 
-    python rethink_exp/fig_bench_bump_not_recommended.py
+    python experiments/fig_bench_bump_not_recommended.py
 """
 
 import os
@@ -45,7 +45,7 @@ N_RESAMPLES = 10_000
 CI_LEVEL = 0.95
 RNG_SEED = 20260527
 
-OUT_DIR = "results"
+OUT_DIR = "results/figures"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # Both overridable so a provisional/partial data file can be plotted without

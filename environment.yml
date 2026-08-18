@@ -1,0 +1,35 @@
+# Conda environment for the openpto benchmark.
+#   conda env create -f environment.yml && conda activate openpto
+#
+# Notes:
+# - gurobipy installs without a license, but the gurobi-solver problems
+#   (knapsack-real, energy) need a Gurobi license to actually solve.
+# - The pip torch below is the default (CPU-capable) build. GPU torch is only
+#   needed for the warcraft shortestpath task (ResNet18 on 12x12 map images);
+#   every other task trains fine on CPU. For CUDA wheels see
+#   https://pytorch.org/get-started/locally/.
+name: openpto
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy>=2.3
+  - pandas>=2.3
+  - scipy>=1.17
+  - scikit-learn>=1.7
+  - matplotlib>=3.10
+  - networkx>=3.6
+  - pillow
+  - pytest>=8.0
+  - pip
+  - pip:
+      - torch>=2.2
+      - torchvision>=0.17
+      - cvxpy>=1.7
+      - cvxpylayers>=1.0
+      - gurobipy>=13.0
+      # 0.18 removed the module-level safe_load/dump API this codebase uses
+      - ruamel.yaml>=0.17,<0.18
+      # optional: only for re-downloading raw portfolio data (needs QUANDL_API_KEY)
+      # - quandl>=3.7
+      - -e .

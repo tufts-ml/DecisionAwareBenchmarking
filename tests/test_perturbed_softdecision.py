@@ -19,14 +19,28 @@ import pytest
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "perturbations-differential-pytorch"))
 
 from openpto.method.Models.perturbed import (
     perturbedSoftDecision,
-    perturbedOptFunc_reinforce,
     sample_noise_with_gradients,
 )
-import perturbations as ref_perturbations  # reference impl
+
+# The reference implementation (Berthet et al. perturbations.py, PyTorch port)
+# is not vendored. To enable the reference-comparison tests, clone
+#   https://github.com/tuero/perturbations-differential-pytorch
+# into the repo root; without it those tests are skipped.
+REF_IMPL_DIR = os.path.join(PROJECT_ROOT, "perturbations-differential-pytorch")
+HAS_REF_IMPL = os.path.isdir(REF_IMPL_DIR)
+if HAS_REF_IMPL:
+    sys.path.insert(0, REF_IMPL_DIR)
+    import perturbations as ref_perturbations  # reference impl
+
+requires_ref_impl = pytest.mark.skipif(
+    not HAS_REF_IMPL,
+    reason="reference implementation not found; clone "
+    "github.com/tuero/perturbations-differential-pytorch into the repo root "
+    "to run the reference-comparison tests",
+)
 
 
 # ---------------------------------------------------------------------------
@@ -120,6 +134,7 @@ class TestSoftDecisionCorrectness:
 # Test B: Linear objective ⇒ gradient matches REINFORCE
 # ---------------------------------------------------------------------------
 
+@requires_ref_impl
 class TestLinearEquivalence:
     """For f = c^T z, both gradient estimators should agree."""
 
@@ -277,6 +292,7 @@ class TestEndToEndGradientFlow:
 # Test E: Exact match with reference perturbations.py
 # ---------------------------------------------------------------------------
 
+@requires_ref_impl
 class TestReferenceMatch:
     """Our perturbedSoftDecision backward should match the reference exactly."""
 

@@ -1,0 +1,22 @@
+# Plain-pip fallback mirroring the [project] dependencies in pyproject.toml.
+# Prefer `pip install -e .` (or environment.yml); this file is for
+# `pip install -r requirements.txt` into an existing Python >=3.10 env.
+numpy>=2.3
+pandas>=2.3
+scipy>=1.17
+scikit-learn>=1.7
+matplotlib>=3.10
+networkx>=3.6
+torch>=2.2
+# torchvision floor pairs with torch>=2.2; only needed for warcraft shortestpath
+torchvision>=0.17
+cvxpy>=1.7
+cvxpylayers>=1.0
+# needs a Gurobi license for the gurobi-solver problems (knapsack-real, energy)
+gurobipy>=13.0
+# 0.18 removed the module-level safe_load/dump API this codebase uses
+ruamel.yaml>=0.17,<0.18
+# optional: only for re-downloading raw portfolio data (needs QUANDL_API_KEY)
+# quandl>=3.7
+# tests
+pytest>=8.0

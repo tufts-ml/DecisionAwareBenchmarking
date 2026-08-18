@@ -1,0 +1,131 @@
+[build-system]
+# setuptools>=77 for SPDX license expressions (PEP 639)
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openpto"
+version = "1.0.0"
+description = "Benchmark for 'Towards Better Benchmarking for Decision-Aware Learning': Predict-then-Optimize vs Predict-and-Optimize methods on combinatorial optimization tasks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Kyle Heuton", email = "kheuton@gmail.com" },
+    { name = "Haoyu Geng" },
+]
+keywords = [
+    "decision-focused learning",
+    "predict-then-optimize",
+    "combinatorial optimization",
+    "benchmark",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=2.3",
+    "pandas>=2.3",
+    "scipy>=1.17",
+    "scikit-learn>=1.7",
+    "matplotlib>=3.10",
+    "networkx>=3.6",
+    "torch>=2.2",
+    # torchvision floor pairs with torch>=2.2 (each torchvision release pins
+    # its matching torch); only needed at runtime for the warcraft
+    # shortestpath task's ResNet18.
+    "torchvision>=0.17",
+    "cvxpy>=1.7",
+    "cvxpylayers>=1.0",
+    # gurobipy installs without a license, but solving the gurobi-backed
+    # problems (knapsack-real, energy) requires one.
+    "gurobipy>=13.0",
+    # 0.18 removed the module-level safe_load/dump API used in
+    # openpto/config/utils_conf.py.
+    "ruamel.yaml>=0.17,<0.18",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+# re-downloading the raw portfolio dataset (needs QUANDL_API_KEY); the
+# provided data files make this unnecessary for the benchmark itself
+data = ["quandl>=3.7"]
+
+[tool.setuptools.packages.find]
+include = ["openpto*"]
+# datasets are read from ./openpto/data relative to the repo root, not from
+# the installed package
+exclude = ["openpto.data*"]
+# several subpackages (openpto.method, openpto.problems, ...) are PEP 420
+# namespace dirs without __init__.py
+namespaces = true
+
+# Ruff + Black + isort combo for code formatting
+# Adapted from https://github.com/AntonOsika/gpt-engineer (kudos!)
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+line-length = 90
+target-version = "py311"
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I001"]
+ignore = ["E501"] # never enforce `E501` (line length violations), done in Black
+task-tags = ["TODO", "FIXME"]
+
+# Ignore `E402` (import violations) and "F401" (unused imports) in all `__init__.py` files
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = []
+known-third-party = []
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+combine-as-imports = true
+split-on-trailing-comma = false
+lines-between-types = 1
+
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html
+[tool.black]
+line-length = 90
+target-version = ["py311"]
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.direnv
+    | \.eggs
+    | \.git
+    | \.tox
+    | \.venv
+    | _build
+    | build
+    | dist
+    | venv
+  )/
+)
+'''
