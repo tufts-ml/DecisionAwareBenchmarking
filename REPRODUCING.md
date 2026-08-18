@@ -19,8 +19,8 @@ Every figure script reads only `bench_p2_best_val.json`.
 
 | Paper file (in the manuscript's `figures/`) | Command | Notes |
 |---|---|---|
-| `fig_bench_bump_not_recommended_bootstrap_cropped.pdf` | `python experiments/fig_bench_bump_not_recommended.py` | Emits plain + bootstrap variants; the paper uses the bootstrap one. The `_cropped` paper file was produced by running `pdfcrop` on the output afterwards — margins differ, content is identical. |
-| `fig_bench_bump_recommended_main_bootstrap_cropped.pdf` | `python experiments/fig_bench_bump_recommended.py` | Emits `recommended_{main,spatial}_{plain,bootstrap}`; `_cropped` again = `pdfcrop` post-processing. |
+| `fig_bench_bump_not_recommended_bootstrap_cropped.pdf` | `python experiments/fig_bench_bump_not_recommended.py` | Emits plain + bootstrap variants; the paper uses the bootstrap one. The `_cropped` variant trims the suptitle and legend; a copy with the manuscript's exact crop box applied is committed at `results/figures/fig_bench_bump_not_recommended_bootstrap_cropped.pdf` (regenerating the figure does not re-crop — re-apply the crop box or `pdfcrop` after changes). |
+| `fig_bench_bump_recommended_main_bootstrap_cropped.pdf` | `python experiments/fig_bench_bump_recommended.py` | Emits `recommended_{main,spatial}_{plain,bootstrap}`; `_cropped` = same crop-box post-processing, committed copy at `results/figures/`. |
 | `fig_bench_bump_recommended_spatial_bootstrap.pdf` | `python experiments/fig_bench_bump_recommended.py` | Same script as above. |
 | `fig_bench_bump_bootstrap_portfolio.pdf` | `python experiments/fig_bench_bump_bootstrap.py` | The portfolio panel of the per-group outputs (appendix). |
 | `synthetic_data.pdf` | `python experiments/fig_synthetic_data.py` | pg_misspec data-generating-process illustration. |
