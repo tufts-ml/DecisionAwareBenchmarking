@@ -1,0 +1,21 @@
+bce: {reduction: mean}
+blackbox: {lambd: 0.1, reduction: mean}
+blackboxSolver: {lambd: 0.1, reduction: mean}
+ce: {reduction: mean}
+cpLayer: {reduction: mean}
+dfl: {dflalpha: 0.1, reduction: mean}
+identity: {reduction: mean}
+identitySolver: {reduction: mean}
+listLTR: {reduction: mean, tau: 1}
+lodl: {losslr: 0.001, model_type: weightedmse, num_iters: 100, num_samples: 2000,
+  patience: 25, quadalpha: 0, quadrank: 20, reduction: mean, sampling: random_hessian,
+  sampling_std: -1, serial: true, test_frac: 0.2, train_frac: 0.6, verbose: false}
+mae: {reduction: mean}
+mse: {reduction: mean}
+msemean: {alpha: 0.1}
+nce: {reduction: mean}
+pairLTR: {reduction: mean}
+perturb: {noise: normal, reduction: mean}
+pointLTR: {reduction: mean}
+qptl: {reduction: mean, tau: 1.0}
+spo: {reduction: mean}

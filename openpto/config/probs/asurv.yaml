@@ -1,0 +1,7 @@
+dataset:
+  budget: 50
+  prob_version: real
+
+solver:
+  heuristic:
+    kwargs: none

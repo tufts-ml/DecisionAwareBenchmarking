@@ -1,0 +1,10 @@
+dataset:
+  prob_version: planted
+  num_features: 6
+  poly_deg: 6
+  noise_width: 0.3
+  grid_size: 5
+
+solver:
+  heuristic:
+    kwargs: None

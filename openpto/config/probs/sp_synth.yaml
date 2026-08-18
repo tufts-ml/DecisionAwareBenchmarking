@@ -1,0 +1,10 @@
+dataset:
+  prob_version: synth
+  num_features: 5
+  poly_deg: 6
+  noise_width: 0.3
+  grid_size: 5
+
+solver:
+  heuristic:
+    kwargs: None

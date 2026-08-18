@@ -1,0 +1,11 @@
+dataset:
+  prob_version: v3
+  m: 0.0           # right-piece slope; 0 = maximally misspecified, -4 = well-specified
+  m0: -4.0         # left-piece slope
+  c0: -0.2         # cost at the kink
+  alpha: 1.0       # 1 = pure exponential noise, 0 = pure Gaussian
+  sd: 0.5          # exponential scale + Gaussian std (variance = sd^2 = 0.25)
+
+solver:
+  heuristic:
+    kwargs: None
