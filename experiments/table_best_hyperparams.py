@@ -90,7 +90,7 @@ TASK_FULL = {
     "knapsack": "Knapsack (synth)", "knapsack-real": "Knapsack (energy)",
     "energy": "Energy scheduling", "budgetalloc": "Budget allocation",
     "cubic": "Cubic Top-K", "bipartitematching": "Bipartite matching",
-    "portfolio": "Portfolio", "asurv": "Whooping crane (asurv)",
+    "portfolio": "Portfolio", "asurv": "Aerial survey (asurv)",
     "cook_county": "Cook County", "speed_humps": "Speed humps",
     "sp_synth": "Shortest path (synth)", "sp_planted": "Shortest path (planted)",
     "pg_misspec": "PG misspec", "shortestpath": "Warcraft shortest path",
