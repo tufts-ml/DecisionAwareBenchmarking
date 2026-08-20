@@ -4,7 +4,7 @@ Code and results for:
 
 > **Towards Better Benchmarking for Decision-Aware Learning**
 > Kyle Heuton and Michael C. Hughes
-> Under review at Transactions on Machine Learning Research (TMLR), 2026.
+> Under review, 2026.
 
 This repository benchmarks **Predict-then-Optimize** (PtO, "two-stage") against
 **Predict-and-Optimize** (PnO, "decision-aware") training for predictive
