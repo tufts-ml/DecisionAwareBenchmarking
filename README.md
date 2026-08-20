@@ -20,8 +20,6 @@ model selection throughout. The paper reports a 12-method x 12-task subset; the
 sweep results for all cells ship with the repo as JSON, so every figure and table
 in the paper regenerates in minutes without retraining anything.
 
-![Modular pipeline: problems, solvers, losses, prediction models](resource/figs/modular.png)
-
 The package (`openpto`) is modular: **problems** (dataset + objective +
 decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
 **losses** (the PtO/PnO methods), and **prediction models** are assembled by
