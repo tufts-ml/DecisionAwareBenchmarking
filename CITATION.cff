@@ -7,7 +7,7 @@ authors:
   - family-names: Hughes
     given-names: Michael C.
 license: MIT
-repository-code: "https://github.com/kheuton/DecisionAwareBenchmarking"
+repository-code: "https://github.com/tufts-ml/DecisionAwareBenchmarking"
 preferred-citation:
   type: unpublished
   title: "Towards Better Benchmarking for Decision-Aware Learning"
@@ -17,7 +17,7 @@ preferred-citation:
     - family-names: Hughes
       given-names: Michael C.
   year: 2026
-  notes: "Under review at Transactions on Machine Learning Research."
+  notes: "Under review."
 references:
   - type: software
     title: "PredictiveCO-Benchmark (openpto)"

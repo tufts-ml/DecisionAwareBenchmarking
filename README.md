@@ -30,7 +30,7 @@ decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
 ## Installation
 
 ```bash
-git clone https://github.com/kheuton/DecisionAwareBenchmarking.git
+git clone https://github.com/tufts-ml/DecisionAwareBenchmarking.git
 cd DecisionAwareBenchmarking
 conda env create -f environment.yml && conda activate openpto
 ```
@@ -259,7 +259,7 @@ If you use this repository, please cite both papers:
   title  = {Towards Better Benchmarking for Decision-Aware Learning},
   author = {Heuton, Kyle and Hughes, Michael C.},
   year   = {2026},
-  note   = {Under review at Transactions on Machine Learning Research},
+  note   = {Under review},
 }
 
 @inproceedings{geng2024benchmarking,
