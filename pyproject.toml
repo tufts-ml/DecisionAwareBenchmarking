@@ -12,7 +12,6 @@ requires-python = ">=3.10"
 license = "MIT"
 authors = [
     { name = "Kyle Heuton", email = "kheuton@gmail.com" },
-    { name = "Haoyu Geng" },
 ]
 keywords = [
     "decision-focused learning",
