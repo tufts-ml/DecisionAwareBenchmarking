@@ -56,7 +56,7 @@ RNG_SEED = 20260527
 OUT_DIR = "results/figures"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-data = load_per_seed_data("bench_p2_best_val.json")
+data = load_per_seed_data("results/bench_p2_best_val.json")
 
 try:
     from scipy.stats import bootstrap as _scipy_bootstrap

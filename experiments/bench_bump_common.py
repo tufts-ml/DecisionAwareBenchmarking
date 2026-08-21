@@ -129,7 +129,7 @@ jitter_x["dad"]       =  0.18
 # Data loading
 # ============================================================
 
-def load_per_seed_data(path="bench_p2_best_val.json"):
+def load_per_seed_data(path="results/bench_p2_best_val.json"):
     """
     Returns dict: out[method][prob] = {
         "mean":     scalar in display units (relative-% or absolute),

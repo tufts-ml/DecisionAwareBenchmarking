@@ -1,8 +1,9 @@
 # Regenerate the paper's tables and figures from the bundled result JSONs
-# (bench_p1_best_val.json, bench_p2_best_val.json, loss_matrix.json,
-# rank_counterfactual_cache.json). No cluster or saved_records/ needed.
+# in results/ (bench_p1_best_val.json, bench_p2_best_val.json,
+# loss_matrix.json, rank_counterfactual_cache.json). No cluster or
+# saved_records/ needed.
 #
-# Run from the repo root: scripts read the JSONs from ./ and write to
+# Run from the repo root: scripts read the JSONs from results/ and write to
 # results/tables/ and results/figures/.
 #
 # Override the interpreter with e.g. `make PY=python3 tables`.

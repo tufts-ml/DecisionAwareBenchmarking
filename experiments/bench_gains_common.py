@@ -325,7 +325,7 @@ def rel_gain(base, new):
 _P1_BEST_CACHE = {}
 
 
-def p1_best_config(prob, method, path="bench_p1_best_val.json"):
+def p1_best_config(prob, method, path="results/bench_p1_best_val.json"):
     """(lr, batch) where Phase-2 was run for this cell, per bench_p1_best_val."""
     if path not in _P1_BEST_CACHE:
         with open(path) as f:

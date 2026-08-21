@@ -125,7 +125,7 @@ MODE_FILETAG = {"seed0": "seed0", "best": "bestseed", "mean": "mean"}
 MODE_LABEL = {"seed0": "init seed 0", "best": "best-validating seed",
               "mean": "10-seed mean"}
 
-CACHE = "rank_counterfactual_cache.json"
+CACHE = "results/rank_counterfactual_cache.json"
 
 
 # ---- Data -------------------------------------------------------------------

@@ -45,7 +45,7 @@ SKIP_COMPLETED=true
 GPU_24G_CONSTRAINT="rtx_6000-24G|rtx_a5000-24G|a100-40G|a100-80G|l40-48G|l40s-48G|rtx_6000_ada-48G|rtx_a6000-48G|h200-141G"
 # Subset with >=40 GB, for dad on shortestpath (OOMs at 23.46 GiB on a 24 GB card).
 GPU_40G_CONSTRAINT="a100-40G|a100-80G|l40-48G|l40s-48G|rtx_6000_ada-48G|rtx_a6000-48G|h200-141G"
-BEST_JSON="bench_p1_best_val.json"   # val-selected HPs (test-leakage fix, Apr 2026). Override with --best-json to use pre-fix bench_p1_best.json.
+BEST_JSON="results/bench_p1_best_val.json"   # val-selected HPs (test-leakage fix, Apr 2026). Override with --best-json to use pre-fix results/bench_p1_best.json.
 MANIFEST_FILE="sweep_manifest_p2.json"
 
 while [[ $# -gt 0 ]]; do

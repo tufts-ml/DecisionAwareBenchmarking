@@ -75,9 +75,10 @@ pass `--loadnew True` to force regeneration.
 
 ### Tier 1 — figures and tables from bundled results (minutes, no cluster)
 
-The sweep's selected results are committed at the repo root
-(`bench_p1_best_val.json`, `bench_p2_best_val.json`, `loss_matrix.json`,
-`rank_counterfactual_cache.json`). To regenerate every generated paper artifact
+The sweep's selected results are committed under `results/`
+(`results/bench_p1_best_val.json`, `results/bench_p2_best_val.json`,
+`results/loss_matrix.json`, `results/rank_counterfactual_cache.json`). To
+regenerate every generated paper artifact
 into `results/figures/` and `results/tables/`:
 
 ```bash
@@ -146,14 +147,14 @@ python experiments/table_best_hyperparams.py    # or: make hp-table
 ├── slurm/                         # Phase-1/2 sweep submitters (SLURM)
 ├── scripts/                       # one-time data prep (speed_humps)
 ├── tests/                         # unit tests for the DPO implementation
-├── results/                       # committed final figures and tables
+├── results/                       # committed final results, figures, and tables
 │   ├── figures/
-│   └── tables/
+│   ├── tables/
+│   ├── bench_p1_best_val.json         # Phase-1 winners (val-selected)
+│   ├── bench_p2_best_val.json         # Phase-2 winners — read by all figure scripts
+│   ├── loss_matrix.json               # prediction loss + decision regret per cell
+│   └── rank_counterfactual_cache.json # cache for the tuning-benefit tables
 ├── resource/figs/                 # framework diagrams
-├── bench_p1_best_val.json         # Phase-1 winners (val-selected)
-├── bench_p2_best_val.json         # Phase-2 winners — read by all figure scripts
-├── loss_matrix.json               # prediction loss + decision regret per cell
-├── rank_counterfactual_cache.json # cache for the tuning-benefit tables
 ├── Makefile                       # make all / tables / figures / hp-table / test
 ├── environment.yml                # conda env (name: openpto)
 ├── pyproject.toml, requirements.txt

@@ -241,9 +241,9 @@ def write_tex(grid, path):
 def main():
     ap = argparse.ArgumentParser(
         description="Emit the best-(LR, batch, HP) table from the sweep JSONs.")
-    ap.add_argument("--p2_json", default="bench_p2_best_val.json",
+    ap.add_argument("--p2_json", default="results/bench_p2_best_val.json",
                     help="Phase-2 val-selected best-config JSON (primary)")
-    ap.add_argument("--p1_json", default="bench_p1_best_val.json",
+    ap.add_argument("--p1_json", default="results/bench_p1_best_val.json",
                     help="Phase-1 val-selected best-config JSON (fallback)")
     ap.add_argument("--outdir", default="results/tables",
                     help="output directory for the .csv/.md/.tex files")

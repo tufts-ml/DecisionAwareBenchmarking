@@ -105,8 +105,8 @@ BATCH_EXCLUDED_PAIRS = {
 USE_ABSOLUTE = {"portfolio"}
 
 RESULTS_ROOT = "saved_records"
-BEST_JSON_PATH_TEST = "bench_p1_best.json"
-BEST_JSON_PATH_VAL  = "bench_p1_best_val.json"
+BEST_JSON_PATH_TEST = "results/bench_p1_best.json"
+BEST_JSON_PATH_VAL  = "results/bench_p1_best_val.json"
 
 
 def seeds_for(prob, method):

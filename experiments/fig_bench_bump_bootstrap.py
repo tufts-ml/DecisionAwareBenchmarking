@@ -47,7 +47,7 @@ RNG_SEED    = 20260524     # deterministic CIs
 OUT_DIR = "results/figures"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-data = load_per_seed_data("bench_p2_best_val.json")
+data = load_per_seed_data("results/bench_p2_best_val.json")
 
 
 # ---- Optional: BCa via scipy if available ----

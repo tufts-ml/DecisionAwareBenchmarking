@@ -8,14 +8,15 @@ Two tiers:
 - **Tier 2** — rerun the full training sweep that produced those JSONs.
   Roughly 22,000 training runs; see [Compute expectations](#compute-expectations).
 
-All commands run **from the repo root**. Scripts read the JSONs from `./` and
-write to `results/figures/` and `results/tables/` (created on demand).
+All commands run **from the repo root**. Scripts read the JSONs from
+`results/` and write to `results/figures/` and `results/tables/` (created on
+demand).
 
 ## Tier 1: per-deliverable commands
 
 ### Figures
 
-Every figure script reads only `bench_p2_best_val.json`.
+Every figure script reads only `results/bench_p2_best_val.json`.
 
 | Paper file (in the manuscript's `figures/`) | Command | Notes |
 |---|---|---|
@@ -48,7 +49,7 @@ emits `results/tables/best_hyperparams.{csv,md,tex}`: the selected
 
 ## Bundled result artifacts
 
-One paragraph each; all four files sit at the repo root and are committed.
+One paragraph each; all four files sit in `results/` and are committed.
 
 **`bench_p1_best_val.json`** — Phase-1 winners. Nested
 `{method: {task: {...}}}`; each cell records the val-regret-minimizing
@@ -70,7 +71,7 @@ evaluated at the method's default HP. Methods with no Phase-2 sweep
 **`loss_matrix.json`** — per (task, method): train/val/test **prediction**
 loss and **decision** regret for the val-best cell, plus its `run_dir`.
 Input to `experiments/table_error_per_problem.py`. Produced by
-`experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json`,
+`experiments/collect_loss_matrix.py --p2_best_json results/bench_p2_best_val.json`,
 with `experiments/eval_test_pred.py` filling per-run `test_pred_loss.json`
 files between two collect passes (the first pass records the run dirs the
 eval script reads).
@@ -145,7 +146,7 @@ Exact per-method semantics live in `batches_for` / `BATCH_LABELS` in
 bash slurm/submit_bench_p1.sh --dry-run           # preview (SLURM)
 bash slurm/submit_bench_p1.sh                     # submit everything
 bash slurm/submit_bench_p1.sh --problem knapsack  # filters: --problem / --method / --seed
-python experiments/collect_bench_p1.py --metric val   # -> bench_p1_best_val.json
+python experiments/collect_bench_p1.py --metric val   # -> results/bench_p1_best_val.json
 ```
 
 The submit scripts target SLURM with `--requeue` plus checkpoint/resume
@@ -179,7 +180,7 @@ run. See the comments around `BATCH_EXCLUDED_PAIRS` in
 ### Phase 2: method-specific hyperparameter
 
 Swept at the Phase-1-best `(lr, batch)` per method x task (read from
-`bench_p1_best_val.json`). Grids (Phase-1 default in **bold**):
+`results/bench_p1_best_val.json`). Grids (Phase-1 default in **bold**):
 
 | Method | HP | Grid |
 |---|---|---|
@@ -198,13 +199,13 @@ Swept at the Phase-1-best `(lr, batch)` per method x task (read from
 
 ```bash
 bash slurm/submit_bench_p2.sh --dry-run
-bash slurm/submit_bench_p2.sh                     # reads bench_p1_best_val.json
-python experiments/collect_bench_p2_val.py        # -> bench_p2_best_val.json
+bash slurm/submit_bench_p2.sh                     # reads results/bench_p1_best_val.json
+python experiments/collect_bench_p2_val.py        # -> results/bench_p2_best_val.json
 # loss matrix: collect first (records run dirs), then fill prediction losses
 # from checkpoints, then collect again
-python experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json
+python experiments/collect_loss_matrix.py --p2_best_json results/bench_p2_best_val.json
 python experiments/eval_test_pred.py              # per-run test_pred_loss.json
-python experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json
+python experiments/collect_loss_matrix.py --p2_best_json results/bench_p2_best_val.json
 ```
 
 Run-output prefix conventions (under `saved_records/`):

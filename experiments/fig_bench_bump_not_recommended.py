@@ -57,7 +57,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 # Both overridable so a provisional/partial data file can be plotted without
 # touching the canonical figure. Defaults reproduce the previous behaviour.
-DATA_JSON = os.environ.get("BENCH_BUMP_DATA", "bench_p2_best_val.json")
+DATA_JSON = os.environ.get("BENCH_BUMP_DATA", "results/bench_p2_best_val.json")
 NAME_SUFFIX = os.environ.get("BENCH_BUMP_SUFFIX", "")
 
 data = load_per_seed_data(DATA_JSON)

@@ -14,7 +14,7 @@ the two metric blocks is bolded so the "best method per task" is visible at
 a glance.
 
 Source: ``loss_matrix.json`` (rebuilt from val-selected configs by
-``experiments/collect_loss_matrix.py --p2_best_json bench_p2_best_val.json``).
+``experiments/collect_loss_matrix.py --p2_best_json results/bench_p2_best_val.json``).
 """
 
 import argparse
@@ -24,7 +24,7 @@ import sys
 
 import numpy as np
 
-LOSS_MATRIX_PATH = "loss_matrix.json"
+LOSS_MATRIX_PATH = "results/loss_matrix.json"
 DEFAULT_OUT = "results/tables/error_per_problem.tex"
 
 PROBLEMS = ["knapsack", "knapsack-real", "energy", "budgetalloc",
@@ -247,7 +247,7 @@ def main():
     if not os.path.exists(args.loss_matrix):
         print(f"error: {args.loss_matrix} not found. Run "
               f"`python experiments/collect_loss_matrix.py "
-              f"--p2_best_json bench_p2_best_val.json` first.")
+              f"--p2_best_json results/bench_p2_best_val.json` first.")
         sys.exit(1)
     with open(args.loss_matrix) as f:
         loss_matrix = json.load(f)

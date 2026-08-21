@@ -15,14 +15,14 @@ a Phase-2 HP sweep, else Phase 1 best):
     if present (produced by eval_test_pred.py); NaN otherwise.
 
 Outputs:
-  - loss_matrix.json                         — full 14 x 17 x 6 tensor as JSON
+  - results/loss_matrix.json                 — full 14 x 17 x 6 tensor as JSON
   - results/tables/loss_matrix/<problem>.md     — one markdown table per problem
   - results/tables/loss_matrix/summary.md       — overview across all problems
 
 Caveat: with the legacy ``--best_json`` fallback (no ``--p2_best_json``),
 Phase-1 best (lr, batch) is picked by *test* regret and Phase-2 HP selection
 inherits that leakage; footnoted in every output. The documented invocation
-(``--p2_best_json bench_p2_best_val.json``) is val-selected and unaffected.
+(``--p2_best_json results/bench_p2_best_val.json``) is val-selected and unaffected.
 
 Usage:
     python experiments/collect_loss_matrix.py
@@ -113,9 +113,9 @@ HP_SWEEPS = {
 
 USE_ABSOLUTE = {"portfolio"}  # report absolute regret, not relative
 RESULTS_ROOT = "saved_records"
-BEST_JSON_PATH = "bench_p1_best.json"
-P2_BEST_VAL_PATH = "bench_p2_best_val.json"
-OUTPUT_JSON = "loss_matrix.json"
+BEST_JSON_PATH = "results/bench_p1_best.json"
+P2_BEST_VAL_PATH = "results/bench_p2_best_val.json"
+OUTPUT_JSON = "results/loss_matrix.json"
 TABLES_DIR = "results/tables/loss_matrix"
 
 

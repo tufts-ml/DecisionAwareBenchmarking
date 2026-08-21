@@ -114,8 +114,8 @@ HP_SWEEPS = {
 
 USE_ABSOLUTE = {"portfolio"}
 RESULTS_ROOT = "saved_records"
-P1_BEST_PATH = "bench_p1_best_val.json"
-OUT_PATH = "bench_p2_best_val.json"
+P1_BEST_PATH = "results/bench_p1_best_val.json"
+OUT_PATH = "results/bench_p2_best_val.json"
 
 # Multi-seed expansion (2026-05-21) — must match collect_bench_p1.py.
 SEEDS = list(range(10))

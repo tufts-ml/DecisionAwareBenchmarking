@@ -168,7 +168,7 @@ def compute_pred_losses(prob, ckpt_path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--loss_matrix_json", default="loss_matrix.json")
+    ap.add_argument("--loss_matrix_json", default="results/loss_matrix.json")
     ap.add_argument("--problem", default=None, help="Restrict to one problem.")
     ap.add_argument("--force", action="store_true",
                     help="Recompute even if test_pred_loss.json exists.")

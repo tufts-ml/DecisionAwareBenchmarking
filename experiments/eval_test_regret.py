@@ -182,7 +182,7 @@ def main():
     ap.add_argument("--missing", action="store_true",
                     help="Process every cell in loss_matrix.json whose test "
                          "regret is missing.")
-    ap.add_argument("--loss_matrix_json", default="loss_matrix.json")
+    ap.add_argument("--loss_matrix_json", default="results/loss_matrix.json")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
