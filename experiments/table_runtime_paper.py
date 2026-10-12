@@ -9,11 +9,6 @@ keeps portfolio as the "excluded task" column).
 Input  (results/): runtimes_per_method_task.json
 Output (results/tables/): tabapp_runtime.tex
 
-For energy x {mse, dfl, identity} every statistic is that of the re-run with
-the per-epoch solver evaluation on (bench_energyvr_*: selected-configuration
-time, run count, CPU-hours); the superseded legacy --skip_solver_eval runs are
-not counted (see REPRODUCING.md, "Selection signal").
-
 Run from the repo root::
 
     PYTHONPATH=$PWD python experiments/table_runtime_paper.py

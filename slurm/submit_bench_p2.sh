@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ====================================================================
-# Benchmark re-run — Phase 2: Method-specific HP sweep
+# Benchmark sweep — Phase 2: Method-specific HP sweep
 # ====================================================================
 # For each method that has a tunable HP, sweeps that HP using the best
 # (lr, batch) config found in Phase 1.
@@ -26,7 +26,6 @@
 #   bash slurm/submit_bench_p2.sh
 #   bash slurm/submit_bench_p2.sh --problem knapsack
 #   bash slurm/submit_bench_p2.sh --method dfl
-#   ENERGY_PTO_SKIP_SOLVER_EVAL=1 bash slurm/submit_bench_p2.sh --problem energy   # legacy protocol
 # ====================================================================
 
 set -e
@@ -40,22 +39,6 @@ PARTITION="${PARTITION:-preempt}"
 MEM="8G"
 CONDA_ENV="${CONDA_ENV:-pco_bench_rhel7}"
 SKIP_COMPLETED=true
-
-# Legacy-protocol switch (default OFF). The Phase-1/2 sweep behind the bundled
-# result JSONs ran the PtO methods (mse, dfl, identity) on energy with
-# --skip_solver_eval -- no per-epoch Gurobi solve of the validation split -- so
-# those cells selected their checkpoint (and early-stopped) on validation
-# PREDICTION error, unlike every other cell, which selects on validation
-# decision regret. The default here runs them with the solver evaluation ON,
-# protocol-identical to the rest of the benchmark; see get_walltime for the
-# cost (median ~2 / ~3.5 / ~7 min per epoch for mse / identity / dfl on energy,
-# 3-5x node-to-node variation; longest observed runs ~20-29 h of active time).
-# Set ENERGY_PTO_SKIP_SOLVER_EVAL=1 to reproduce the legacy runs instead.
-# NOTE: under the default (=0), re-run Phase 1 energy mse/dfl/identity with the
-# solver evaluation on and re-collect results/bench_p1_best_val.json BEFORE
-# submitting Phase 2 on energy: the bundled file holds the legacy val-MSE
-# (lr, batch) picks, e.g. dfl = (default, 1e-3) vs the val-regret (default, 1e-2).
-ENERGY_PTO_SKIP_SOLVER_EVAL="${ENERGY_PTO_SKIP_SOLVER_EVAL:-0}"
 
 # GPU cards with >=24 GB VRAM. shortestpath (ResNet18 + 10K warcraft images)
 # OOMs on the 16 GB p100/t4 nodes, so it must be constrained to these.
@@ -222,12 +205,10 @@ get_walltime() {
         pto)
             case "$prob" in
                 energy)
-                    # Legacy (skip_solver_eval) vs. default per-epoch Gurobi val
-                    # solve + in-loop solves for dfl (median ~7 min/epoch, up to
-                    # 300 epochs, longest observed ~29 h); see
-                    # ENERGY_PTO_SKIP_SOLVER_EVAL at the top.
-                    if [[ "$ENERGY_PTO_SKIP_SOLVER_EVAL" == "1" ]]; then echo "10:00:00"
-                    else echo "48:00:00"; fi ;;
+                    # Per-epoch Gurobi evaluation of the training and validation splits:
+                    # roughly 1-4 min per epoch for MSE and 5-20 min for DFL/Identity;
+                    # single runs of up to 29 h, hence 48 h.
+                    echo "48:00:00" ;;
                 budgetalloc)        echo "5:00:00" ;;
                 bipartitematching)  echo "5:00:00" ;;
                 shortestpath)       echo "4:00:00" ;;   # GPU, ResNet18
@@ -414,12 +395,6 @@ submit_p2_job() {
         solver="${SOLVER_PTO[$prob]}"
     else
         solver="${SOLVER_PNO[$prob]}"
-    fi
-
-    # Extra args: --skip_solver_eval for PtO on energy ONLY under the legacy
-    # protocol (ENERGY_PTO_SKIP_SOLVER_EVAL=1, see top of file).
-    if [[ "$ENERGY_PTO_SKIP_SOLVER_EVAL" == "1" && "$solver_group" == "pto" && "$prob" == "energy" ]]; then
-        extra_args="$extra_args --skip_solver_eval"
     fi
 
     # Per-problem prediction model override

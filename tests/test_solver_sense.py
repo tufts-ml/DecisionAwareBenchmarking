@@ -9,10 +9,10 @@ pairwise/listwise LTR losses, ...) branch on that declaration. The TopKSolver
 that Cubic Top-K is paired with picks the K LARGEST predicted values and never
 consults the declaration. Upstream (Thinklab-SJTU/PredictiveCO-Benchmark,
 f885426) declared this task as a MINIMIZE problem, so those losses trained
-with the wrong sign on it; the fix is a one-line change in
-``openpto/problems/CubicTopK.py`` (see REPRODUCING.md, "Cubic Top-K sense
-correction"). These tests pin the corrected behaviour and keep the legacy
-configuration reproducible.
+with the wrong sign on it; this repo declares MAXIMIZE in
+``openpto/problems/CubicTopK.py`` (see REPRODUCING.md, "Cubic Top-K task
+declaration"). These tests check the declared sense and that the upstream
+declaration stays reproducible through a config file.
 
 Run:  python -m pytest tests/test_solver_sense.py -v
 """
@@ -32,8 +32,8 @@ from openpto.method.Models.SPO import SPO  # noqa: E402
 from openpto.method.Solvers.heuristic.TopKSolver import TopKSolver  # noqa: E402
 from openpto.problems.CubicTopK import CubicTopK  # noqa: E402
 
-LEGACY_CONFIG = os.path.join(
-    PROJECT_ROOT, "openpto", "config", "probs", "cubic_legacy_minsense.yaml"
+UPSTREAM_CONFIG = os.path.join(
+    PROJECT_ROOT, "openpto", "config", "probs", "cubic_upstream_sense.yaml"
 )
 
 
@@ -99,10 +99,10 @@ def test_declared_sense_matches_topk_solver(cubic):
 
 
 def test_spo_plus_loss_nonnegative_under_declared_sense(cubic):
-    """SPO+ is a non-negative upper bound on regret -- but only when the sense is right.
+    """SPO+ is a non-negative upper bound on regret when the declared sense matches the solver.
 
     Under the upstream MINIMIZE declaration the very same loss is <= 0 on this
-    task (its sign is flipped), which is how the bug surfaced in training logs.
+    task (its sign is flipped).
     """
     _, Y, _ = cubic.get_train_data()
     Y = Y[:16]
@@ -114,20 +114,20 @@ def test_spo_plus_loss_nonnegative_under_declared_sense(cubic):
     assert float(loss) >= -1e-6, f"SPO+ loss negative under declared sense: {float(loss)}"
     assert float(loss) > 1e-3, "noisy predictions should incur a strictly positive SPO+ loss"
 
-    legacy = TopKSolver(modelSense=GRB.MINIMIZE, n_vars=cubic.init_API()["n_vars"])
-    legacy_loss = SPO(legacy).forward(cubic, Y_hat, Y, None, reduction="mean")
-    assert float(legacy_loss) < 0, (
-        "legacy (upstream) MINIMIZE declaration should flip the SPO+ sign; "
-        f"got {float(legacy_loss)}"
+    upstream = TopKSolver(modelSense=GRB.MINIMIZE, n_vars=cubic.init_API()["n_vars"])
+    upstream_loss = SPO(upstream).forward(cubic, Y_hat, Y, None, reduction="mean")
+    assert float(upstream_loss) < 0, (
+        "the upstream MINIMIZE declaration should flip the SPO+ sign; "
+        f"got {float(upstream_loss)}"
     )
 
 
-def test_legacy_config_restores_upstream_sense(cubic):
-    """cubic_legacy_minsense.yaml overrides modelSense the way solver_wrapper merges it."""
+def test_upstream_config_restores_upstream_sense(cubic):
+    """cubic_upstream_sense.yaml overrides modelSense the way solver_wrapper merges it."""
     from ruamel.yaml import YAML
 
     yaml = YAML(typ="safe", pure=True)
-    with open(LEGACY_CONFIG) as f:
+    with open(UPSTREAM_CONFIG) as f:
         conf = yaml.load(f)
     assert conf["solver"]["heuristic"]["modelSense"] == GRB.MINIMIZE == 1
     # Mirrors openpto/method/Solvers/wrapper_solver.py:
@@ -135,7 +135,7 @@ def test_legacy_config_restores_upstream_sense(cubic):
     solve_dict = {**cubic.init_API(), **conf["solver"]["heuristic"]}
     solver = TopKSolver(**solve_dict)
     assert solver.modelSense == GRB.MINIMIZE
-    # ... and the default config leaves the corrected declaration in place.
+    # ... and the default config leaves the MAXIMIZE declaration in place.
     with open(os.path.join(PROJECT_ROOT, "openpto", "config", "probs", "cubic.yaml")) as f:
         default_conf = yaml.load(f)
     default_solver = TopKSolver(**{**cubic.init_API(), **default_conf["solver"]["heuristic"]})

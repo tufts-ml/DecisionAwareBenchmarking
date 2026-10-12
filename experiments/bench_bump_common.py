@@ -6,7 +6,7 @@ critical-difference diagram. These helpers load the seed-aggregated JSON
 written by ``collect_bench_p2_val.py`` so that the same per-seed data backs
 every plot.
 
-Public surface:
+Exports:
   - PROBLEMS, METHODS, METHOD_DISPLAY, PROB_DISPLAY, USE_ABSOLUTE,
     METHOD_PROBLEMS, METHOD_STYLE, jitter_x
   - load_per_seed_data(path) -> nested dict with mean + per-seed values

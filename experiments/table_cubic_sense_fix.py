@@ -1,18 +1,18 @@
 """
 table_cubic_sense_fix.py
 ------------------------
-Appendix table for the Cubic Top-K sense correction: per method, Geng et al.'s
-published relative regret, our run of the released code (which reproduces their
-numbers, bug included), and the corrected re-run after CubicTopK.init_API was
-fixed to MAXIMIZE.
+Appendix table for the Cubic Top-K task declaration: per method, Geng et al.'s
+published relative regret, this code under the upstream declaration
+(MINIMIZE), and this code with MAXIMIZE declared.
 
 Inputs  (results/):
-  bench_p2_best_val_oldsense.json   pre-correction picks (released-code values;
-                                    10-seed mean +/- std test relative regret)
-  bench_p2_best_val.json            paper-current picks, cubic cells corrected
+  cubic_upstream_sense.json   method -> cubic cell under the upstream
+                              declaration (10-seed mean +/- std test relative
+                              regret; same fields as a bench_p2_best_val.json cell)
+  bench_p2_best_val.json      val-selected picks (MAXIMIZE declaration)
 Also experiments/bench_gains_common.GENG (published values).
 DPO and LODL are sense-independent (bit-identical runs) and MSE / pointwise
-LTR never read the sense, so their corrected column repeats the original value.
+LTR never read the sense, so their MAXIMIZE column repeats the upstream value.
 Output (results/tables/): tabapp_cubic_sense_fix.tex
 
 Run from the repo root::
@@ -50,18 +50,18 @@ def cell(e):
 
 
 def main():
-    old = json.load(open("results/bench_p2_best_val_oldsense.json"))
+    upstream = json.load(open("results/cubic_upstream_sense.json"))
     new = json.load(open("results/bench_p2_best_val.json"))
     lines = []
     for key, name, dep in ROWS:
         geng = common.GENG.get(key, {}).get("cubic")
         g = f"{geng:.2f}" if geng is not None else "--"
-        oe = old.get(key, {}).get("cubic", {})
+        oe = upstream.get(key, {})
         s0 = oe.get("test_seed_values", {}).get("0")
         s0 = f"{100 * s0:.2f}" if s0 is not None else "--"
         o, ov = cell(oe)
         c, cv = cell(new.get(key, {}).get("cubic"))
-        changed = new.get(key, {}).get("cubic", {}).get("family") == "bench_cubicfix"
+        changed = cv is not None and (ov is None or abs(cv - ov) > 1e-9)
         cc = f"\\textbf{{{c}}}" if changed else c
         lines.append(f"{name} & {dep} & {g} & {s0} & {o} & {cc} \\\\")
     tex = r"""\begin{table}[!h]

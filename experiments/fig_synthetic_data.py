@@ -9,12 +9,10 @@ paper appendix "PG Misspecified Synthetic Task":
     f*(x) = -4x + 2   for x in [0, 0.55],   -0.2  for x in (0.55, 2]
     Y  = f*(x) + zeta - 0.5,   zeta ~ Exponential(mean 0.5)
 
-This is exactly the DGP in openpto/problems/PGMisspec.py — the benchmark
-that produced every pg_misspec number in the paper — and the corrected
-manuscript equation: eps = zeta - 0.5 gives a hard floor at f*(x) - 0.5
-with sparse upward spikes (unbounded upper tail). The RNG recipe (seed,
-draw order) is unchanged from the originally submitted figure, so these
-samples are the exact mirror of the previously published points about f*.
+This is the DGP in openpto/problems/PGMisspec.py, which generates every
+pg_misspec number in the paper: the noise eps = zeta - 0.5 gives a hard floor
+at f*(x) - 0.5 with sparse upward spikes (unbounded upper tail). The figure
+plots a fixed-seed sample of these points together with f*.
 
 Generates:
     results/figures/synthetic_data.pdf

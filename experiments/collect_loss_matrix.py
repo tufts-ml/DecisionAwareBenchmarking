@@ -377,7 +377,7 @@ def extract_run_metrics(dirpath, prob):
         result["train_pred_loss"] = tp
         result["train_regret"] = te
     else:
-        # No val_logs.csv (e.g., mse_train / mse_val / energy --skip_solver_eval
+        # No val_logs.csv (e.g., mse_train / mse_val
         # runs). Best epoch comes from whatever selection signal was used.
         # train/val regret will remain NaN since no solver was run during
         # training, but pred losses can be filled from test_pred_loss.json

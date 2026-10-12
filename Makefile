@@ -1,23 +1,17 @@
 # Regenerate the paper's figures and generated tables from the bundled result
-# JSONs in results/. No cluster, datasets or saved_records/ needed. The JSONs
-# are the values the manuscript reports: Cubic Top-K cells from the
-# sense-corrected re-run (REPRODUCING.md, "Cubic Top-K sense correction"),
-# the mse/dfl/identity cells on energy from the re-run with the per-epoch
-# solver evaluation on (REPRODUCING.md, "Selection signal").
+# JSONs in results/ (no cluster, datasets or saved_records/ needed):
 #
 #   bench_p1_best_val.json, bench_p2_best_val.json   Phase-1/2 winners (figures, hp-table)
 #   loss_matrix.json                                 error_per_problem.tex
 #   rank_counterfactual_cache.json                   tuning-benefit tables
-#   bench_p2_best_val_oldsense.json                  tabapp_cubic_sense_fix.tex ("released code" column)
 #   geng_reproduction_data.json                      tabapp_geng_repro.tex
 #   runtimes_per_method_task.json                    tabapp_runtime.tex
 #   bench_fullgrid_best_val.json                     tabapp_fullgrid_{pairs,cubic}.tex
-#   bench_bump_rerun_data.json                       fig_rank_transition_2col_*.pdf
+#   cubic_upstream_sense.json                        tabapp_cubic_sense_fix.tex
 #
 # Run from the repo root: scripts read the JSONs from results/ and write to
-# results/tables/ and results/figures/.
-#
-# Override the interpreter with e.g. `make PY=python3 tables`.
+# results/tables/ and results/figures/. Override the interpreter with e.g.
+# `make PY=python3 tables`.
 PY ?= python
 
 .PHONY: all tables figures hp-table appendix-tables test
@@ -40,7 +34,7 @@ tables: hp-table appendix-tables
 			bipartitematching asurv cook_county speed_humps sp_synth \
 			pg_misspec shortestpath
 
-# Appendix tables (reproduction check, runtimes, joint-grid check, cubic sense fix)
+# Appendix tables (reproduction check, runtimes, joint-grid check, cubic declaration)
 appendix-tables:
 	$(PY) experiments/table_geng_repro.py
 	$(PY) experiments/table_runtime_paper.py
@@ -57,7 +51,6 @@ figures:
 	$(PY) experiments/fig_bench_bump_recommended.py
 	$(PY) experiments/fig_bench_bump_bootstrap.py
 	$(PY) experiments/fig_synthetic_data.py
-	$(PY) experiments/fig_rank_transition.py
 
 test:
 	$(PY) -m pytest -q tests/

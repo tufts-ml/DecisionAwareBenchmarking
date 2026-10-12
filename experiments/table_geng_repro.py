@@ -2,7 +2,7 @@
 table_geng_repro.py
 -------------------
 Appendix "reproduction check" table: Geng et al. (NeurIPS 2024) published
-Table-3 values vs. our re-run of their released code under their protocol
+Table-3 values vs. our run of their released code under their protocol
 (their seed 2023, data, splits, 300 epochs, patience 40, default batch regime,
 method hyperparameters at released defaults, learning rate validation-selected
 over the same five-value grid). Columns: Geng et al. (1 run), ours seed0
@@ -14,14 +14,8 @@ research pipeline) and writes  results/tables/tabapp_geng_repro.tex , the
 two-panel one-page table of the paper's appendix. It prints the summary
 statistics quoted in the appendix text. No saved_records/ is needed.
 
-Variant notes:
-  * energy x {mse, dfl, identity} come from the val-regret re-run
-    (bench_energyvr_*, solver evaluation ON, checkpoints selected on validation
-    regret), so no selection-signal flag remains. See REPRODUCING.md
-    "Selection signal".
-  * cubic rows are the released-code (pre-correction) values, deliberately:
-    the table checks reproduction of the published numbers, which carry the
-    Cubic Top-K sense bug. See REPRODUCING.md "Cubic Top-K sense correction".
+The cubic rows use the upstream task declaration so the comparison is against
+the code as released (REPRODUCING.md, "Cubic Top-K task declaration").
 
 Usage (from the repo root):
     python experiments/table_geng_repro.py
@@ -134,7 +128,6 @@ def main():
           f"20%: {st['unflagged_within_20pct']:.0f}%")
     print(f"relative-regret cells within 2 regret points: "
           f"{st['rel_regret_within_2pts']}/{st['rel_regret_cells']}")
-    print(f"(variant: energyvr={meta['energyvr']}, cubicfix={meta['cubicfix']})")
 
     by_prob = {}
     for r in data["rows"]:

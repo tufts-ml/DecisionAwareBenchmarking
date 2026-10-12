@@ -211,7 +211,7 @@ def load_selection_signal(dirpath, method):
     if method == "mse_val":
         return _min_from_log(os.path.join(dirpath, "log.txt"), _VAL_MSE_LINE)
     # Default: val regret. Fallback to "val MSE (no solver)" for runs with
-    # --skip_solver_eval (e.g. energy mse/dfl/identity).
+    # --skip_solver_eval (e.g. mse_val).
     v = _min_from_csv_eval_col(os.path.join(dirpath, "val_logs.csv"))
     if v is None:
         v = _min_from_log(os.path.join(dirpath, "log.txt"), _VAL_MSE_LINE)

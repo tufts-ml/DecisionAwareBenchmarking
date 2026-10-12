@@ -1,10 +1,7 @@
 {
   "meta": {
-    "variant": "paper",
-    "energyvr": true,
-    "cubicfix": false,
-    "generated_from": "ENERGYVR=1 python rethink_exp/table_geng_repro.py --paper --dump_json <path>",
-    "units": "test relative regret (%); absolute regret for portfolio"
+    "units": "test relative regret (%); absolute regret for portfolio",
+    "protocol": "released code, released seed, default batch regime, learning rate val-selected over the 5-value grid; cubic under the upstream task declaration (see REPRODUCING.md)"
   },
   "rows": [
     {

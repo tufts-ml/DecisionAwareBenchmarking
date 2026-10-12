@@ -6,7 +6,6 @@ Appendix tables for the full joint-grid check of the two-phase tuning design
 
 Inputs  (results/):
   bench_fullgrid_best_val.json   joint-grid results for all 8 swept pairs
-                                 (Cubic Top-K under the corrected sense)
   bench_p2_best_val.json         the paper-current two-stage picks (per-task
                                  ranking table)
 Outputs (results/tables/), paper notation (b = batch size, eta = learning

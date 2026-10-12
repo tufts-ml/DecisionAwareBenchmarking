@@ -18,10 +18,7 @@ hyperparameter sweep (learning rate x batch regime, then method-specific
 hyperparameters), 10 model-init seeds per configuration, and validation-regret
 model selection throughout. The paper reports a 12-method x 12-task subset; the
 sweep results for all cells ship with the repo as JSON, so the paper's figures and
-generated tables regenerate in minutes without retraining anything. The bundled
-JSONs are the values the manuscript currently reports, including the Cubic Top-K
-sense correction described below and the energy re-run with the per-epoch
-solver evaluation on (`REPRODUCING.md`, "Selection signal").
+generated tables regenerate in minutes without retraining anything.
 
 The package (`openpto`) is modular: **problems** (dataset + objective +
 decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
@@ -86,11 +83,8 @@ pass `--loadnew True` to force regeneration.
 
 ### Tier 1 — figures and tables from bundled results (minutes, no cluster)
 
-The sweep's selected results are committed under `results/`
-(`bench_p1_best_val.json`, `bench_p2_best_val.json`, `loss_matrix.json`,
-`rank_counterfactual_cache.json`, plus the inputs of the appendix tables and
-the rank-transition figure; each file is described in `REPRODUCING.md`). To
-regenerate every generated paper artifact
+The sweep's selected results are committed under `results/` (each file is
+described in `REPRODUCING.md`). To regenerate every generated paper artifact
 into `results/figures/` and `results/tables/`:
 
 ```bash
@@ -106,14 +100,12 @@ make all          # = make tables figures (hp-table and appendix-tables run as p
 | Tuning-benefit tables (`tabapp_tuning_benefit.tex`, `tab_tuning_benefit_summary.tex`) | `make tables` (see `Makefile` for the full flags) | `results/tables/notrec-rec-geo-spw_regret_change_{,by_group_}mean_paper.tex` |
 | Error grid (`error_per_problem.tex`) | `make tables` | `results/tables/error_per_problem.tex` |
 | Appendix tables (`tabapp_geng_repro.tex`, `tabapp_runtime.tex`, `tabapp_fullgrid_{pairs,cubic}.tex`, `tabapp_cubic_sense_fix.tex`) | `make appendix-tables` | `results/tables/tabapp_*.tex` |
-| Rank-transition figure (`fig_rank_transition_2col_7tasks.pdf`; in the manuscript repo, not in the current build) | `python experiments/fig_rank_transition.py` | `results/figures/fig_rank_transition_2col_{5,7}tasks.pdf` |
 
 The generated tables are byte-identical to the manuscript's files except the
-two tuning-benefit tables, whose captions and group headers were hand-edited
+two tuning-benefit tables, whose captions and group headers are hand-written
 (every data row matches); regenerated PDFs differ from the manuscript's only
-in their creation timestamp. Details, including which paper files are
-hand-maintained and what each bundled JSON holds, are in
-[`REPRODUCING.md`](REPRODUCING.md).
+in their creation timestamp. Which paper files are hand-maintained and what
+each bundled JSON holds is in [`REPRODUCING.md`](REPRODUCING.md).
 
 ### Tier 2 — retraining from scratch
 
@@ -133,11 +125,8 @@ two-phase sweep (~22,000 runs including 10 seeds per configuration) is submitted
 via `slurm/submit_bench_p1.sh` and `slurm/submit_bench_p2.sh` and collected with
 `experiments/collect_bench_p1.py` / `experiments/collect_bench_p2_val.py`. Per-task
 instance counts, solver choices, batch-arm semantics, and known caveats are all
-specified in [`REPRODUCING.md`](REPRODUCING.md) — the instance counts and solvers
-there are load-bearing for comparability and must not be changed. The submit
-scripts run every cell with validation-regret selection; set
-`ENERGY_PTO_SKIP_SOLVER_EVAL=1` to reproduce the original sweep's legacy energy
-protocol for `mse`/`dfl`/`identity` instead (see `REPRODUCING.md`).
+specified in [`REPRODUCING.md`](REPRODUCING.md); the instance counts and solvers
+there must not be changed if results are to be compared with the paper.
 
 ## Best hyperparameters
 
@@ -172,13 +161,12 @@ python experiments/table_best_hyperparams.py    # or: make hp-table
 │   ├── tables/
 │   ├── bench_p1_best_val.json         # Phase-1 winners (val-selected)
 │   ├── bench_p2_best_val.json         # Phase-2 winners — read by the bump-chart scripts
-│   ├── bench_p2_best_val_oldsense.json# Phase-2 winners before the Cubic Top-K correction
 │   ├── loss_matrix.json               # prediction loss + decision regret per cell
 │   ├── rank_counterfactual_cache.json # cache for the tuning-benefit tables
 │   ├── geng_reproduction_data.json    # reproduction-check table data
 │   ├── runtimes_per_method_task.json  # runtime table data
 │   ├── bench_fullgrid_best_val.json   # joint-grid check data
-│   └── bench_bump_rerun_data.json     # rank-transition figure data
+│   └── cubic_upstream_sense.json      # Cubic Top-K column under the upstream declaration
 ├── resource/figs/                 # framework diagrams
 ├── Makefile                       # make all / tables / appendix-tables / figures / hp-table / test
 ├── environment.yml                # conda env (name: openpto)
@@ -248,9 +236,9 @@ make test          # = python -m pytest -q tests/
 ```
 
 `tests/test_solver_sense.py` checks that the Cubic Top-K task declares the
-optimisation sense its solver actually uses (see *Relationship to the upstream
+optimisation sense its solver uses (see *Relationship to the upstream
 benchmark*); `tests/test_bundled_results.py` checks that the bundled result
-JSONs are mutually consistent and carry the corrected cubic cells. Two tests compare the DPO implementation against the reference
+JSONs are mutually consistent. Two tests compare the DPO implementation against the reference
 [perturbations-differential-pytorch](https://github.com/tuero/perturbations-differential-pytorch)
 implementation; they skip cleanly unless that repo is cloned into the repo root
 (see `REPRODUCING.md`).
@@ -272,14 +260,14 @@ implementation, the MSE selection-signal variants, the two-phase multi-seed
 hyperparameter sweep with checkpoint/requeue support, and all analysis, figure,
 and table code in `experiments/`.
 
-One correction to the upstream code: the Cubic Top-K task declared its
+One difference from the upstream code: the Cubic Top-K task there declares its
 objective as a minimisation while its top-K solver maximises, so the
 sense-dependent losses (SPO+, NCE, PG, DFL, Identity, Blackbox, DAD,
-pairwise/listwise LTR) trained with the wrong sign on that task — this explains the published 160% SPO+/NCE regret
-in the upstream paper's table. `openpto/problems/CubicTopK.py` now declares MAXIMIZE;
-the upstream behaviour is reproducible via
-`openpto/config/probs/cubic_legacy_minsense.yaml`. Details and corrected
-numbers: `REPRODUCING.md`, "Cubic Top-K sense correction".
+pairwise/listwise LTR) train with the wrong sign on that task, which is where
+the 160% SPO+/NCE regret in the upstream paper's table comes from.
+`openpto/problems/CubicTopK.py` declares MAXIMIZE; the upstream declaration is
+available via `openpto/config/probs/cubic_upstream_sense.yaml`. See
+`REPRODUCING.md`, "Cubic Top-K task declaration".
 
 ## License and citation
 
