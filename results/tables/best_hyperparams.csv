@@ -1,7 +1,7 @@
 method,task,lr,batch,hp_name,hp_value
 mse,knapsack,5e-2,bs=32,,
 mse,knapsack-real,5e-2,bs=32,,
-mse,energy,1e-1,bs=32,,
+mse,energy,5e-2,full batch,,
 mse,budgetalloc,1e-3,bs=32,,
 mse,cubic,5e-3,bs=32,,
 mse,bipartitematching,5e-3,bs=4,,
@@ -43,9 +43,9 @@ mse_val,pg_misspec,5e-2,bs=32,,
 mse_val,shortestpath,1e-2,bs=32,,
 dfl,knapsack,1e-1,full batch,dflalpha,10.0
 dfl,knapsack-real,5e-2,bs=32,dflalpha,1.0
-dfl,energy,1e-3,full batch,dflalpha,0.001
+dfl,energy,1e-2,full batch,,
 dfl,budgetalloc,1e-3,full batch,dflalpha,1.0
-dfl,cubic,1e-2,full batch,dflalpha,10.0
+dfl,cubic,5e-3,full batch,dflalpha,0.001
 dfl,bipartitematching,1e-1,bs=4,dflalpha,10.0
 dfl,portfolio,1e-2,full batch,dflalpha,0.1
 dfl,asurv,1e-3,full batch,dflalpha,1.0
@@ -57,9 +57,9 @@ dfl,pg_misspec,5e-3,bs=32,dflalpha,10.0
 dfl,shortestpath,1e-1,full batch,dflalpha,0.001
 identity,knapsack,1e-2,bs=32,,
 identity,knapsack-real,5e-3,full batch,,
-identity,energy,1e-3,full batch,,
+identity,energy,1e-2,bs=32,,
 identity,budgetalloc,1e-2,full batch,,
-identity,cubic,5e-2,full batch,,
+identity,cubic,1e-3,full batch,,
 identity,bipartitematching,1e-3,full batch,,
 identity,portfolio,1e-3,bs=32,,
 identity,asurv,1e-2,full batch,,
@@ -73,7 +73,7 @@ spo,knapsack,5e-2,bs=32,,
 spo,knapsack-real,1e-1,bs=32,,
 spo,energy,1e-1,bs=1,,
 spo,budgetalloc,1e-3,bs=1,,
-spo,cubic,5e-2,bs=1,,
+spo,cubic,5e-3,bs=1,,
 spo,bipartitematching,1e-2,bs=1,,
 spo,portfolio,5e-3,bs=32,,
 spo,asurv,5e-2,bs=32,,
@@ -87,7 +87,7 @@ nce,knapsack,5e-2,bs=32,,
 nce,knapsack-real,1e-3,bs=32,,
 nce,energy,5e-3,bs=32,,
 nce,budgetalloc,1e-3,bs=32,,
-nce,cubic,1e-3,bs=32,,
+nce,cubic,5e-3,bs=32,,
 nce,bipartitematching,1e-2,bs=4,,
 nce,portfolio,1e-2,bs=1,,
 nce,asurv,1e-1,bs=32,,
@@ -101,7 +101,7 @@ blackbox,knapsack,1e-2,full batch,lambd,0.01
 blackbox,knapsack-real,1e-1,full batch,lambd,0.01
 blackbox,energy,1e-1,full batch,lambd,0.05
 blackbox,budgetalloc,1e-3,full batch,lambd,0.05
-blackbox,cubic,5e-2,full batch,lambd,0.01
+blackbox,cubic,1e-3,full batch,lambd,0.01
 blackbox,bipartitematching,1e-3,full batch,lambd,0.01
 blackbox,portfolio,5e-3,bs=32,lambd,0.1
 blackbox,asurv,1e-2,full batch,lambd,0.01
@@ -129,7 +129,7 @@ pairLTR,knapsack,1e-2,bs=32,,
 pairLTR,knapsack-real,5e-2,bs=32,,
 pairLTR,energy,1e-2,bs=32,,
 pairLTR,budgetalloc,5e-3,bs=32,,
-pairLTR,cubic,1e-2,bs=1,,
+pairLTR,cubic,5e-3,bs=1,,
 pairLTR,bipartitematching,1e-2,bs=4,,
 pairLTR,portfolio,1e-3,bs=1,,
 pairLTR,asurv,5e-2,bs=32,,
@@ -143,7 +143,7 @@ listLTR,knapsack,1e-2,bs=32,tau,0.1
 listLTR,knapsack-real,5e-2,bs=1,tau,5
 listLTR,energy,1e-2,bs=32,tau,0.5
 listLTR,budgetalloc,5e-3,bs=1,tau,0.1
-listLTR,cubic,5e-2,bs=1,tau,5
+listLTR,cubic,5e-2,bs=1,tau,0.1
 listLTR,bipartitematching,5e-2,bs=4,tau,0.5
 listLTR,portfolio,1e-3,bs=1,tau,0.5
 listLTR,asurv,5e-2,bs=32,tau,0.1
@@ -185,7 +185,7 @@ pg,knapsack,1e-2,full batch,sigma,0.01
 pg,knapsack-real,1e-1,bs=32,sigma,0.1
 pg,energy,5e-2,bs=32,sigma,0.1
 pg,budgetalloc,1e-3,bs=32,sigma,1.0
-pg,cubic,1e-2,full batch,sigma,0.5
+pg,cubic,1e-3,full batch,sigma,0.01
 pg,bipartitematching,5e-2,full batch,sigma,0.05
 pg,portfolio,1e-1,bs=32,sigma,0.5
 pg,asurv,1e-1,bs=32,sigma,0.1

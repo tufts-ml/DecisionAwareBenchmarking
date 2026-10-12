@@ -691,23 +691,23 @@
   "energy": {
     "mse": {
       "metrics": {
-        "best_epoch": null,
-        "train_pred_loss": 672.3024291992188,
-        "train_regret": null,
-        "val_pred_loss": 565.3019409179688,
-        "val_regret": null,
-        "test_pred_loss": 614.9794921875,
-        "test_regret": 0.021401392905195566,
-        "test_regret_abs": 40954.534988297484,
-        "test_regret_rel": 0.021401392905195566
+        "best_epoch": "Tr-121",
+        "train_pred_loss": 745.409851,
+        "train_regret": 31747.06508,
+        "val_pred_loss": 626.58075,
+        "val_regret": 34728.666047,
+        "test_pred_loss": 689.3772583007812,
+        "test_regret": 0.021127666135985195,
+        "test_regret_abs": 40430.720832998355,
+        "test_regret_rel": 0.021127666135985195
       },
       "meta": {
         "phase": 1,
-        "lr": "1e-1",
-        "batch": "alt"
+        "lr": "5e-2",
+        "batch": "default",
+        "family": "bench_energyvr"
       },
-      "prefix": "bench_p1_mse_alt_lr1e-1",
-      "run_dir": "saved_records/energy-energy/mse/bench_p1_mse_alt_lr1e-1"
+      "prefix": "bench_energyvr_mse_default_lr5e-2"
     },
     "mse_train": {
       "metrics": {
@@ -751,46 +751,43 @@
     },
     "dfl": {
       "metrics": {
-        "best_epoch": null,
-        "train_pred_loss": 5353.3369140625,
-        "train_regret": null,
-        "val_pred_loss": 5264.24755859375,
-        "val_regret": null,
-        "test_pred_loss": 5280.37353515625,
-        "test_regret": 0.17147750254925068,
-        "test_regret_abs": 328145.99540174106,
-        "test_regret_rel": 0.17147750254925068
-      },
-      "meta": {
-        "phase": 2,
-        "lr": "1e-3",
-        "batch": "default",
-        "hp_name": "dflalpha",
-        "hp_val": "0.001",
-        "hp_tag": "alpha0.001"
-      },
-      "prefix": "bench_p2_dfl_alpha0.001_default_lr1e-3",
-      "run_dir": "saved_records/energy-energy/dfl/bench_p2_dfl_alpha0.001_default_lr1e-3"
-    },
-    "identity": {
-      "metrics": {
-        "best_epoch": null,
-        "train_pred_loss": 5353.31884765625,
-        "train_regret": null,
-        "val_pred_loss": 5264.234375,
-        "val_regret": null,
-        "test_pred_loss": 5280.34130859375,
-        "test_regret": 0.1708395871219079,
-        "test_regret_abs": 326925.25571416947,
-        "test_regret_rel": 0.1708395871219079
+        "best_epoch": "Tr-294",
+        "train_pred_loss": 2819209.5,
+        "train_regret": 77087.088864,
+        "val_pred_loss": 2629508.75,
+        "val_regret": 75045.762336,
+        "test_pred_loss": 2335938.25,
+        "test_regret": 0.04600177191828759,
+        "test_regret_abs": 88030.77378640247,
+        "test_regret_rel": 0.04600177191828759
       },
       "meta": {
         "phase": 1,
-        "lr": "1e-3",
-        "batch": "default"
+        "lr": "1e-2",
+        "batch": "default",
+        "family": "bench_energyvr"
       },
-      "prefix": "bench_p1_identity_default_lr1e-3",
-      "run_dir": "saved_records/energy-energy/identity/bench_p1_identity_default_lr1e-3"
+      "prefix": "bench_energyvr_dfl_default_lr1e-2"
+    },
+    "identity": {
+      "metrics": {
+        "best_epoch": "Tr-50",
+        "train_pred_loss": 959367808.0,
+        "train_regret": 58703.313239,
+        "val_pred_loss": 903243008.0,
+        "val_regret": 57595.657782,
+        "test_pred_loss": 781275008.0,
+        "test_regret": 0.04146055616969809,
+        "test_regret_abs": 79340.5273109095,
+        "test_regret_rel": 0.04146055616969809
+      },
+      "meta": {
+        "phase": 1,
+        "lr": "1e-2",
+        "batch": "alt",
+        "family": "bench_energyvr"
+      },
+      "prefix": "bench_energyvr_identity_alt_lr1e-2"
     },
     "spo": {
       "metrics": {
@@ -1397,109 +1394,114 @@
     },
     "dfl": {
       "metrics": {
-        "best_epoch": "Tr-116",
-        "train_pred_loss": 0.577485,
-        "train_regret": 0.137804,
-        "val_pred_loss": 0.558098,
-        "val_regret": 0.117964,
-        "test_pred_loss": 0.5885815620422363,
-        "test_regret": 0.012069797515063211,
-        "test_regret_abs": 0.13565618753433228,
-        "test_regret_rel": 0.012069797515063211
+        "best_epoch": "Tr-1",
+        "train_pred_loss": 2.326247,
+        "train_regret": 16.966593,
+        "val_pred_loss": 2.281998,
+        "val_regret": 16.86471,
+        "test_pred_loss": 2.3461270332336426,
+        "test_regret": 1.5358276061073814,
+        "test_regret_abs": 17.26164150595665,
+        "test_regret_rel": 1.5358276061073814
       },
       "meta": {
         "phase": 2,
-        "lr": "1e-2",
+        "lr": "5e-3",
         "batch": "default",
+        "family": "bench_cubicfix",
         "hp_name": "dflalpha",
-        "hp_val": "10.0",
-        "hp_tag": "alpha10.0"
+        "hp_val": "0.001",
+        "hp_tag": "alpha0.001"
       },
-      "prefix": "bench_p2_dfl_alpha10.0_default_lr1e-2",
-      "run_dir": "saved_records/cubic-gen/dfl/bench_p2_dfl_alpha10.0_default_lr1e-2"
+      "prefix": "bench_cubicfix_p2_dfl_alpha0.001_default_lr5e-3",
+      "run_dir": "saved_records/cubic-gen/dfl/bench_cubicfix_p2_dfl_alpha0.001_default_lr5e-3"
     },
     "identity": {
       "metrics": {
-        "best_epoch": "Tr-25",
-        "train_pred_loss": 1173.026611,
-        "train_regret": 1.472195,
-        "val_pred_loss": 1172.029053,
-        "val_regret": 1.38307,
-        "test_pred_loss": 1173.3951416015625,
-        "test_regret": 0.13943652696944428,
-        "test_regret_abs": 1.5671702551841735,
-        "test_regret_rel": 0.13943652696944428
-      },
-      "meta": {
-        "phase": 1,
-        "lr": "5e-2",
-        "batch": "default"
-      },
-      "prefix": "bench_p1_identity_default_lr5e-2",
-      "run_dir": "saved_records/cubic-gen/identity/bench_p1_identity_default_lr5e-2"
-    },
-    "spo": {
-      "metrics": {
         "best_epoch": "Tr-1",
-        "train_pred_loss": 7379147.0,
-        "train_regret": 17.790543,
-        "val_pred_loss": 7331321.5,
-        "val_regret": 17.586449,
-        "test_pred_loss": 7428314.5,
-        "test_regret": 1.6040789493384875,
-        "test_regret_abs": 18.028739463090897,
-        "test_regret_rel": 1.6040789493384875
-      },
-      "meta": {
-        "phase": 1,
-        "lr": "5e-2",
-        "batch": "default"
-      },
-      "prefix": "bench_p1_spo_default_lr5e-2",
-      "run_dir": "saved_records/cubic-gen/spo/bench_p1_spo_default_lr5e-2"
-    },
-    "nce": {
-      "metrics": {
-        "best_epoch": "Tr-1",
-        "train_pred_loss": 2.347015,
-        "train_regret": 16.819216,
-        "val_pred_loss": 2.301705,
-        "val_regret": 16.733515,
-        "test_pred_loss": 2.367596387863159,
-        "test_regret": 1.5305378286965583,
-        "test_regret_abs": 17.202188061475752,
-        "test_regret_rel": 1.5305378286965583
+        "train_pred_loss": 2.344862,
+        "train_regret": 14.659136,
+        "val_pred_loss": 2.299491,
+        "val_regret": 14.716775,
+        "test_pred_loss": 2.3651628494262695,
+        "test_regret": 1.313376621224366,
+        "test_regret_abs": 14.761446081399917,
+        "test_regret_rel": 1.313376621224366
       },
       "meta": {
         "phase": 1,
         "lr": "1e-3",
-        "batch": "alt"
+        "batch": "default",
+        "family": "bench_cubicfix"
       },
-      "prefix": "bench_p1_nce_alt_lr1e-3",
-      "run_dir": "saved_records/cubic-gen/nce/bench_p1_nce_alt_lr1e-3"
+      "prefix": "bench_cubicfix_p1_identity_default_lr1e-3",
+      "run_dir": "saved_records/cubic-gen/identity/bench_cubicfix_p1_identity_default_lr1e-3"
+    },
+    "spo": {
+      "metrics": {
+        "best_epoch": "Tr-88",
+        "train_pred_loss": 5.432871,
+        "train_regret": 0.004094,
+        "val_pred_loss": 5.443728,
+        "val_regret": 0.002922,
+        "test_pred_loss": 5.411325931549072,
+        "test_regret": 0.0002635334193716111,
+        "test_regret_abs": 0.0029619336128234863,
+        "test_regret_rel": 0.0002635334193716111
+      },
+      "meta": {
+        "phase": 1,
+        "lr": "5e-3",
+        "batch": "default",
+        "family": "bench_cubicfix"
+      },
+      "prefix": "bench_cubicfix_p1_spo_default_lr5e-3",
+      "run_dir": "saved_records/cubic-gen/spo/bench_cubicfix_p1_spo_default_lr5e-3"
+    },
+    "nce": {
+      "metrics": {
+        "best_epoch": "Tr-1",
+        "train_pred_loss": 2.373316,
+        "train_regret": 4.758854,
+        "val_pred_loss": 2.324975,
+        "val_regret": 4.779993,
+        "test_pred_loss": 2.3932394981384277,
+        "test_regret": 0.3929938738751823,
+        "test_regret_abs": 4.416979703903198,
+        "test_regret_rel": 0.3929938738751823
+      },
+      "meta": {
+        "phase": 1,
+        "lr": "5e-3",
+        "batch": "alt",
+        "family": "bench_cubicfix"
+      },
+      "prefix": "bench_cubicfix_p1_nce_alt_lr5e-3",
+      "run_dir": "saved_records/cubic-gen/nce/bench_cubicfix_p1_nce_alt_lr5e-3"
     },
     "blackbox": {
       "metrics": {
-        "best_epoch": "Tr-25",
-        "train_pred_loss": 1173.026611,
-        "train_regret": 1.472195,
-        "val_pred_loss": 1172.029053,
-        "val_regret": 1.38307,
-        "test_pred_loss": 1173.3951416015625,
-        "test_regret": 0.13943652696944428,
-        "test_regret_abs": 1.5671702551841735,
-        "test_regret_rel": 0.13943652696944428
+        "best_epoch": "Tr-1",
+        "train_pred_loss": 2.344862,
+        "train_regret": 14.659136,
+        "val_pred_loss": 2.299491,
+        "val_regret": 14.716775,
+        "test_pred_loss": 2.3651628494262695,
+        "test_regret": 1.313376621224366,
+        "test_regret_abs": 14.761446081399917,
+        "test_regret_rel": 1.313376621224366
       },
       "meta": {
         "phase": 2,
-        "lr": "5e-2",
+        "lr": "1e-3",
         "batch": "default",
+        "family": "bench_cubicfix",
         "hp_name": "lambd",
         "hp_val": "0.01",
         "hp_tag": "lam0.01"
       },
-      "prefix": "bench_p2_blackbox_lam0.01_default_lr5e-2",
-      "run_dir": "saved_records/cubic-gen/blackbox/bench_p2_blackbox_lam0.01_default_lr5e-2"
+      "prefix": "bench_cubicfix_p2_blackbox_lam0.01_default_lr1e-3",
+      "run_dir": "saved_records/cubic-gen/blackbox/bench_cubicfix_p2_blackbox_lam0.01_default_lr1e-3"
     },
     "pointLTR": {
       "metrics": {
@@ -1523,46 +1525,48 @@
     },
     "pairLTR": {
       "metrics": {
-        "best_epoch": "Tr-8",
-        "train_pred_loss": 2.372592,
-        "train_regret": 0.044052,
-        "val_pred_loss": 2.321221,
-        "val_regret": 0.038948,
-        "test_pred_loss": 2.3947200775146484,
-        "test_regret": 0.004178020318659658,
-        "test_regret_abs": 0.0469580626487732,
-        "test_regret_rel": 0.004178020318659658
+        "best_epoch": "Tr-33",
+        "train_pred_loss": 2.261443,
+        "train_regret": 0.008572,
+        "val_pred_loss": 2.209598,
+        "val_regret": 0.012081,
+        "test_pred_loss": 2.2809460163116455,
+        "test_regret": 0.00017612197267271858,
+        "test_regret_abs": 0.0019794893264770508,
+        "test_regret_rel": 0.00017612197267271858
       },
       "meta": {
         "phase": 1,
-        "lr": "1e-2",
-        "batch": "default"
+        "lr": "5e-3",
+        "batch": "default",
+        "family": "bench_cubicfix"
       },
-      "prefix": "bench_p1_pairLTR_default_lr1e-2",
-      "run_dir": "saved_records/cubic-gen/pairLTR/bench_p1_pairLTR_default_lr1e-2"
+      "prefix": "bench_cubicfix_p1_pairLTR_default_lr5e-3",
+      "run_dir": "saved_records/cubic-gen/pairLTR/bench_cubicfix_p1_pairLTR_default_lr5e-3"
     },
     "listLTR": {
       "metrics": {
-        "best_epoch": "Tr-118",
-        "train_pred_loss": 880.733215,
-        "train_regret": 0.013827,
-        "val_pred_loss": 880.729919,
-        "val_regret": 0.011011,
-        "test_pred_loss": 880.72802734375,
-        "test_regret": 0.0012212299765814573,
-        "test_regret_abs": 0.013725781440734863,
-        "test_regret_rel": 0.0012212299765814573
+        "best_epoch": "Tr-27",
+        "train_pred_loss": 56.176125,
+        "train_regret": 0.005529,
+        "val_pred_loss": 56.215538,
+        "val_regret": 0.006114,
+        "test_pred_loss": 56.1807746887207,
+        "test_regret": 0.0009803585327193857,
+        "test_regret_abs": 0.011018552780151368,
+        "test_regret_rel": 0.0009803585327193857
       },
       "meta": {
         "phase": 2,
         "lr": "5e-2",
         "batch": "default",
+        "family": "bench_cubicfix",
         "hp_name": "tau",
-        "hp_val": "5",
-        "hp_tag": "tau5"
+        "hp_val": "0.1",
+        "hp_tag": "tau0.1"
       },
-      "prefix": "bench_p2_listLTR_tau5_default_lr5e-2",
-      "run_dir": "saved_records/cubic-gen/listLTR/bench_p2_listLTR_tau5_default_lr5e-2"
+      "prefix": "bench_cubicfix_p2_listLTR_tau0.1_default_lr5e-2",
+      "run_dir": "saved_records/cubic-gen/listLTR/bench_cubicfix_p2_listLTR_tau0.1_default_lr5e-2"
     },
     "lodl": {
       "metrics": {
@@ -1612,26 +1616,27 @@
     },
     "pg": {
       "metrics": {
-        "best_epoch": "Tr-1",
-        "train_pred_loss": 2.399592,
-        "train_regret": 4.823171,
-        "val_pred_loss": 2.353287,
-        "val_regret": 4.779993,
-        "test_pred_loss": 2.420382499694824,
-        "test_regret": 0.3958932381888125,
-        "test_regret_abs": 4.449566556215286,
-        "test_regret_rel": 0.3958932381888125
+        "best_epoch": "Tr-56",
+        "train_pred_loss": 2.370058,
+        "train_regret": 1.424078,
+        "val_pred_loss": 2.321191,
+        "val_regret": 1.339054,
+        "test_pred_loss": 2.393187999725342,
+        "test_regret": 0.13527578955988104,
+        "test_regret_abs": 1.5204064404964448,
+        "test_regret_rel": 0.13527578955988104
       },
       "meta": {
         "phase": 2,
-        "lr": "1e-2",
+        "lr": "1e-3",
         "batch": "default",
+        "family": "bench_cubicfix",
         "hp_name": "sigma",
-        "hp_val": "0.5",
-        "hp_tag": "s0p5"
+        "hp_val": "0.01",
+        "hp_tag": "s0p01"
       },
-      "prefix": "bench_p2_pg_s0p5_default_lr1e-2",
-      "run_dir": "saved_records/cubic-gen/pg/bench_p2_pg_s0p5_default_lr1e-2"
+      "prefix": "bench_cubicfix_p2_pg_s0p01_default_lr1e-3",
+      "run_dir": "saved_records/cubic-gen/pg/bench_cubicfix_p2_pg_s0p01_default_lr1e-3"
     },
     "dad": {
       "metrics": {

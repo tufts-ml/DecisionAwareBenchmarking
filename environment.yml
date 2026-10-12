@@ -30,6 +30,8 @@ dependencies:
       - gurobipy>=13.0
       # 0.18 removed the module-level safe_load/dump API this codebase uses
       - ruamel.yaml>=0.17,<0.18
+      # writes the manuscript-cropped figure PDFs
+      - pypdf>=5.0
       # optional: only for re-downloading raw portfolio data (needs QUANDL_API_KEY)
       # - quandl>=3.7
       - -e .

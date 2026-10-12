@@ -1,6 +1,6 @@
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Knapsack (synth). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Knapsack (synth).]{Train / val / test error for Knapsack (synth). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-knapsack}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -26,9 +26,9 @@ PG & 24.90 & 28.30 & 24.66 & 5.497 & 5.800 & 5.335 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Knapsack (energy). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Knapsack (energy).]{Train / val / test error for Knapsack (energy). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-knapsack-real}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -54,9 +54,9 @@ PG & 85152 & 80561 & 44383 & 61.91 & 73.22 & 68.61 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Energy scheduling. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Energy scheduling.]{Train / val / test error for Energy scheduling. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-energy}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -66,9 +66,9 @@ PG & 85152 & 80561 & 44383 & 61.91 & 73.22 & 68.61 \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
 Method & Train & Val & Test & Train & Val & Test \\
 \midrule
-MSE & 672 & 565 & \textbf{615} & -- & -- & 40955 \\
-DFL & 5353 & 5264 & 5280 & -- & -- & $3.28{\times}10^{5}$ \\
-Identity & 5353 & 5264 & 5280 & -- & -- & $3.27{\times}10^{5}$ \\
+MSE & 745 & 627 & \textbf{689} & 31747 & 34729 & 40431 \\
+DFL & $2.82{\times}10^{6}$ & $2.63{\times}10^{6}$ & $2.34{\times}10^{6}$ & 77087 & 75046 & 88031 \\
+Identity & $9.59{\times}10^{8}$ & $9.03{\times}10^{8}$ & $7.81{\times}10^{8}$ & 58703 & 57596 & 79341 \\
 SPO\textsuperscript{+} & 3769 & 3609 & 3851 & 27866 & 29116 & 38245 \\
 NCE & 5338 & 5248 & 5267 & 28207 & 31784 & \textbf{36194} \\
 Blackbox & 9508 & 9317 & 9060 & 36107 & 35115 & 45799 \\
@@ -82,9 +82,9 @@ PG & 5558 & 5372 & 5444 & 26600 & 29596 & 37155 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Budget allocation. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Budget allocation.]{Train / val / test error for Budget allocation. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-budgetalloc}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -110,9 +110,9 @@ PG & 0.0627 & 0.0538 & 0.0595 & 0.0053 & 0.0042 & 0.0059 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Cubic Top-$K$. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Cubic Top-$K$.]{Train / val / test error for Cubic Top-$K$. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-cubic}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -122,25 +122,25 @@ PG & 0.0627 & 0.0538 & 0.0595 & 0.0053 & 0.0042 & 0.0059 \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
 Method & Train & Val & Test & Train & Val & Test \\
 \midrule
-MSE & 0.007 & 0.007 & 0.007 & 0.003 & 0.002 & \textbf{0.0036} \\
-DFL & 0.577 & 0.558 & 0.589 & 0.138 & 0.118 & 0.1357 \\
-Identity & 1173.027 & 1172.029 & 1173.395 & 1.472 & 1.383 & 1.5672 \\
-SPO\textsuperscript{+} & $7.38{\times}10^{6}$ & $7.33{\times}10^{6}$ & $7.43{\times}10^{6}$ & 17.791 & 17.586 & 18.0287 \\
-NCE & 2.347 & 2.302 & 2.368 & 16.819 & 16.734 & 17.2022 \\
-Blackbox & 1173.027 & 1172.029 & 1173.395 & 1.472 & 1.383 & 1.5672 \\
+MSE & 0.007 & 0.007 & 0.007 & 0.003 & 0.002 & 0.0036 \\
+DFL & 2.326 & 2.282 & 2.346 & 16.967 & 16.865 & 17.2616 \\
+Identity & 2.345 & 2.299 & 2.365 & 14.659 & 14.717 & 14.7614 \\
+SPO\textsuperscript{+} & 5.433 & 5.444 & 5.411 & 0.004 & 0.003 & 0.0030 \\
+NCE & 2.373 & 2.325 & 2.393 & 4.759 & 4.780 & 4.4170 \\
+Blackbox & 2.345 & 2.299 & 2.365 & 14.659 & 14.717 & 14.7614 \\
 pt-LTR & 0.004 & 0.005 & \textbf{0.004} & 0.013 & 0.012 & 0.0141 \\
-pr-LTR & 2.373 & 2.321 & 2.395 & 0.044 & 0.039 & 0.0470 \\
-L-LTR & 880.733 & 880.730 & 880.728 & 0.014 & 0.011 & 0.0137 \\
+pr-LTR & 2.261 & 2.210 & 2.281 & 0.009 & 0.012 & \textbf{0.0020} \\
+L-LTR & 56.176 & 56.216 & 56.181 & 0.006 & 0.006 & 0.0110 \\
 LODL & 2.373 & 2.346 & 2.387 & 3.053 & 3.183 & 3.2677 \\
 DPO & 251.410 & 255.907 & 250.834 & 1.429 & 1.344 & 1.5303 \\
-PG & 2.400 & 2.353 & 2.420 & 4.823 & 4.780 & 4.4496 \\
+PG & 2.370 & 2.321 & 2.393 & 1.424 & 1.339 & 1.5204 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Bipartite matching. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Bipartite matching.]{Train / val / test error for Bipartite matching. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-bipartitematching}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -166,9 +166,9 @@ PG & 0.6966 & 0.6002 & 0.6611 & 33.22 & 33.75 & 37.33 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Aerial survey. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for TX Whooping Cranes.]{Train / val / test error for TX Whooping Cranes. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-asurv}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -194,9 +194,9 @@ PG & 586.137 & 211.667 & 145.222 & 117.5 & 118.0 & 118.3 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Cook County opioid. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Cook County opioid.]{Train / val / test error for Cook County opioid. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-cook-county}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -222,9 +222,9 @@ PG & 1.425 & 2.009 & 2.155 & 132.2 & 100.0 & 134.5 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for NYC speed humps. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for NYC speed humps.]{Train / val / test error for NYC speed humps. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-speed-humps}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -250,9 +250,9 @@ PG & 22.10 & 15.94 & 9.18 & 228.2 & 194.0 & 207.8 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Shortest path (synth). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Shortest path (synth).]{Train / val / test error for Shortest path (synth). Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-sp-synth}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -278,9 +278,9 @@ PG & 8.869 & 9.581 & 10.112 & 0.1625 & 0.2440 & 0.2726 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for PG mis-specification. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for PG mis-specification.]{Train / val / test error for PG mis-specification. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-pg-misspec}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}
@@ -306,9 +306,9 @@ PG & 1.2137 & 1.2653 & 1.3397 & 0.2400 & 0.2441 & 0.2455 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Train / val / test error for Warcraft shortest path. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
+\caption[Train/val/test error for Warcraft shortest path.]{Train / val / test error for Warcraft shortest path. Bold = best test value per metric. Hyperparameters per row: val-best (LR, batch, method-specific HP). Prediction loss is two-stage MSE/BCE. Decision regret is mean absolute regret (lower is better).}
 \label{tab:err-shortestpath}
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.05}

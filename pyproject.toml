@@ -30,6 +30,7 @@ dependencies = [
     "scipy>=1.17",
     "scikit-learn>=1.7",
     "matplotlib>=3.10",
+    "pypdf>=5.0",
     "networkx>=3.6",
     "torch>=2.2",
     # torchvision floor pairs with torch>=2.2 (each torchvision release pins

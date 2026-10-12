@@ -16,13 +16,12 @@ extension to the open-source benchmark of
 (NeurIPS 2024, Datasets and Benchmarks Track), covering **14 tasks x 17 methods** with a two-phase
 hyperparameter sweep (learning rate x batch regime, then method-specific
 hyperparameters), 10 model-init seeds per configuration, and validation-regret
-model selection throughout (one legacy exception on the energy task is
-documented in `REPRODUCING.md`). The paper reports a 12-method x 12-task subset; the
+model selection throughout. The paper reports a 12-method x 12-task subset; the
 sweep results for all cells ship with the repo as JSON, so the paper's figures and
-generated tables regenerate in minutes without retraining anything. (The bundled
-JSONs predate the Cubic Top-K sense correction described below, so the
-affected cubic cells regenerate at their pre-correction values; see
-`REPRODUCING.md`.)
+generated tables regenerate in minutes without retraining anything. The bundled
+JSONs are the values the manuscript currently reports, including the Cubic Top-K
+sense correction described below and the energy re-run with the per-epoch
+solver evaluation on (`REPRODUCING.md`, "Selection signal").
 
 The package (`openpto`) is modular: **problems** (dataset + objective +
 decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
@@ -50,7 +49,8 @@ Notes:
 - GPU PyTorch is only needed for the Warcraft shortest-path task
   (`shortestpath`, ResNet18 on map images); every other task trains on CPU.
 - Regenerating the paper figures/tables (Tier 1 below) needs none of the above —
-  the default CPU environment is sufficient.
+  the default CPU environment is sufficient (`pypdf` is used only to write the
+  cropped copies of two bump charts; without it the scripts skip that step).
 - In a mixed conda/pip environment (as `environment.yml` creates: conda scipy,
   pip torch), the training/eval entrypoints preload the environment's own
   `libstdc++` before importing any compiled extension (`numpy`, `torch`, ...);
@@ -87,27 +87,33 @@ pass `--loadnew True` to force regeneration.
 ### Tier 1 — figures and tables from bundled results (minutes, no cluster)
 
 The sweep's selected results are committed under `results/`
-(`results/bench_p1_best_val.json`, `results/bench_p2_best_val.json`,
-`results/loss_matrix.json`, `results/rank_counterfactual_cache.json`). To
+(`bench_p1_best_val.json`, `bench_p2_best_val.json`, `loss_matrix.json`,
+`rank_counterfactual_cache.json`, plus the inputs of the appendix tables and
+the rank-transition figure; each file is described in `REPRODUCING.md`). To
 regenerate every generated paper artifact
 into `results/figures/` and `results/tables/`:
 
 ```bash
-make all          # = make tables figures (hp-table runs as part of tables)
+make all          # = make tables figures (hp-table and appendix-tables run as part of tables)
 ```
 
 | Paper artifact | Command | Output |
 |---|---|---|
-| Bump charts, not-recommended tasks (`fig_bench_bump_not_recommended_bootstrap_cropped.pdf`) | `python experiments/fig_bench_bump_not_recommended.py` | `results/figures/fig_bench_bump_not_recommended_bootstrap.pdf` |
-| Bump charts, recommended tasks (`fig_bench_bump_recommended_main_bootstrap_cropped.pdf`, `fig_bench_bump_recommended_spatial_bootstrap.pdf`) | `python experiments/fig_bench_bump_recommended.py` | `results/figures/fig_bench_bump_recommended_{main,spatial}_bootstrap.pdf` |
+| Bump charts, not-recommended tasks (`fig_bench_bump_not_recommended_bootstrap_cropped.pdf`) | `python experiments/fig_bench_bump_not_recommended.py` | `results/figures/fig_bench_bump_not_recommended_bootstrap{,_cropped}.pdf` |
+| Bump charts, recommended tasks (`fig_bench_bump_recommended_main_bootstrap_cropped.pdf`, `fig_bench_bump_recommended_spatial_bootstrap.pdf`) | `python experiments/fig_bench_bump_recommended.py` | `results/figures/fig_bench_bump_recommended_main_bootstrap{,_cropped}.pdf`, `..._spatial_bootstrap.pdf` |
 | Portfolio panel (`fig_bench_bump_bootstrap_portfolio.pdf`) | `python experiments/fig_bench_bump_bootstrap.py` | `results/figures/fig_bench_bump_bootstrap_portfolio.pdf` |
 | pg_misspec DGP illustration (`synthetic_data.pdf`) | `python experiments/fig_synthetic_data.py` | `results/figures/synthetic_data.pdf` |
 | Tuning-benefit tables (`tabapp_tuning_benefit.tex`, `tab_tuning_benefit_summary.tex`) | `make tables` (see `Makefile` for the full flags) | `results/tables/notrec-rec-geo-spw_regret_change_{,by_group_}mean_paper.tex` |
 | Error grid (`error_per_problem.tex`) | `make tables` | `results/tables/error_per_problem.tex` |
+| Appendix tables (`tabapp_geng_repro.tex`, `tabapp_runtime.tex`, `tabapp_fullgrid_{pairs,cubic}.tex`, `tabapp_cubic_sense_fix.tex`) | `make appendix-tables` | `results/tables/tabapp_*.tex` |
+| Rank-transition figure (`fig_rank_transition_2col_7tasks.pdf`; in the manuscript repo, not in the current build) | `python experiments/fig_rank_transition.py` | `results/figures/fig_rank_transition_2col_{5,7}tasks.pdf` |
 
-Details, including which paper files were hand-edited after generation, which
-are hand-maintained, and where the bundled data deviates from the manuscript
-(the Cubic Top-K cells), are in [`REPRODUCING.md`](REPRODUCING.md).
+The generated tables are byte-identical to the manuscript's files except the
+two tuning-benefit tables, whose captions and group headers were hand-edited
+(every data row matches); regenerated PDFs differ from the manuscript's only
+in their creation timestamp. Details, including which paper files are
+hand-maintained and what each bundled JSON holds, are in
+[`REPRODUCING.md`](REPRODUCING.md).
 
 ### Tier 2 — retraining from scratch
 
@@ -130,8 +136,8 @@ instance counts, solver choices, batch-arm semantics, and known caveats are all
 specified in [`REPRODUCING.md`](REPRODUCING.md) — the instance counts and solvers
 there are load-bearing for comparability and must not be changed. The submit
 scripts run every cell with validation-regret selection; set
-`ENERGY_PTO_SKIP_SOLVER_EVAL=1` to reproduce the legacy energy protocol behind
-the bundled JSONs instead (see `REPRODUCING.md`).
+`ENERGY_PTO_SKIP_SOLVER_EVAL=1` to reproduce the original sweep's legacy energy
+protocol for `mse`/`dfl`/`identity` instead (see `REPRODUCING.md`).
 
 ## Best hyperparameters
 
@@ -165,11 +171,16 @@ python experiments/table_best_hyperparams.py    # or: make hp-table
 │   ├── figures/
 │   ├── tables/
 │   ├── bench_p1_best_val.json         # Phase-1 winners (val-selected)
-│   ├── bench_p2_best_val.json         # Phase-2 winners — read by all figure scripts
+│   ├── bench_p2_best_val.json         # Phase-2 winners — read by the bump-chart scripts
+│   ├── bench_p2_best_val_oldsense.json# Phase-2 winners before the Cubic Top-K correction
 │   ├── loss_matrix.json               # prediction loss + decision regret per cell
-│   └── rank_counterfactual_cache.json # cache for the tuning-benefit tables
+│   ├── rank_counterfactual_cache.json # cache for the tuning-benefit tables
+│   ├── geng_reproduction_data.json    # reproduction-check table data
+│   ├── runtimes_per_method_task.json  # runtime table data
+│   ├── bench_fullgrid_best_val.json   # joint-grid check data
+│   └── bench_bump_rerun_data.json     # rank-transition figure data
 ├── resource/figs/                 # framework diagrams
-├── Makefile                       # make all / tables / figures / hp-table / test
+├── Makefile                       # make all / tables / appendix-tables / figures / hp-table / test
 ├── environment.yml                # conda env (name: openpto)
 ├── pyproject.toml, requirements.txt
 └── REPRODUCING.md                 # full retraining + per-deliverable detail
@@ -182,7 +193,7 @@ of) the decision objective. Method names below are the `--opt_model` values.
 
 | Method | Type | Description | Reference |
 |---|---|---|---|
-| `mse` | PtO | Two-stage least squares; model selected on validation decision regret (energy: see the legacy exception in `REPRODUCING.md`) | Wilder et al. (2019) |
+| `mse` | PtO | Two-stage least squares; model selected on validation decision regret | Wilder et al. (2019) |
 | `mse_train` | PtO | As `mse`, but selected on training MSE (never calls the solver during training) | this paper |
 | `mse_val` | PtO | As `mse`, but selected on validation MSE | this paper |
 | `dfl` | PnO | "DFL by Wilder et al.": differentiates the post-solver cost only, MSE-regularized with weight alpha | Wilder et al. (2019) |
@@ -238,7 +249,8 @@ make test          # = python -m pytest -q tests/
 
 `tests/test_solver_sense.py` checks that the Cubic Top-K task declares the
 optimisation sense its solver actually uses (see *Relationship to the upstream
-benchmark*). Two tests compare the DPO implementation against the reference
+benchmark*); `tests/test_bundled_results.py` checks that the bundled result
+JSONs are mutually consistent and carry the corrected cubic cells. Two tests compare the DPO implementation against the reference
 [perturbations-differential-pytorch](https://github.com/tuero/perturbations-differential-pytorch)
 implementation; they skip cleanly unless that repo is cloned into the repo root
 (see `REPRODUCING.md`).

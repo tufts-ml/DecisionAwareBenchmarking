@@ -507,3 +507,30 @@ def draw_cd_diagram(avg_ranks, methods, cd, title, out_path,
         "cliques": [(float(lo), float(hi)) for lo, hi in cliques],
         "friedman_p": None if friedman_p is None else float(friedman_p),
     }
+
+
+# ---- Manuscript crop boxes ----
+
+def write_cropped_pdf(src_pdf, cropbox):
+    """Copy ``src_pdf`` to ``<name>_cropped.pdf`` with ``cropbox`` set on page 1.
+
+    The manuscript includes two bump charts with a CropBox that trims the
+    suptitle and legend; the figure scripts pass the box read from the
+    manuscript's PDF. Needs ``pypdf``; without it the copy is skipped with a
+    note (the uncropped PDF is always written).
+    """
+    try:
+        from pypdf import PdfReader, PdfWriter
+        from pypdf.generic import RectangleObject
+    except ImportError:
+        print("[note] pypdf not installed; skipping the _cropped PDF")
+        return None
+    reader = PdfReader(src_pdf)
+    writer = PdfWriter()
+    writer.append(reader)
+    writer.pages[0].cropbox = RectangleObject(list(cropbox))
+    out = src_pdf[:-len(".pdf")] + "_cropped.pdf"
+    with open(out, "wb") as fh:
+        writer.write(fh)
+    print(f"Saved {out}")
+    return out
