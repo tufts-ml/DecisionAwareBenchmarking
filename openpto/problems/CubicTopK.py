@@ -102,7 +102,20 @@ class CubicTopK(PTOProblem):
         return "mse"
 
     def init_API(self):
-        return {"modelSense": GRB.MINIMIZE, "n_vars": self.Ys_train.shape[1]}
+        # MAXIMIZE: the objective is sum(Z * Y) over the K selected items and the
+        # paired TopKSolver picks the K LARGEST predicted values (torch.topk), so
+        # this is a maximisation problem. Upstream (Thinklab-SJTU/PredictiveCO-
+        # Benchmark, f885426) declared MINIMIZE here while the solver maximised
+        # regardless; every loss that branches on modelSense (SPO+, NCE, PG, DFL,
+        # Identity, Blackbox, DAD, pairwise/listwise LTR) then trained with the wrong sign on
+        # this task -- 78 of the 100 Phase-1 SPO+ runs sat at exactly 160.4% regret
+        # (rank by MINUS the value; the 160.408% Geng et al. publish for SPO+ and
+        # NCE), the rest on other ranking attractors. See REPRODUCING.md, "Cubic
+        # Top-K sense correction", and tests/test_solver_sense.py. The upstream
+        # behaviour is reproducible with
+        #   --config_path openpto/config/probs/cubic_legacy_minsense.yaml
+        # (solver-kwarg override; solver_wrapper merges it over this dict).
+        return {"modelSense": GRB.MAXIMIZE, "n_vars": self.Ys_train.shape[1]}
 
 
 if __name__ == "__main__":

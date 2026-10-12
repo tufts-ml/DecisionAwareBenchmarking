@@ -58,7 +58,7 @@ METHOD_LABELS = {
     "mse_val":   r"MSE\textsubscript{val}",
     "dfl": "DFL", "identity": "Identity",
     "spo": r"SPO\textsuperscript{+}", "nce": "NCE", "blackbox": "Blackbox",
-    "pointLTR": "ptLTR", "pairLTR": "prLTR", "listLTR": "lsLTR",
+    "pointLTR": "pt-LTR", "pairLTR": "pr-LTR", "listLTR": "L-LTR",
     "lodl": "LODL", "perturb": "DPO", "pg": "PG",
 }
 

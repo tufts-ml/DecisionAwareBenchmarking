@@ -24,6 +24,8 @@
 #   bash slurm/submit_bench_p1.sh --method mse
 #   bash slurm/submit_bench_p1.sh --method mse --problem knapsack
 #   bash slurm/submit_bench_p1.sh --seed 1            # submit only init_seed 2024
+#   ENERGY_PTO_SKIP_SOLVER_EVAL=1 bash slurm/submit_bench_p1.sh --problem energy
+#                                                      # legacy protocol behind the bundled JSONs
 #
 # Multi-seed model-init expansion (added 2026-05-21):
 #   SEEDS=(0..9); seed 0 = existing runs (prefix unchanged, no --init_seed);
@@ -50,6 +52,18 @@ PARTITION="${PARTITION:-preempt}"
 MEM="8G"
 CONDA_ENV="${CONDA_ENV:-pco_bench_rhel7}"
 SKIP_COMPLETED=true
+
+# Legacy-protocol switch (default OFF). The Phase-1/2 sweep behind the bundled
+# result JSONs ran the PtO methods (mse, dfl, identity) on energy with
+# --skip_solver_eval -- no per-epoch Gurobi solve of the validation split -- so
+# those cells selected their checkpoint (and early-stopped) on validation
+# PREDICTION error, unlike every other cell, which selects on validation
+# decision regret. The default here runs them with the solver evaluation ON,
+# protocol-identical to the rest of the benchmark; see get_walltime for the
+# cost (median ~2 / ~3.5 / ~7 min per epoch for mse / identity / dfl on energy,
+# 3-5x node-to-node variation; longest observed runs ~20-29 h of active time).
+# Set ENERGY_PTO_SKIP_SOLVER_EVAL=1 to reproduce the legacy runs instead.
+ENERGY_PTO_SKIP_SOLVER_EVAL="${ENERGY_PTO_SKIP_SOLVER_EVAL:-0}"
 
 # GPU cards with >=24 GB VRAM. shortestpath (ResNet18 + 10K warcraft images)
 # OOMs on the 16 GB p100/t4 nodes, so it must be constrained to these.
@@ -201,13 +215,22 @@ SOLVER_CVXPY[portfolio]=cvxpy
 # ====================================================================
 
 # Walltime function: returns SLURM walltime for a given (prob, method_group)
-# method_group: pto | pno | lodl | energy_pto | energy_pno
+# method_group: pto | pno | lodl  (energy / shortestpath are special-cased per problem)
 get_walltime() {
     local prob="$1" group="$2"
     case "$group" in
         pto)
             case "$prob" in
-                energy)        echo "3:00:00" ;;   # skip_solver_eval; setup ~35min
+                energy)
+                    # Legacy (skip_solver_eval): no per-epoch solve, setup ~35 min.
+                    # Default: per-epoch Gurobi val solve (~41 s) plus, for
+                    # dfl/identity, Gurobi solves inside the training loop:
+                    # median ~2 (mse) / ~3.5 (identity) / ~7 (dfl) min per epoch,
+                    # up to 300 epochs; longest observed runs ~20 h (mse,
+                    # identity) and ~29 h (dfl). Jobs checkpoint every epoch and
+                    # resume on requeue.
+                    if [[ "$ENERGY_PTO_SKIP_SOLVER_EVAL" == "1" ]]; then echo "3:00:00"
+                    else echo "48:00:00"; fi ;;
                 shortestpath)  echo "4:00:00" ;;   # GPU, ResNet18, 10K images
                 *)             echo "1:30:00" ;;
             esac ;;
@@ -341,7 +364,7 @@ PRED_MODEL_ARGS[sp_planted]="--pred_model dense --n_layers 1"    # linear model 
 PRED_MODEL_ARGS[pg_misspec]="--pred_model dense --n_layers 1"    # linear model (PG paper §4.1)
 PRED_MODEL_ARGS[shortestpath]="--pred_model Resnet18"             # ResNet18 (DPO paper)
 
-# Extra args per method (e.g. --skip_solver_eval for PtO on energy)
+# Extra args per method (e.g. --skip_solver_eval for PtO on energy under the legacy protocol)
 # These are evaluated per (method, prob) at submit time
 
 # ====================================================================
@@ -483,9 +506,10 @@ submit_job() {
     local instances="${INSTANCES[$prob]}"
     local testinstances="${TESTINSTANCES[$prob]}"
 
-    # Extra args: PtO methods on energy get --skip_solver_eval
+    # Extra args: --skip_solver_eval for PtO methods on energy ONLY under the
+    # legacy protocol (ENERGY_PTO_SKIP_SOLVER_EVAL=1, see top of file).
     local extra_args=""
-    if [[ "$solver_group" == "pto" && "$prob" == "energy" ]]; then
+    if [[ "$ENERGY_PTO_SKIP_SOLVER_EVAL" == "1" && "$solver_group" == "pto" && "$prob" == "energy" ]]; then
         extra_args="--skip_solver_eval"
     fi
 
@@ -517,6 +541,12 @@ submit_job() {
     # Walltime
     local walltime
     walltime=$(get_walltime "$prob" "$solver_group")
+
+    # mse_train / mse_val never run the solver during training (see their
+    # extra_args above), so on energy they keep the legacy short walltime.
+    if [[ "$prob" == "energy" && ( "$method" == "mse_train" || "$method" == "mse_val" ) ]]; then
+        walltime="3:00:00"
+    fi
 
     local method_path="${METHOD_PATH[$method]}"
 

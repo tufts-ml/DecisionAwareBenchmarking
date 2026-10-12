@@ -1,0 +1,22 @@
+# LEGACY cubic config: reproduces the upstream (Geng et al., f885426) behaviour
+# where CubicTopK.init_API declared modelSense = MINIMIZE (GRB.MINIMIZE == 1)
+# while the TopKSolver maximised regardless. solver_wrapper merges these solver
+# kwargs OVER problem.init_API(), so `modelSense: 1` restores the inverted-sign
+# losses that produced the published Cubic Top-K numbers for SPO+, NCE, PG,
+# DFL, DAD and the pairwise/listwise LTR losses. Use only to reproduce those
+# numbers (see REPRODUCING.md, "Cubic Top-K sense correction"); do not use for
+# new results.
+#
+#   python experiments/main_results.py --problem cubic --opt_model spo --solver heuristic \
+#       --config_path openpto/config/probs/cubic_legacy_minsense.yaml ...
+dataset:
+  budget: 5
+  num_items: 50
+  prob_version: gen
+
+solver:
+  heuristic:
+    modelSense: 1
+  neural:
+    epsilon: 0.01
+    max_iter: 200

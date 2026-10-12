@@ -25,6 +25,17 @@ import sys
 import warnings
 from types import SimpleNamespace
 
+# Load the env's own libstdc++ before ANY binary extension (numpy, torch, ...):
+# in mixed conda/pip environments scipy>=1.17 extensions otherwise fail with
+# "CXXABI_1.3.15 not found" once the pip torch has bound the system copy, and
+# preloading it after another copy is already mapped crashes the interpreter.
+# Same preamble as experiments/main_results.py.
+import ctypes
+
+_libstdcxx = os.path.join(sys.prefix, "lib", "libstdc++.so.6")
+if os.path.exists(_libstdcxx):
+    ctypes.CDLL(_libstdcxx, mode=ctypes.RTLD_GLOBAL)
+
 import numpy as np
 import torch
 

@@ -16,9 +16,13 @@ extension to the open-source benchmark of
 (NeurIPS 2024, Datasets and Benchmarks Track), covering **14 tasks x 17 methods** with a two-phase
 hyperparameter sweep (learning rate x batch regime, then method-specific
 hyperparameters), 10 model-init seeds per configuration, and validation-regret
-model selection throughout. The paper reports a 12-method x 12-task subset; the
-sweep results for all cells ship with the repo as JSON, so every figure and table
-in the paper regenerates in minutes without retraining anything.
+model selection throughout (one legacy exception on the energy task is
+documented in `REPRODUCING.md`). The paper reports a 12-method x 12-task subset; the
+sweep results for all cells ship with the repo as JSON, so the paper's figures and
+generated tables regenerate in minutes without retraining anything. (The bundled
+JSONs predate the Cubic Top-K sense correction described below, so the
+affected cubic cells regenerate at their pre-correction values; see
+`REPRODUCING.md`.)
 
 The package (`openpto`) is modular: **problems** (dataset + objective +
 decision evaluation), **solvers** (Gurobi / cvxpy / heuristic / neural),
@@ -47,6 +51,13 @@ Notes:
   (`shortestpath`, ResNet18 on map images); every other task trains on CPU.
 - Regenerating the paper figures/tables (Tier 1 below) needs none of the above —
   the default CPU environment is sufficient.
+- In a mixed conda/pip environment (as `environment.yml` creates: conda scipy,
+  pip torch), the training/eval entrypoints preload the environment's own
+  `libstdc++` before importing any compiled extension (`numpy`, `torch`, ...);
+  without it scipy/cvxpy can fail at import with `CXXABI_1.3.15 not found`.
+  Any new entrypoint that imports `torch` before `cvxpy`/`scipy` needs the same
+  preamble, as its very first import (copy it from
+  `experiments/main_results.py`).
 
 ## Data
 
@@ -94,9 +105,9 @@ make all          # = make tables figures (hp-table runs as part of tables)
 | Tuning-benefit tables (`tabapp_tuning_benefit.tex`, `tab_tuning_benefit_summary.tex`) | `make tables` (see `Makefile` for the full flags) | `results/tables/notrec-rec-geo-spw_regret_change_{,by_group_}mean_paper.tex` |
 | Error grid (`error_per_problem.tex`) | `make tables` | `results/tables/error_per_problem.tex` |
 
-Details, including which paper files were hand-edited after generation (captions
-only — data rows match) and which are hand-maintained, are in
-[`REPRODUCING.md`](REPRODUCING.md).
+Details, including which paper files were hand-edited after generation, which
+are hand-maintained, and where the bundled data deviates from the manuscript
+(the Cubic Top-K cells), are in [`REPRODUCING.md`](REPRODUCING.md).
 
 ### Tier 2 — retraining from scratch
 
@@ -117,7 +128,10 @@ via `slurm/submit_bench_p1.sh` and `slurm/submit_bench_p2.sh` and collected with
 `experiments/collect_bench_p1.py` / `experiments/collect_bench_p2_val.py`. Per-task
 instance counts, solver choices, batch-arm semantics, and known caveats are all
 specified in [`REPRODUCING.md`](REPRODUCING.md) — the instance counts and solvers
-there are load-bearing for comparability and must not be changed.
+there are load-bearing for comparability and must not be changed. The submit
+scripts run every cell with validation-regret selection; set
+`ENERGY_PTO_SKIP_SOLVER_EVAL=1` to reproduce the legacy energy protocol behind
+the bundled JSONs instead (see `REPRODUCING.md`).
 
 ## Best hyperparameters
 
@@ -146,7 +160,7 @@ python experiments/table_best_hyperparams.py    # or: make hp-table
 ├── experiments/                   # main entrypoint + figure/table/collect scripts
 ├── slurm/                         # Phase-1/2 sweep submitters (SLURM)
 ├── scripts/                       # one-time data prep (speed_humps)
-├── tests/                         # unit tests for the DPO implementation
+├── tests/                         # unit tests: DPO implementation, Cubic Top-K solver sense
 ├── results/                       # committed final results, figures, and tables
 │   ├── figures/
 │   ├── tables/
@@ -168,7 +182,7 @@ of) the decision objective. Method names below are the `--opt_model` values.
 
 | Method | Type | Description | Reference |
 |---|---|---|---|
-| `mse` | PtO | Two-stage least squares; model selected on validation decision regret | Wilder et al. (2019) |
+| `mse` | PtO | Two-stage least squares; model selected on validation decision regret (energy: see the legacy exception in `REPRODUCING.md`) | Wilder et al. (2019) |
 | `mse_train` | PtO | As `mse`, but selected on training MSE (never calls the solver during training) | this paper |
 | `mse_val` | PtO | As `mse`, but selected on validation MSE | this paper |
 | `dfl` | PnO | "DFL by Wilder et al.": differentiates the post-solver cost only, MSE-regularized with weight alpha | Wilder et al. (2019) |
@@ -222,7 +236,9 @@ and `sp_planted`.
 make test          # = python -m pytest -q tests/
 ```
 
-Two tests compare the DPO implementation against the reference
+`tests/test_solver_sense.py` checks that the Cubic Top-K task declares the
+optimisation sense its solver actually uses (see *Relationship to the upstream
+benchmark*). Two tests compare the DPO implementation against the reference
 [perturbations-differential-pytorch](https://github.com/tuero/perturbations-differential-pytorch)
 implementation; they skip cleanly unless that repo is cloned into the repo root
 (see `REPRODUCING.md`).
@@ -243,6 +259,15 @@ misspecification task), the PG and DAD methods, the soft-decision DPO
 implementation, the MSE selection-signal variants, the two-phase multi-seed
 hyperparameter sweep with checkpoint/requeue support, and all analysis, figure,
 and table code in `experiments/`.
+
+One correction to the upstream code: the Cubic Top-K task declared its
+objective as a minimisation while its top-K solver maximises, so the
+sense-dependent losses (SPO+, NCE, PG, DFL, Identity, Blackbox, DAD,
+pairwise/listwise LTR) trained with the wrong sign on that task — this explains the published 160% SPO+/NCE regret
+in the upstream paper's table. `openpto/problems/CubicTopK.py` now declares MAXIMIZE;
+the upstream behaviour is reproducible via
+`openpto/config/probs/cubic_legacy_minsense.yaml`. Details and corrected
+numbers: `REPRODUCING.md`, "Cubic Top-K sense correction".
 
 ## License and citation
 

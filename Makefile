@@ -1,7 +1,9 @@
 # Regenerate the paper's tables and figures from the bundled result JSONs
 # in results/ (bench_p1_best_val.json, bench_p2_best_val.json,
 # loss_matrix.json, rank_counterfactual_cache.json). No cluster or
-# saved_records/ needed.
+# saved_records/ needed. NOTE: the bundled JSONs predate the Cubic Top-K sense
+# correction (REPRODUCING.md, "Cubic Top-K sense correction"); the eight
+# affected cubic cells regenerate at their pre-correction values.
 #
 # Run from the repo root: scripts read the JSONs from results/ and write to
 # results/tables/ and results/figures/.
