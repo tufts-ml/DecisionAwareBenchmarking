@@ -1,0 +1,18 @@
+# Reproduces the upstream (Geng et al., f885426) Cubic Top-K declaration,
+# modelSense = MINIMIZE (GRB.MINIMIZE == 1), via the solver-kwarg override that
+# solver_wrapper merges over problem.init_API(). See REPRODUCING.md,
+# "Cubic Top-K task declaration".
+#
+#   python experiments/main_results.py --problem cubic --opt_model spo --solver heuristic \
+#       --config_path openpto/config/probs/cubic_upstream_sense.yaml ...
+dataset:
+  budget: 5
+  num_items: 50
+  prob_version: gen
+
+solver:
+  heuristic:
+    modelSense: 1
+  neural:
+    epsilon: 0.01
+    max_iter: 200

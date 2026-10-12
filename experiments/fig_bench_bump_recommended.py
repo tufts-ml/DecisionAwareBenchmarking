@@ -39,6 +39,7 @@ from bench_bump_common import (
     USE_ABSOLUTE, METHOD_PROBLEMS, jitter_x,
     load_per_seed_data, method_style, style_ax, rewrite_ticklabels_with_boxes,
     legend_elements,
+    write_cropped_pdf,
 )
 
 TASK_GROUPS = {
@@ -64,6 +65,11 @@ try:
 except Exception:
     _HAS_SCIPY_BS = False
 
+
+# CropBox [llx, lly, urx, ury] of the manuscript's
+# BetterBenchmarks/figures/fig_bench_bump_recommended_main_bootstrap_cropped.pdf
+# (read with pypdf; full float precision).
+CROPBOX_RECOMMENDED_MAIN = (3.248529, 0.4945984, 533.1401, 190.51065)
 
 def bootstrap_ci_mean(seeds, n_resamples=N_RESAMPLES, level=CI_LEVEL,
                       rng_seed=RNG_SEED):
@@ -236,6 +242,8 @@ def draw(tasks, group, with_ci=False):
     plt.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.savefig(out_pdf, bbox_inches="tight")
     plt.close()
+    if with_ci and group == "main":
+        write_cropped_pdf(out_pdf, CROPBOX_RECOMMENDED_MAIN)
     print(f"Saved {out_png}  +  {out_pdf}")
 
     print(f"\n{'Method':<16}", end="")

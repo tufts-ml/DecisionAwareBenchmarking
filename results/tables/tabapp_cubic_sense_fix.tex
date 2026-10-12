@@ -1,0 +1,39 @@
+\begin{table}[!h]
+\centering
+\small
+\caption{Cubic Top-$K$ after correcting the problem's declared optimisation sense.
+The released \texttt{CubicTopK} problem declares a \emph{minimisation} sense while its
+top-$K$ solver selects the $K$ \emph{largest} predicted values, so every surrogate
+loss that branches on the declared sense trained with the wrong sign on this task;
+the released code reproduces the published numbers (middle columns) bug included.
+Columns: published value from \citet{gengBenchmarkingPtOPnO2024}; our run of the
+released code (seed 0 reproduces the published single-run values of the affected methods to the decimal; the 10-seed mean also shows the spread across initialisations); and our re-run with the one-line fix under the identical protocol
+(two-phase search, 10 initialisation seeds; bold = re-run cells).
+Test relative regret (\%), 10-seed mean $\pm$ std.
+$^{\dagger}$Decision term is the self-objective $\langle\hat{y}, z(\hat{y})\rangle$,
+whose gradient never involves the true costs; with the correct sign it reinforces the
+initial ranking, with the inverted sign it churned it and checkpoint selection on
+validation regret harvested the best moment. $^{\ddagger}$Sense-independent in code
+(DPO's loss uses $|\cdot|$; LODL reads the sense only to choose among solver restarts);
+re-runs are bit-identical, so the original value stands.}
+\label{tab:cubic-sense-fix}
+\begin{tabular}{l l r r r r}
+\toprule
+Method & Sense use & Published & \multicolumn{2}{c}{Released code} & Corrected \\
+ & & (single run) & seed 0 & 10-seed mean $\pm$ std & 10-seed mean $\pm$ std \\
+\midrule
+MSE & no & 0.11 & 0.03 & 0.08 $\pm$ 0.12 & 0.08 $\pm$ 0.12 \\
+DFL & self-objective$^{\dagger}$ & 1.97 & 1.21 & 8.61 $\pm$ 4.41 & \textbf{109.02 $\pm$ 65.35} \\
+Identity & self-objective$^{\dagger}$ & 13.94 & 13.94 & 14.75 $\pm$ 1.44 & \textbf{106.70 $\pm$ 64.14} \\
+Blackbox & self-objective$^{\dagger}$ & 13.94 & 13.94 & 14.75 $\pm$ 1.44 & \textbf{106.70 $\pm$ 64.14} \\
+SPO\textsuperscript{+} & inverted & 160.41 & 160.41 & 124.15 $\pm$ 58.37 & \textbf{0.01 $\pm$ 0.01} \\
+NCE & inverted & 160.41 & 153.05 & 130.35 $\pm$ 46.53 & \textbf{29.65 $\pm$ 11.82} \\
+pt-LTR & no & 1.15 & 0.13 & 0.13 $\pm$ 0.09 & 0.13 $\pm$ 0.09 \\
+pr-LTR & sign-sensitive & 5.07 & 0.42 & 4.17 $\pm$ 5.49 & \textbf{0.09 $\pm$ 0.09} \\
+L-LTR & sign-sensitive & 0.19 & 0.12 & 0.22 $\pm$ 0.21 & \textbf{0.07 $\pm$ 0.07} \\
+LODL & no$^{\ddagger}$ & 0.17 & 29.07 & 11.61 $\pm$ 8.05 & 11.61 $\pm$ 8.05 \\
+DPO & no$^{\ddagger}$ & -- & 13.62 & 13.54 $\pm$ 0.03 & 13.54 $\pm$ 0.03 \\
+PG & self-objective$^{\dagger}$ & -- & 39.59 & 33.78 $\pm$ 17.59 & \textbf{94.81 $\pm$ 69.80} \\
+\bottomrule
+\end{tabular}
+\end{table}

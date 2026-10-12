@@ -64,7 +64,7 @@ METHOD_LABELS = {
     "mse_val": r"MSE\textsubscript{val}",
     "dfl": "DFL", "identity": "Identity",
     "spo": r"SPO\textsuperscript{+}", "nce": "NCE", "blackbox": "Blackbox",
-    "pointLTR": "ptLTR", "pairLTR": "prLTR", "listLTR": "lsLTR",
+    "pointLTR": "pt-LTR", "pairLTR": "pr-LTR", "listLTR": "L-LTR",
     "lodl": "LODL", "perturb": "DPO", "pg": "PG", "qptl": "QPTL",
     "cpLayer": "cpLayer", "dad": "DAD",
 }
@@ -72,7 +72,7 @@ METHOD_LABELS = {
 PROB_LABELS = {
     "knapsack": "KS", "knapsack-real": "KS-E", "energy": "En",
     "budgetalloc": "BA", "cubic": "Cu", "bipartitematching": "BM",
-    "portfolio": "Pf", "asurv": "AS", "cook_county": "CC",
+    "portfolio": "Pf", "asurv": "WC", "cook_county": "CC",
     "speed_humps": "SH", "sp_synth": r"sp\textsubscript{s}",
     "sp_planted": r"sp\textsubscript{p}", "pg_misspec": r"pg\textsubscript{ms}",
     "shortestpath": "SP-W",
@@ -82,8 +82,9 @@ PROB_FULL = {
     "knapsack": "Knapsack (synth)", "knapsack-real": "Knapsack (energy)",
     "energy": "Energy scheduling", "budgetalloc": "Budget allocation",
     "cubic": "Cubic Top-$K$", "bipartitematching": "Bipartite matching",
-    "portfolio": "Portfolio", "asurv": "asurv", "cook_county": "cook\\_county",
-    "speed_humps": "speed\\_humps", "sp_synth": "Shortest path (synth)",
+    "portfolio": "Portfolio", "asurv": "TX Whooping Cranes",
+    "cook_county": "Cook County, IL opioid overdoses",
+    "speed_humps": "NYC Speed Humps", "sp_synth": "Shortest path (synth)",
     "sp_planted": "Shortest path (planted)", "pg_misspec": "PG misspec",
     "shortestpath": "Warcraft shortest path",
 }

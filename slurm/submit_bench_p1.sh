@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ====================================================================
-# Benchmark re-run — Phase 1: LR × Batch sweep
+# Benchmark sweep — Phase 1: LR × Batch sweep
 # ====================================================================
 # Runs all 17 methods × 14 tasks × 5 LRs × 2 batch configs.
 # LRs match the original NeurIPS 2024 benchmark sweep: 1e-3, 5e-3, 1e-2, 5e-2, 1e-1.
@@ -201,13 +201,17 @@ SOLVER_CVXPY[portfolio]=cvxpy
 # ====================================================================
 
 # Walltime function: returns SLURM walltime for a given (prob, method_group)
-# method_group: pto | pno | lodl | energy_pto | energy_pno
+# method_group: pto | pno | lodl  (energy / shortestpath are special-cased per problem)
 get_walltime() {
     local prob="$1" group="$2"
     case "$group" in
         pto)
             case "$prob" in
-                energy)        echo "3:00:00" ;;   # skip_solver_eval; setup ~35min
+                energy)
+                    # Per-epoch Gurobi evaluation of the training and validation splits:
+                    # roughly 1-4 min per epoch for MSE and 5-20 min for DFL/Identity;
+                    # single runs of up to 29 h, hence 48 h.
+                    echo "48:00:00" ;;
                 shortestpath)  echo "4:00:00" ;;   # GPU, ResNet18, 10K images
                 *)             echo "1:30:00" ;;
             esac ;;
@@ -341,7 +345,7 @@ PRED_MODEL_ARGS[sp_planted]="--pred_model dense --n_layers 1"    # linear model 
 PRED_MODEL_ARGS[pg_misspec]="--pred_model dense --n_layers 1"    # linear model (PG paper §4.1)
 PRED_MODEL_ARGS[shortestpath]="--pred_model Resnet18"             # ResNet18 (DPO paper)
 
-# Extra args per method (e.g. --skip_solver_eval for PtO on energy)
+# Extra args per method (e.g. --skip_solver_eval for mse_train / mse_val)
 # These are evaluated per (method, prob) at submit time
 
 # ====================================================================
@@ -483,11 +487,7 @@ submit_job() {
     local instances="${INSTANCES[$prob]}"
     local testinstances="${TESTINSTANCES[$prob]}"
 
-    # Extra args: PtO methods on energy get --skip_solver_eval
     local extra_args=""
-    if [[ "$solver_group" == "pto" && "$prob" == "energy" ]]; then
-        extra_args="--skip_solver_eval"
-    fi
 
     # MSE selection-criterion variants:
     #   mse_train: select on training MSE; no solver during training.
@@ -517,6 +517,12 @@ submit_job() {
     # Walltime
     local walltime
     walltime=$(get_walltime "$prob" "$solver_group")
+
+    # mse_train / mse_val never run the solver during training (see their
+    # extra_args above), so on energy they get a short walltime.
+    if [[ "$prob" == "energy" && ( "$method" == "mse_train" || "$method" == "mse_val" ) ]]; then
+        walltime="3:00:00"
+    fi
 
     local method_path="${METHOD_PATH[$method]}"
 

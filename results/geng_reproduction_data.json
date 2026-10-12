@@ -1,0 +1,721 @@
+{
+  "meta": {
+    "units": "test relative regret (%); absolute regret for portfolio",
+    "protocol": "released code, released seed, default batch regime, learning rate val-selected over the 5-value grid; cubic under the upstream task declaration (see REPRODUCING.md)"
+  },
+  "rows": [
+    {
+      "problem": "knapsack",
+      "method": "mse",
+      "geng": 6.595,
+      "seed0": 6.016797466611593,
+      "mean": 5.960346964064436,
+      "std": 0.1732426803467736,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "dfl",
+      "geng": 11.744,
+      "seed0": 23.709211069805868,
+      "mean": 23.26586809858185,
+      "std": 0.8003280804838321,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "blackbox",
+      "geng": 24.274,
+      "seed0": 24.315021341043646,
+      "mean": 23.908853091009224,
+      "std": 1.2386855874668785,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "identity",
+      "geng": 31.874,
+      "seed0": 31.543439350130804,
+      "mean": 31.430538345036485,
+      "std": 4.799954712954267,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "spo",
+      "geng": 6.223,
+      "seed0": 6.264628941208867,
+      "mean": 5.985130111524164,
+      "std": 0.1848423636052117,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "nce",
+      "geng": 13.438,
+      "seed0": 14.938730552113451,
+      "mean": 13.25623020790307,
+      "std": 2.0886665269141615,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "pointLTR",
+      "geng": 6.402,
+      "seed0": 5.796502822525127,
+      "mean": 6.080132176786451,
+      "std": 0.2628609679109765,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "pairLTR",
+      "geng": 7.82,
+      "seed0": 8.095828170177613,
+      "mean": 8.446922759190418,
+      "std": 0.7268845291521462,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "listLTR",
+      "geng": 6.031,
+      "seed0": 5.5899765936940655,
+      "mean": 5.9424480242324105,
+      "std": 0.32029120730738464,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack",
+      "method": "lodl",
+      "geng": 6.044,
+      "seed0": 24.02588462068016,
+      "mean": 23.235577585019964,
+      "std": 1.1597514296776508,
+      "n": 10,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "mse",
+      "geng": 8.745,
+      "seed0": 8.416284202304558,
+      "mean": 8.443052621238198,
+      "std": 0.24487983390361645,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "dfl",
+      "geng": 8.353,
+      "seed0": 9.783096593524103,
+      "mean": 9.809259808784837,
+      "std": 0.14059499760472455,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "blackbox",
+      "geng": 35.705,
+      "seed0": 37.28729731788745,
+      "mean": 36.064019872240024,
+      "std": 25.938841415525836,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "identity",
+      "geng": 17.156,
+      "seed0": 30.66657523822301,
+      "mean": 42.427114203947134,
+      "std": 31.02922723236569,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "spo",
+      "geng": 8.407,
+      "seed0": 7.0088850622473995,
+      "mean": 7.210235603445966,
+      "std": 0.11607246952566946,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "nce",
+      "geng": 11.932,
+      "seed0": 11.750366339874304,
+      "mean": 11.33843389548124,
+      "std": 0.648006354027891,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "pointLTR",
+      "geng": 8.236,
+      "seed0": 8.423831002047528,
+      "mean": 8.416233694658981,
+      "std": 0.18919400234122716,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "pairLTR",
+      "geng": 9.022,
+      "seed0": 8.651470058244211,
+      "mean": 9.529712443881888,
+      "std": 0.6883682999334544,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "listLTR",
+      "geng": 8.083,
+      "seed0": 8.715255191964314,
+      "mean": 8.356074654661652,
+      "std": 0.8878157606202655,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "knapsack-real",
+      "method": "lodl",
+      "geng": 9.567,
+      "seed0": 8.4862378542915,
+      "mean": 9.123510226654062,
+      "std": 0.7472356042859104,
+      "n": 10,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "energy",
+      "method": "mse",
+      "geng": 1.793,
+      "seed0": 2.1127666135985197,
+      "mean": 2.1127666135985197,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "dfl",
+      "geng": 6.272,
+      "seed0": 4.600177191828759,
+      "mean": 4.600177191828759,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "blackbox",
+      "geng": 6.503,
+      "seed0": 5.345109160336672,
+      "mean": 5.345109160336672,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "identity",
+      "geng": 5.69,
+      "seed0": 3.731587501828814,
+      "mean": 3.731587501828814,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "spo",
+      "geng": 1.505,
+      "seed0": 1.998543934948327,
+      "mean": 1.998543934948327,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "nce",
+      "geng": 1.663,
+      "seed0": 1.9018577816651565,
+      "mean": 1.9018577816651565,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "pointLTR",
+      "geng": 4.548,
+      "seed0": 2.0571638169364435,
+      "mean": 2.0571638169364435,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "pairLTR",
+      "geng": 1.54,
+      "seed0": 1.9437500095621434,
+      "mean": 1.9437500095621434,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "listLTR",
+      "geng": 1.551,
+      "seed0": 1.9937797439669946,
+      "mean": 1.9937797439669946,
+      "std": 0.0,
+      "n": 1,
+      "flags": ""
+    },
+    {
+      "problem": "energy",
+      "method": "lodl",
+      "geng": 1.786,
+      "seed0": 2.8734668497243328,
+      "mean": 2.8734668497243328,
+      "std": 0.0,
+      "n": 1,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "mse",
+      "geng": 20.332,
+      "seed0": 50.37330586205927,
+      "mean": 29.848045538379747,
+      "std": 12.883693030072394,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "dfl",
+      "geng": 35.97,
+      "seed0": 33.21703373202611,
+      "mean": 17.784099514076527,
+      "std": 9.252049256550638,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "blackbox",
+      "geng": 26.905,
+      "seed0": 45.723103891615246,
+      "mean": 29.67661489434069,
+      "std": 12.892246257686557,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "identity",
+      "geng": 14.799,
+      "seed0": 14.652133026414472,
+      "mean": 14.778446242849386,
+      "std": 4.4644287781419605,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "spo",
+      "geng": 5.559,
+      "seed0": 12.388102938704503,
+      "mean": 4.990407190281966,
+      "std": 2.7625278445763306,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "nce",
+      "geng": 9.979,
+      "seed0": 18.22868593725529,
+      "mean": 19.393286291872997,
+      "std": 4.617020858841978,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "pointLTR",
+      "geng": 69.663,
+      "seed0": 4.161804504574299,
+      "mean": 4.619047923381434,
+      "std": 0.9343275502175844,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "pairLTR",
+      "geng": 5.958,
+      "seed0": 31.573323986351166,
+      "mean": 16.550136664557556,
+      "std": 12.201327059123654,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "listLTR",
+      "geng": 5.742,
+      "seed0": 3.6267089075315866,
+      "mean": 4.470505103756923,
+      "std": 2.234273884451409,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "budgetalloc",
+      "method": "lodl",
+      "geng": 25.7,
+      "seed0": 56.10756784558142,
+      "mean": 30.430276056507765,
+      "std": 14.262470052553844,
+      "n": 10,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "cubic",
+      "method": "mse",
+      "geng": 0.11,
+      "seed0": 0.11026718102778604,
+      "mean": 0.22015183793844,
+      "std": 0.23467208443353174,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "dfl",
+      "geng": 1.974,
+      "seed0": 13.55761969753668,
+      "mean": 14.317746527791792,
+      "std": 3.0418618581310333,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "blackbox",
+      "geng": 13.944,
+      "seed0": 13.593154394677914,
+      "mean": 14.747522460133505,
+      "std": 1.4414073682534139,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "identity",
+      "geng": 13.944,
+      "seed0": 13.593154394677914,
+      "mean": 14.747522460133505,
+      "std": 1.4414073682534139,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "spo",
+      "geng": 160.408,
+      "seed0": 160.40789493384875,
+      "mean": 124.15378150188916,
+      "std": 58.374668482401525,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "nce",
+      "geng": 160.408,
+      "seed0": 139.10919692086358,
+      "mean": 156.78125132338135,
+      "std": 4.224041541048028,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "pointLTR",
+      "geng": 1.149,
+      "seed0": 0.053238916059300694,
+      "mean": 0.12520743059989606,
+      "std": 0.0885146508358263,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "pairLTR",
+      "geng": 5.072,
+      "seed0": 0.41780203186596576,
+      "mean": 4.1735560520351065,
+      "std": 5.488900379180001,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "listLTR",
+      "geng": 0.193,
+      "seed0": 0.5508200917547159,
+      "mean": 0.4540630976015243,
+      "std": 0.5960297359712682,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "cubic",
+      "method": "lodl",
+      "geng": 0.172,
+      "seed0": 3.139509639210434,
+      "mean": 14.022803427084321,
+      "std": 14.069353468594285,
+      "n": 10,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "mse",
+      "geng": 92.963,
+      "seed0": 95.37786442577696,
+      "mean": 93.01516404702872,
+      "std": 1.0265404933179727,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "dfl",
+      "geng": 91.364,
+      "seed0": 92.16747107188546,
+      "mean": 92.9458652065162,
+      "std": 1.1573738125017248,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "blackbox",
+      "geng": 91.988,
+      "seed0": 91.67284596639493,
+      "mean": 92.69314696595423,
+      "std": 1.4250431972878799,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "identity",
+      "geng": 91.868,
+      "seed0": 92.22840395668416,
+      "mean": 92.40730097102228,
+      "std": 0.7286942074246943,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "spo",
+      "geng": 93.327,
+      "seed0": 92.20166671693919,
+      "mean": 93.12981343347036,
+      "std": 1.1866473972653682,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "nce",
+      "geng": 92.622,
+      "seed0": 89.99874182902724,
+      "mean": 92.57120446453368,
+      "std": 1.7347923393325422,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "pointLTR",
+      "geng": 91.035,
+      "seed0": 92.45477937425534,
+      "mean": 93.24424366890675,
+      "std": 1.1309338437845913,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "pairLTR",
+      "geng": 92.285,
+      "seed0": 90.93640782039112,
+      "mean": 93.30938828986207,
+      "std": 1.1737821506747534,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "listLTR",
+      "geng": 91.831,
+      "seed0": 89.80296343108635,
+      "mean": 92.01230008480339,
+      "std": 1.207596849621407,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "bipartitematching",
+      "method": "lodl",
+      "geng": 91.113,
+      "seed0": 95.38823278771775,
+      "mean": 93.01884666484135,
+      "std": 1.0412980070096662,
+      "n": 10,
+      "flags": "\u2020"
+    },
+    {
+      "problem": "portfolio",
+      "method": "mse",
+      "geng": 0.243,
+      "seed0": 0.22056179671967918,
+      "mean": 0.24856696623486454,
+      "std": 0.009653435911247656,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "dfl",
+      "geng": 0.38,
+      "seed0": 0.27436723917336453,
+      "mean": 0.2828221742262522,
+      "std": 0.00984294818353636,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "blackbox",
+      "geng": 0.286,
+      "seed0": 0.26819531696729054,
+      "mean": 0.2833144604361882,
+      "std": 0.013614044681921946,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "identity",
+      "geng": 0.28,
+      "seed0": 0.2685427513259551,
+      "mean": 0.292893020414682,
+      "std": 0.026260316901040737,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "spo",
+      "geng": 0.245,
+      "seed0": 0.24452155654394928,
+      "mean": 0.2368350101954455,
+      "std": 0.006202216951187471,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "nce",
+      "geng": 0.367,
+      "seed0": 0.30992167912792296,
+      "mean": 0.3070498907918212,
+      "std": 0.011621725640863221,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "pointLTR",
+      "geng": 0.214,
+      "seed0": 0.25181460726115956,
+      "mean": 0.2466266541048509,
+      "std": 0.00926956369152905,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "pairLTR",
+      "geng": 0.255,
+      "seed0": 0.2554331496096115,
+      "mean": 0.24970084381530225,
+      "std": 0.004134071318977637,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "listLTR",
+      "geng": 0.249,
+      "seed0": 0.23836139117293648,
+      "mean": 0.24386263757960908,
+      "std": 0.007996029795385147,
+      "n": 10,
+      "flags": ""
+    },
+    {
+      "problem": "portfolio",
+      "method": "lodl",
+      "geng": 0.16,
+      "seed0": 0.25435625717723026,
+      "mean": 0.2480451176583903,
+      "std": 0.008897660884950481,
+      "n": 10,
+      "flags": "\u2020"
+    }
+  ],
+  "stats": {
+    "n_cells": 70,
+    "median_abs_rel_diff": 10.312874805281847,
+    "within_5pct": 40.0,
+    "within_10pct": 50.0,
+    "within_20pct": 64.28571428571429,
+    "n_unflagged": 63,
+    "unflagged_median_abs_rel_diff": 8.767286328861356,
+    "unflagged_within_10pct": 53.96825396825397,
+    "unflagged_within_20pct": 68.25396825396825,
+    "rel_regret_within_2pts": 39,
+    "rel_regret_cells": 60
+  }
+}

@@ -102,7 +102,12 @@ class CubicTopK(PTOProblem):
         return "mse"
 
     def init_API(self):
-        return {"modelSense": GRB.MINIMIZE, "n_vars": self.Ys_train.shape[1]}
+        # MAXIMIZE: the paired TopKSolver picks the K largest values (torch.topk).
+        # Upstream declared MINIMIZE, which inverts the sign of every loss that
+        # branches on modelSense; that declaration is reproducible with
+        # --config_path openpto/config/probs/cubic_upstream_sense.yaml.
+        # See REPRODUCING.md "Cubic Top-K task declaration" and tests/test_solver_sense.py.
+        return {"modelSense": GRB.MAXIMIZE, "n_vars": self.Ys_train.shape[1]}
 
 
 if __name__ == "__main__":

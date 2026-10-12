@@ -54,8 +54,8 @@ HP_SYMBOL = {
 METHOD_MD = {
     "mse": "MSE", "mse_train": "MSE-tr", "mse_val": "MSE-val",
     "dfl": "DFL", "identity": "Identity", "spo": "SPO+", "nce": "NCE",
-    "blackbox": "Blackbox", "pointLTR": "ptLTR", "pairLTR": "prLTR",
-    "listLTR": "lsLTR", "lodl": "LODL", "perturb": "DPO", "pg": "PG",
+    "blackbox": "Blackbox", "pointLTR": "pt-LTR", "pairLTR": "pr-LTR",
+    "listLTR": "L-LTR", "lodl": "LODL", "perturb": "DPO", "pg": "PG",
     "qptl": "QPTL", "cpLayer": "cpLayer", "dad": "DAD",
 }
 
@@ -64,7 +64,7 @@ METHOD_TEX = {
     "mse_val": r"MSE\textsubscript{val}",
     "dfl": "DFL", "identity": "Identity",
     "spo": r"SPO\textsuperscript{+}", "nce": "NCE", "blackbox": "Blackbox",
-    "pointLTR": "ptLTR", "pairLTR": "prLTR", "listLTR": "lsLTR",
+    "pointLTR": "pt-LTR", "pairLTR": "pr-LTR", "listLTR": "L-LTR",
     "lodl": "LODL", "perturb": "DPO", "pg": "PG", "qptl": "QPTL",
     "cpLayer": "cpLayer", "dad": "DAD",
 }
@@ -181,7 +181,7 @@ def write_md(grid, path):
         "- Batch regimes: `full` = full-batch gradient descent; `bs=n` = "
         "minibatch SGD with batch size n (bs=4 only on bipartite matching).",
         "- HP symbols: α = DFL alpha (`dflalpha`), λ = Blackbox smoothing "
-        "(`lambd`), τ = temperature (`tau`, QPTL/lsLTR), K = LODL samples "
+        "(`lambd`), τ = temperature (`tau`, QPTL/L-LTR), K = LODL samples "
         "(`num_samples`), σ = perturbation width (`sigma`, DPO/PG), M = DPO "
         "samples (`n_samples`), w = DAD Stein weight (`stein_weight`). "
         "Methods without a symbol have no Phase-2 HP sweep; their best "
@@ -218,7 +218,7 @@ def write_tex(grid, path):
         "Phase 2 sweeps the method-specific hyperparameter at the Phase-1-best "
         "(LR, batch). Batch regimes: full $=$ full-batch gradient descent; "
         "bs=$n$ $=$ minibatch SGD with batch size $n$. Symbols: $\\alpha$ "
-        "(DFL), $\\lambda$ (Blackbox), $\\tau$ (QPTL, lsLTR), $K$ (LODL "
+        "(DFL), $\\lambda$ (Blackbox), $\\tau$ (QPTL, L-LTR), $K$ (LODL "
         "samples), $\\sigma$ (DPO/PG perturbation width), $M$ (DPO samples), "
         "$w$ (DAD Stein weight). `--' $=$ method not applicable. Tasks: "
         + ", ".join(f"{TASK_TEX[t]} = {TASK_FULL[t]}" for t in TASKS) + "."

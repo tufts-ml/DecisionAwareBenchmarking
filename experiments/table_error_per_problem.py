@@ -31,6 +31,11 @@ PROBLEMS = ["knapsack", "knapsack-real", "energy", "budgetalloc",
             "cubic", "bipartitematching", "portfolio", "asurv", "cook_county",
             "speed_humps", "sp_synth", "sp_planted", "pg_misspec", "shortestpath"]
 
+# LaTeX float placement for each per-problem table, and whether to emit the
+# short (list-of-tables) caption \caption[short]{long}.
+FLOAT_PLACEMENT = "h"
+SHORT_CAPTION = True
+
 # Display name without trailing period; the caption template adds one.
 PROBLEM_DISPLAY = {
     "knapsack": "Knapsack (synth)",
@@ -40,7 +45,7 @@ PROBLEM_DISPLAY = {
     "cubic": "Cubic Top-$K$",
     "bipartitematching": "Bipartite matching",
     "portfolio": "Portfolio optimisation",
-    "asurv": "Aerial survey",
+    "asurv": "TX Whooping Cranes",
     "cook_county": "Cook County opioid",
     "speed_humps": "NYC speed humps",
     "sp_synth": "Shortest path (synth)",
@@ -58,7 +63,7 @@ METHOD_LABELS = {
     "mse_val":   r"MSE\textsubscript{val}",
     "dfl": "DFL", "identity": "Identity",
     "spo": r"SPO\textsuperscript{+}", "nce": "NCE", "blackbox": "Blackbox",
-    "pointLTR": "ptLTR", "pairLTR": "prLTR", "listLTR": "lsLTR",
+    "pointLTR": "pt-LTR", "pairLTR": "pr-LTR", "listLTR": "L-LTR",
     "lodl": "LODL", "perturb": "DPO", "pg": "PG",
 }
 
@@ -197,10 +202,12 @@ def render_one_problem(loss_matrix, prob, methods=None):
     reg_val_h    = _scale_header("Val",   reg_scales[1][1])
     reg_test_h   = _scale_header("Test",  reg_scales[2][1])
 
+    short_opt = (f"[Train/val/test error for {PROBLEM_DISPLAY[prob]}.]"
+                 if SHORT_CAPTION else "")
     head = (
-        r"\begin{table}[t]" "\n"
+        rf"\begin{{table}}[{FLOAT_PLACEMENT}]" "\n"
         r"\centering" "\n"
-        rf"\caption{{Train / val / test error for {PROBLEM_DISPLAY[prob]}. "
+        rf"\caption{short_opt}{{Train / val / test error for {PROBLEM_DISPLAY[prob]}. "
         r"Bold = best test value per metric. Hyperparameters per row: "
         r"val-best (LR, batch, method-specific HP). "
         r"Prediction loss is two-stage MSE/BCE. Decision regret is mean "

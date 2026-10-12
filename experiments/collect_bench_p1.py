@@ -331,7 +331,7 @@ def load_signal(prob, method, batch, lr, seed, metric):
     else:
         v, best_epoch, source = load_val_regret(val_log_path(prob, method, batch, lr, seed))
         if v is None:
-            # Fallback for --skip_solver_eval runs (e.g. energy/mse)
+            # Fallback for --skip_solver_eval runs (e.g. mse_val)
             v, best_epoch, source = load_val_pred_mse_from_log(
                 train_log_txt_path(prob, method, batch, lr, seed))
     return v, {"best_epoch": best_epoch, "val_source": source}

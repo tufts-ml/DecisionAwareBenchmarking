@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ====================================================================
-# Benchmark re-run — Phase 2: Method-specific HP sweep
+# Benchmark sweep — Phase 2: Method-specific HP sweep
 # ====================================================================
 # For each method that has a tunable HP, sweeps that HP using the best
 # (lr, batch) config found in Phase 1.
@@ -204,7 +204,11 @@ get_walltime() {
     case "$group" in
         pto)
             case "$prob" in
-                energy)             echo "10:00:00" ;;
+                energy)
+                    # Per-epoch Gurobi evaluation of the training and validation splits:
+                    # roughly 1-4 min per epoch for MSE and 5-20 min for DFL/Identity;
+                    # single runs of up to 29 h, hence 48 h.
+                    echo "48:00:00" ;;
                 budgetalloc)        echo "5:00:00" ;;
                 bipartitematching)  echo "5:00:00" ;;
                 shortestpath)       echo "4:00:00" ;;   # GPU, ResNet18
@@ -391,11 +395,6 @@ submit_p2_job() {
         solver="${SOLVER_PTO[$prob]}"
     else
         solver="${SOLVER_PNO[$prob]}"
-    fi
-
-    # Extra args: PtO on energy
-    if [[ "$solver_group" == "pto" && "$prob" == "energy" ]]; then
-        extra_args="$extra_args --skip_solver_eval"
     fi
 
     # Per-problem prediction model override

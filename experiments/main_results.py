@@ -2,7 +2,18 @@ import os
 import sys
 import warnings
 
-import numpy  # noqa: F401  (import before torch: avoids libstdc++ conflicts in mixed conda/pip envs)
+# Load the env's own libstdc++ before torch. In mixed conda/pip environments the
+# pip-wheel torch otherwise binds the system's older /lib64 copy first, and
+# scipy>=1.17 extensions (imported via cvxpy) then fail their version lookup
+# (CXXABI_1.3.15) against it. No-op when the env ships no libstdc++. Must be
+# the first import of any compiled extension (before numpy/torch): preloading
+# after another libstdc++ is already mapped crashes the interpreter.
+import ctypes
+
+_libstdcxx = os.path.join(sys.prefix, "lib", "libstdc++.so.6")
+if os.path.exists(_libstdcxx):
+    ctypes.CDLL(_libstdcxx, mode=ctypes.RTLD_GLOBAL)
+
 import torch
 
 from openpto.config import get_args, get_logger, load_conf, setup_seed
